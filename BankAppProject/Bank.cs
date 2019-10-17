@@ -8,23 +8,43 @@ namespace BankAppProject
 {
     class Bank
     {
-        public int idNumberMaker;
-
+      public static int idNumberMaker=1000;
+       
         public static void CreateClient()
         {
-            Console.WriteLine("Create Client method");
+            string creationDate = Convert.ToString(DateTime.Now);
+
+            Console.WriteLine("Create client");
             //Create an input for client name 
-            //Client enters a name
-            //Creates client object from client class construtor (Method to create an ID)
+            string name = Console.ReadLine();
+            //Creating an object from client constructor in the Client class with the previous input from the user
+            int id = ++idNumberMaker;
+            int checkingsAccount = 0;
+            int savingsAccount = 5000;
+
+            Client client = new Client(name, id, creationDate, checkingsAccount, savingsAccount);
+
+           Console.WriteLine($"Client created!\nName: {name}\nID: {id}\nAccount created at: {creationDate}\nCheckings Account: {checkingsAccount}\nSavings Account:{savingsAccount}");
+            Client.ClientList.Add(client);
+
             //Create a date of account creation, can be hardcoded
             //Create account automatic from the method CreateAccount
             //Writes client name and the ID that was created by the Client class
 
-
+            ShowClient();
         }
+    
 
-        public void ShowClient()
+        public static void ShowClient()
         {
+           
+            foreach (Client clients in Client.ClientList)
+            {
+                Console.WriteLine($"ID: {clients.id}");
+                Console.WriteLine($"Name: {clients.name}");
+
+
+            }
             //Get the information from the stored Client list
             //Print out information
         }
