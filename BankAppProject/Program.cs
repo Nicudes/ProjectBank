@@ -14,6 +14,7 @@ namespace BankAppProject
 
             do
             {
+                Console.Clear();
                 Console.WriteLine("Main Menu");
                 Console.WriteLine("---------");
                 Console.WriteLine();
