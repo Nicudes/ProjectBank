@@ -22,7 +22,7 @@ namespace BankAppProject
                 //CheckForBonus(client);
                 Console.WriteLine($"ID: {client.id}");
                 Console.WriteLine($"Name: {client.name}");
-                Console.WriteLine($"Checking Account Balance: {client.checkingAccount}");
+                Console.WriteLine($"Checking Account Balance: {client.checkingsAccount}");
                 Console.WriteLine($"Member since: {client.creationDate}");
                 if (IsBonus == true)
                 {
