@@ -8,25 +8,50 @@ namespace BankAppProject
 {
     class CheckingsAccount : BankAccount
     {
-        public override void ShowAccount()
+        public override void ShowAccounts()
         {
             //Metoden ShowAccount implementeras olika i de två barnklasserna. De visar olika Listor av clients och konton.
-            //Metoden ska visa client.id följt av client.name
+            //Metoden ska visa aClient.id följt av aClient.name
             //Metoden ska visa vad det är för slags konto och hur mycket pengar som finns nuvarande i kontot
-            //Ska visa dateAndTime
+            //Ska visa creationDate
+
+            //Vi skapade en foreach loop för att skriva ut varje klient som vi har i vår klientlista
+            foreach (Client client in Client.ClientList)
+            {
+                //Första vi vill göra är att kolla ifall klientens saldo är större än det klienten hade de första 30 dagarna
+                //CheckForBonus(client);
+                Console.WriteLine($"ID: {client.id}");
+                Console.WriteLine($"Name: {client.name}");
+                Console.WriteLine($"Checking Account Balance: {client.checkingsAccount}");
+                Console.WriteLine($"Member since: {client.creationDate}");
+                if (IsBonus == true)
+                {
+                    Console.WriteLine("Bonus mother fucker!!");
+                }
+                Console.WriteLine(); 
+            }
             /*
 ID: 1001
 Name: Sohail
 CheckingAccount Balance: 2000krona
 MemberSince: 2018-12-12 00:00:00 */
-            base.ShowAccount();
         }
 
-        public override void CheckForBonus()
-        {
-            //Kraven är samma som i SavingsAccount, alltså att man har mer pengar i kontot än de första 30 dagarna.
-            //Uppfyller man kraven sätts en bool??? till true som i sin tur godkänner de olika bonusarna i de olika kontona.
-            base.CheckForBonus();
-        }
+        //public override bool CheckForBonus(Client aClient)
+        //{
+        //    //Kraven är samma som i SavingsAccount, alltså att man har mer pengar i kontot än de första 30 dagarna.
+        //    //Uppfyller man kraven sätts en bool??? till true som i sin tur godkänner de olika bonusarna i de olika kontona.
+            
+        //    if (aClient.balance > 0 && )
+        //    {
+        //        return IsBonus = true;
+        //    }
+        //    else
+        //    {
+        //        return IsBonus = false;
+        //    }
+
+        //    //Ska CheckForBonusmetoden finnas i metoden ShowAccounts så att den alltid kollar?
+        //}
     }
 }
