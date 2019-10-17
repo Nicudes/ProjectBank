@@ -10,29 +10,29 @@ namespace BankAppProject
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Main Menu");
-            Console.WriteLine("---------");
-            Console.WriteLine();
-            Console.WriteLine("1. Bank.Create client");
-            Console.WriteLine("2. Bank.ShowClient()");
-            Console.WriteLine("3. Bank.CreateAccount()");
-            Console.WriteLine("4. Bank.ShowTransactions()");
-            Console.WriteLine("5. CheckingsAccount.ShowAccounts()");
-            Console.WriteLine("6. CheckingsAccount.CheckForBonus()");
-            Console.WriteLine("7. SavingsAccount.ShowAccounts()");
-            Console.WriteLine("8. SavingsAccount.CheckForBonus()");
-            Console.WriteLine("9. Transactions.ConfirmTransactions()");
-            Console.WriteLine("10. Transactions.ExecuteTransactions()");
-            Console.WriteLine("");
-            Console.WriteLine("'exit' to exit program");
-            Console.WriteLine();
-
-            Console.Write("Input: ");
-
             string choice;
 
             do
             {
+                Console.WriteLine("Main Menu");
+                Console.WriteLine("---------");
+                Console.WriteLine();
+                Console.WriteLine("1. Bank.Create client");
+                Console.WriteLine("2. Bank.ShowClient()");
+                Console.WriteLine("3. Bank.CreateAccount()");
+                Console.WriteLine("4. Bank.ShowTransactions()");
+                Console.WriteLine("5. CheckingsAccount.ShowAccounts()");
+                Console.WriteLine("6. CheckingsAccount.CheckForBonus()");
+                Console.WriteLine("7. SavingsAccount.ShowAccounts()");
+                Console.WriteLine("8. SavingsAccount.CheckForBonus()");
+                Console.WriteLine("9. Transactions.ConfirmTransactions()");
+                Console.WriteLine("10. Transactions.ExecuteTransactions()");
+                Console.WriteLine("");
+                Console.WriteLine("'exit' to exit program");
+                Console.WriteLine();
+
+                Console.Write("Input: ");
+
                 choice = Console.ReadLine();
                 Console.Clear();
 
