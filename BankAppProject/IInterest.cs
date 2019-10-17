@@ -8,9 +8,6 @@ namespace BankAppProject
 {
     interface IInterest
     {
-        //public void Interest()
-        //{
-
-        //}
+        public void Interest();
     }
 }
