@@ -5,6 +5,7 @@ namespace BankAppProject
 {
     interface ICinemaTicket
     {
->>>>>>> master
+
     }
+}
 
