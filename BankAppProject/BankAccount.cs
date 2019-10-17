@@ -10,14 +10,15 @@ namespace BankAppProject
     {
         protected int balance;
 
-        public void ShowAccount()
+        public virtual void ShowAccount()
         {
-
+            //När man anropar metoden ShowAccount så ska den implementeras på olika sätt i barnklasserna.
         }
 
-        public void CheckForBonus()
+        public virtual void CheckForBonus()
         {
-
+            //Metoden CheckForBonus ska kolla ifall man uppfyller kraven för att få bonus.
+            //Metoden implementeras olika i barnklasserna utefter kraven som ställs i de individuella klasserna.
         }
     }
 }
