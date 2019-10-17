@@ -8,5 +8,16 @@ namespace BankAppProject
 {
    abstract class BankAccount
     {
+        protected int balance;
+
+        public void ShowAccount()
+        {
+
+        }
+
+        public void CheckForBonus()
+        {
+
+        }
     }
 }

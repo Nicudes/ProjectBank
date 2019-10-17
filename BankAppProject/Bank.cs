@@ -8,5 +8,26 @@ namespace BankAppProject
 {
     class Bank
     {
+        public int idNumberMaker;
+
+        public static void CreateClient()
+        {
+            Console.WriteLine("Create Client method");
+        }
+
+        public void ShowClient()
+        {
+
+        }
+
+        public void CreateAccount()
+        {
+
+        }
+
+        public void ShowTransactions()
+        {
+
+        }
     }
 }

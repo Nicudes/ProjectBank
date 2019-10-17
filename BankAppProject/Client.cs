@@ -8,5 +8,8 @@ namespace BankAppProject
 {
     class Client
     {
+        public string name;
+
+        public int id;
     }
 }
