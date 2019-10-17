@@ -11,5 +11,10 @@ namespace BankAppProject
         public string name;
 
         public int id;
+
+        public int creationDate;
+
+        //Skapa en konstruktor för Client som ska innehålla Name och ID 
+
     }
 }
