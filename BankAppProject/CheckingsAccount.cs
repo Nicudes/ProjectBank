@@ -28,7 +28,7 @@ namespace BankAppProject
                 {
                     Console.WriteLine("Bonus mother fucker!!");
                 }
-                Console.WriteLine(); 
+                Console.WriteLine();
             }
             /*
 ID: 1001
@@ -39,19 +39,20 @@ MemberSince: 2018-12-12 00:00:00 */
 
         //public override bool CheckForBonus(Client aClient)
         //{
-        //    //Kraven är samma som i SavingsAccount, alltså att man har mer pengar i kontot än de första 30 dagarna.
-        //    //Uppfyller man kraven sätts en bool??? till true som i sin tur godkänner de olika bonusarna i de olika kontona.
-            
-        //    if (aClient.balance > 0 && )
-        //    {
-        //        return IsBonus = true;
-        //    }
-        //    else
-        //    {
-        //        return IsBonus = false;
-        //    }
+        //        //Kraven är samma som i SavingsAccount, alltså att man har mer pengar i kontot än de första 30 dagarna.
+        //        //Uppfyller man kraven sätts en bool??? till true som i sin tur godkänner de olika bonusarna i de olika kontona.
 
-        //    //Ska CheckForBonusmetoden finnas i metoden ShowAccounts så att den alltid kollar?
+        //        if (aClient.balance > 0 && )
+        //        {
+        //            return IsBonus = true;
+        //        }
+        //        else
+        //        {
+        //            return IsBonus = false;
+        //        }
+
+        //        //Ska CheckForBonusmetoden finnas i metoden ShowAccounts så att den alltid kollar?
+
         //}
     }
 }
