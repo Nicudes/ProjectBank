@@ -15,7 +15,9 @@ namespace BankAppProject
             //Metoden ska visa aClient.id följt av aClient.name
             //Metoden ska visa vad det är för slags konto och hur mycket pengar som finns nuvarande i kontot
             //Ska visa dateAndTime
+
             
+
             foreach (Client client in Client.ClientList)
             {
                 Console.WriteLine($"ID: {client.id}");
@@ -28,6 +30,8 @@ namespace BankAppProject
                 }
                 Console.WriteLine();
             }
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
 
             /*
 ID: 1001
