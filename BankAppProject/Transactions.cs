@@ -8,7 +8,7 @@ namespace BankAppProject
 {
     class Transactions
     {
-        List<Transactions> ListOfTransactions = new List<Transactions>();
+        static List<Transactions> ListOfTransactions = new List<Transactions>();
         string dateAndTime;
         int amount;
         string transactionType;
@@ -26,14 +26,15 @@ namespace BankAppProject
 
         }
 
-        public void ShowTransactions()
+        public static void ShowTransactions()
         {
             foreach (Transactions trans in ListOfTransactions)
             {
-                Console.Write($"{trans.transactionType}: {trans.amount} kronor");
+                Console.WriteLine($"{trans.transactionType}: {trans.amount} kronor");
                 Console.WriteLine($"Date and time: {trans.dateAndTime}");
+                Console.WriteLine();
             }
-            Console.WriteLine();
+            Console.ReadKey();
             /*Transcation TYPE: Deposit,
 DATE: 2019 - 09 - 22 13:24:18,
 AMOUNT: 10000krona,
@@ -64,7 +65,7 @@ TO ACCOUNT Type: Checking Account*/
 
         }
 
-        public void ExecuteDeposit()
+        public static void ExecuteDeposit()
         {
             //Frågar efter kund ID
             /*
@@ -100,7 +101,7 @@ TO ACCOUNT Type: Checking Account*/
                         Console.WriteLine($"{client.name}, you now have {client.checkingsAccount} in your checking account");
 
                         // Kod som lägger till transaktion till lista
-                        dateAndTime = Convert.ToString(DateTime.Now);
+                        string dateAndTime = Convert.ToString(DateTime.Now);
                         Transactions trans = new Transactions(dateAndTime, amount, "Deposit");
                         ListOfTransactions.Add(trans);
 
@@ -124,7 +125,7 @@ TO ACCOUNT Type: Checking Account*/
                 Console.ReadKey();
             }
         }
-        public void RepeatQuery()
+        public static void RepeatQuery()
         {
             string choice;
 
