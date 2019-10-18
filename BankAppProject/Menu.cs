@@ -91,7 +91,7 @@ namespace BankAppProject
             switch (choice)
             {
                 case "1":
-                    //Kalla på deposit metod
+                    Transactions.ExecuteDeposit();
                     break;
                 case "2":
                     //Kalla transfer metoden
