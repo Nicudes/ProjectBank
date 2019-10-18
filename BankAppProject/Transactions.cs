@@ -76,54 +76,59 @@ Transcation TYPE: Deposit,
 DATE: 2019 - 09 - 22 13:24:18,
 AMOUNT: 10000krona,
 TO ACCOUNT Type: Checking Account*/
-            Console.WriteLine("--- Deposit Money ---");
-            Console.WriteLine();
 
-            Console.Write("Enter the ID of the customer: ");
-
-            int id = int.Parse(Console.ReadLine());
-
-            // Systemet kontrollerar att ID finns i kundlista
-
-            foreach (Client client in Client.ClientList)
+            //En counter som går til 3 och sen frågar om man vill tillbaka till main menu???
+            do
             {
-                if (id == client.id)
+                Console.Clear();
+                Console.WriteLine("--- Deposit Money ---");
+                Console.WriteLine();
+
+                Console.Write("Enter the ID of the customer: ");
+
+                int id = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+
+                // Systemet kontrollerar att ID finns i kundlista
+
+                foreach (Client client in Client.ClientList)
                 {
-                    Console.WriteLine($"Name: {client.name}");
-                    Console.Write("Enter the amount to deposit: ");
-                    int amount = int.Parse(Console.ReadLine());
-
-                    // Lägg till möjlighet att backa ur?
-                    if (amount % 100 == 0)
+                    if (id == client.id)
                     {
-                        Console.WriteLine($"Sucessfully deposited {amount} to your account!");
-                        client.checkingsAccount += amount;
-                        Console.WriteLine($"{client.name}, you now have {client.checkingsAccount} in your checking account");
-
-                        // Kod som lägger till transaktion till lista
-                        string dateAndTime = Convert.ToString(DateTime.Now);
-                        Transactions trans = new Transactions(dateAndTime, amount, "Deposit");
-                        ListOfTransactions.Add(trans);
-
-                        Console.ReadKey();
+                        Console.WriteLine($"Name: {client.name}");
+                        Console.Write("Enter the amount to deposit: ");
+                        int amount = int.Parse(Console.ReadLine());
                         Console.WriteLine();
-                        ShowTransactions();
-                        Console.ReadKey();
-                        RepeatQuery();
-                    }
-                    else
-                    {
-                        Console.WriteLine("You have to deposit a larger amount!");
-                        Console.WriteLine("You can only add amount in even 100´s");
-                        RepeatQuery();
+
+                        // Lägg till möjlighet att backa ur?
+                        if (amount % 50 == 0 && amount >= 50)
+                        {
+                            Console.WriteLine($"Sucessfully deposited {amount} to your account!");
+                            client.checkingsAccount += amount;
+                            Console.WriteLine($"{client.name}, you now have {client.checkingsAccount} in your checking account");
+                            Console.WriteLine();
+
+                            // Kod som lägger till transaktion till lista
+                            string dateAndTime = Convert.ToString(DateTime.Now);
+                            Transactions trans = new Transactions(dateAndTime, amount, "Deposit");
+                            ListOfTransactions.Add(trans);
+
+                            RepeatQuery();
+                        }
+                        else
+                        {
+                            Console.WriteLine("You have to deposit a larger amount!");
+                            Console.WriteLine("You can only add amount in even 50 kronor bills");
+                            Console.WriteLine();
+                            Console.WriteLine("Press any key to continue");
+                            Console.ReadKey();
+                            ExecuteDeposit();
+                        }
                     }
                 }
-                else
-                {
-                    Console.WriteLine("No such client was found");
-                }
-                Console.ReadKey();
-            }
+                Console.WriteLine("No such client was found");
+                Console.ReadKey(); 
+            } while (true);
         }
         public static void RepeatQuery()
         {
@@ -142,12 +147,12 @@ TO ACCOUNT Type: Checking Account*/
 
                 else if (choice == "N")
                 {
-                    //MainMenu();
+                    Menu.MainMenu();
                 }
                 else
                 {
                     Console.WriteLine("Wrong input!");
-                    Console.Clear();
+                    Console.WriteLine();
                 }
             } while (choice != "Y" && choice != "N");
         }
