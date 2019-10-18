@@ -10,8 +10,9 @@ namespace BankAppProject
     {
         List<string> ListOfTransactions = new List<string>();
         public string dateAndTime;
+        public bool IsTrue = false;
 
-        public bool ConfirmTransactions(bool IsTrue)
+        public bool ConfirmTransactions()
         {
             
             //Kolla om transaction value <= Balance
