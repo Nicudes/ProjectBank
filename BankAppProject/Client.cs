@@ -21,7 +21,7 @@ namespace BankAppProject
             id = aId;
             creationDate = aCreationDate;
             checkingsAccount = aCheckingsAccount;
-            savingsAccount = aCheckingsAccount;
+            savingsAccount = aSavingsAccount;
         }
 
         public Client()

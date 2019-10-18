@@ -12,9 +12,28 @@ namespace BankAppProject
         protected bool IsBonus = false;
         public virtual void ShowAccounts()
         {
-            //När man anropar metoden ShowAccount så ska den implementeras på olika sätt i barnklasserna.
+            
         }
 
+        public static void ShowAllAccounts()
+        {
+            
+            foreach (Client client in Client.ClientList)
+            {
+                //Första vi vill göra är att kolla ifall klientens saldo är större än det klienten hade de första 30 dagarna
+                //CheckForBonus(client);
+                Console.WriteLine($"ID: {client.id}");
+                Console.WriteLine($"Name: {client.name}");
+                Console.WriteLine($"Checking Account Balance: {client.checkingsAccount}");
+                Console.WriteLine($"Savings Account Balance: {client.savingsAccount}");
+                Console.WriteLine($"Member since: {client.creationDate}");
+
+                Console.WriteLine();
+                
+            }
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+        }
         //public virtual bool CheckForBonus(Client aClient)
         //{
         //    //Metoden CheckForBonus ska kolla ifall man uppfyller kraven för att få bonus.
