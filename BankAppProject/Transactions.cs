@@ -53,8 +53,52 @@ TO ACCOUNT Type: Checking Account*/
             return IsTrue = true;
         }
 
-        public void ExecuteTransactions()
+        public static void ExecuteTransactions()
         {
+            int inputAmount;
+
+            Console.Write("Please enter your account ID: ");
+            int firstId = int.Parse(Console.ReadLine());
+            Client firstClient = new Client();
+            Client secondClient = new Client();
+
+            foreach (Client client in Client.ClientList)
+            {
+                if (firstId == client.id)
+                {
+                    firstClient = client;
+                }
+            }
+            //Lös ett felmeddelande om man inte hittar
+
+            Console.Write("Please enter the id of the person you would like to transfer funds to: ");
+            int secondId = int.Parse(Console.ReadLine());
+
+            foreach (Client client in Client.ClientList)
+            {
+                if (secondId == client.id)
+                {
+                    secondClient = client;
+                }
+            }
+
+            Console.Write("Enter the amount of funds you would like to transfer: ");
+            inputAmount = int.Parse(Console.ReadLine());
+
+            if (firstClient == secondClient)
+            {
+                firstClient.checkingsAccount -= inputAmount;
+                firstClient.savingsAccount += inputAmount;
+            }
+            else
+            {
+                firstClient.checkingsAccount -= inputAmount;
+                secondClient.checkingsAccount += inputAmount;
+            }
+
+            Console.WriteLine();
+            Console.WriteLine($"Åsa has {firstClient.checkingsAccount}, Urban has {secondClient.checkingsAccount}");
+            Console.ReadKey();
             //Om ConfirmTransaction IsTrue är True så genomför transaktionen
             //Get set för den nya Balance i respektive konto 
             //Konto där överföringen genomförs get set - transaction amount
@@ -96,20 +140,20 @@ TO ACCOUNT Type: Checking Account*/
                     {
                         Console.WriteLine($"Name: {client.name}");
                         Console.Write("Enter the amount to deposit: ");
-                        int amount = int.Parse(Console.ReadLine());
+                        int inputAmount = int.Parse(Console.ReadLine());
                         Console.WriteLine();
 
                         // Lägg till möjlighet att backa ur?
-                        if (amount % 50 == 0 && amount >= 50)
+                        if (inputAmount % 50 == 0 && inputAmount >= 50)
                         {
-                            Console.WriteLine($"Sucessfully deposited {amount} to your account!");
-                            client.checkingsAccount += amount;
+                            Console.WriteLine($"Sucessfully deposited {inputAmount} to your account!");
+                            client.checkingsAccount += inputAmount;
                             Console.WriteLine($"{client.name}, you now have {client.checkingsAccount} in your checking account");
                             Console.WriteLine();
 
                             // Kod som lägger till transaktion till lista
                             string dateAndTime = Convert.ToString(DateTime.Now);
-                            Transactions trans = new Transactions(dateAndTime, amount, "Deposit");
+                            Transactions trans = new Transactions(dateAndTime, inputAmount, "Deposit");
                             ListOfTransactions.Add(trans);
 
                             RepeatQuery();

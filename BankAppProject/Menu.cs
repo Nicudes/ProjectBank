@@ -63,10 +63,7 @@ namespace BankAppProject
                     Console.WriteLine("Incorrect input!");
                     break;
             }
-
         }
-
-        
 
         public static void TransactionMenu()
         {
@@ -94,7 +91,7 @@ namespace BankAppProject
                     Transactions.ExecuteDeposit();
                     break;
                 case "2":
-                    //Kalla transfer metoden
+                    Transactions.ExecuteTransactions();
                     break;
                 case "3":
                     MainMenu();
@@ -103,9 +100,6 @@ namespace BankAppProject
                     Console.WriteLine("Incorrect input!");
                     break;
             }
-
         }
-
-
     }
 }

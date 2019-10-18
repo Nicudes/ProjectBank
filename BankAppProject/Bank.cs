@@ -24,7 +24,7 @@ namespace BankAppProject
 
             Client client = new Client(name, id, creationDate, checkingsAccount, savingsAccount);
 
-           Console.WriteLine($"Client created!\nName: {name}\nID: {id}\nAccount created at: {creationDate}\nCheckings Account: {checkingsAccount}\nSavings Account:{savingsAccount}");
+            Console.WriteLine($"Client created!\nName: {name}\nID: {id}\nAccount created at: {creationDate}\nCheckings Account: {checkingsAccount}\nSavings Account:{savingsAccount}");
             Client.ClientList.Add(client);
 
             //Create a date of account creation, can be hardcoded
@@ -32,21 +32,10 @@ namespace BankAppProject
             //Writes client name and the ID that was created by the Client class
 
             Console.WriteLine();
-    
-
 
             Console.WriteLine("Press any key to return to main menu");
             Console.ReadKey();
             Menu.MainMenu();
-
-        }
-    
-
-        public void ShowTransactions()
-        {
-            //Get the information stored in transactions
-            //Print out information 
-
         }
     }
 }

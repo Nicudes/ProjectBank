@@ -84,8 +84,7 @@ namespace BankAppProject
                         break;
 
                     case "10":
-                        Transactions trans1 = new Transactions();
-                        trans1.ExecuteTransactions();   
+                        Transactions.ExecuteTransactions();   
                         break;
                     case "11":
                         Transactions.ExecuteDeposit();
