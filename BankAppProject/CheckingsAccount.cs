@@ -16,6 +16,8 @@ namespace BankAppProject
             //Ska visa creationDate
 
             //Vi skapade en foreach loop för att skriva ut varje klient som vi har i vår klientlista
+
+            
             foreach (Client client in Client.ClientList)
             {
                 //Första vi vill göra är att kolla ifall klientens saldo är större än det klienten hade de första 30 dagarna
@@ -29,13 +31,19 @@ namespace BankAppProject
                     Console.WriteLine("Bonus mother fucker!!");
                 }
                 Console.WriteLine();
+                
             }
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+
             /*
 ID: 1001
 Name: Sohail
 CheckingAccount Balance: 2000krona
 MemberSince: 2018-12-12 00:00:00 */
         }
+
+        
 
         //public override bool CheckForBonus(Client aClient)
         //{

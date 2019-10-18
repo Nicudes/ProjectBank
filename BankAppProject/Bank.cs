@@ -30,32 +30,17 @@ namespace BankAppProject
             //Create a date of account creation, can be hardcoded
             //Create account automatic from the method CreateAccount
             //Writes client name and the ID that was created by the Client class
+<<<<<<< HEAD
             Console.WriteLine();
             ShowClient();
+=======
+
+            Console.WriteLine("Press any key to return to main menu");
+            Console.ReadKey();
+            Menu.MainMenu();
+>>>>>>> master
         }
     
-
-        public static void ShowClient()
-        {
-           
-            foreach (Client clients in Client.ClientList)
-            {
-                Console.WriteLine($"ID: {clients.id}");
-                Console.WriteLine($"Name: {clients.name}");
-
-
-            }
-            //Get the information from the stored Client list
-            //Print out information
-        }
-
-        public void CreateAccount()
-        {
-            //Use the data from Client to create an account 
-           //Gives the balance value in savings account + 5000
-
-
-        }
 
         public void ShowTransactions()
         {
