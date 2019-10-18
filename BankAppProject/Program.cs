@@ -28,7 +28,7 @@ namespace BankAppProject
                 Console.WriteLine("8. SavingsAccount.CheckForBonus()");
                 Console.WriteLine("9. Transactions.ConfirmTransactions()");
                 Console.WriteLine("10. Transactions.ExecuteTransactions()");
-                Console.WriteLine("");
+                Console.WriteLine("11. Show");
                 Console.WriteLine("'exit' to exit program");
                 Console.WriteLine();
 
@@ -86,7 +86,14 @@ namespace BankAppProject
                         Transactions trans1 = new Transactions();
                         trans1.ExecuteTransactions();   
                         break;
-
+                    case "11":
+                        Transactions trans2 = new Transactions();
+                        trans2.ExecuteDeposit();
+                        break;
+                    case "12":
+                        Transactions trans3 = new Transactions();
+                        trans3.ShowTransactions();
+                        break;
                     case "exit":
                         Environment.Exit(0);
                         break;
