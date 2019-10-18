@@ -30,7 +30,7 @@ namespace BankAppProject
             //Create a date of account creation, can be hardcoded
             //Create account automatic from the method CreateAccount
             //Writes client name and the ID that was created by the Client class
-
+            Console.WriteLine();
             ShowClient();
         }
     
