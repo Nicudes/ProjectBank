@@ -28,7 +28,8 @@ namespace BankAppProject
                 Console.WriteLine("8. SavingsAccount.CheckForBonus()");
                 Console.WriteLine("9. Transactions.ConfirmTransactions()");
                 Console.WriteLine("10. Transactions.ExecuteTransactions()");
-                Console.WriteLine("11. Show");
+                Console.WriteLine("11. Transactions.ExecuteDeposit()");
+                Console.WriteLine("12. Transactions.ShowTransactions()");
                 Console.WriteLine("'exit' to exit program");
                 Console.WriteLine();
 

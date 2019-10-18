@@ -61,8 +61,7 @@ TO ACCOUNT Type: Checking Account*/
             //Mottagarkonto get set + transaction amount
             //Spara transaction information för client
             //Skriv dataTime och informationen för transaktionen
-
-
+            //Om man för över pengar så ska de pengar som gått ut vara markerat med rött och de pengar som gått in ska markeras med grönt.
         }
 
         public static void ExecuteDeposit()
@@ -76,7 +75,7 @@ Transcation TYPE: Deposit,
 DATE: 2019 - 09 - 22 13:24:18,
 AMOUNT: 10000krona,
 TO ACCOUNT Type: Checking Account*/
-
+            //Pengar som går in på kontot ska markeras med grönt
             //En counter som går til 3 och sen frågar om man vill tillbaka till main menu???
             do
             {
