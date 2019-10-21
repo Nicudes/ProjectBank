@@ -21,7 +21,6 @@ namespace BankAppProject
                 Console.WriteLine("1. Bank.Create client");
                 Console.WriteLine("2. BankAccounts.ShowAllAccounts()");
                 Console.WriteLine("3. Menu.MainMenu()");
-                Console.WriteLine("4. Bank.ShowTransactions()");
                 Console.WriteLine("5. CheckingsAccount.ShowAccounts()");
                 Console.WriteLine("6. CheckingsAccount.CheckForBonus()");
                 Console.WriteLine("7. SavingsAccount.ShowAccounts()");
@@ -51,11 +50,6 @@ namespace BankAppProject
 
                     case "3":
                         Menu.MainMenu();
-                        break;
-
-                    case "4":
-                        Bank bank1 = new Bank();
-                        bank1.ShowTransactions();
                         break;
 
                     case "5":
