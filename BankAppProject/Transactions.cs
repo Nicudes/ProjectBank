@@ -10,11 +10,14 @@ namespace BankAppProject
     {
         static List<Transactions> ListOfTransactions = new List<Transactions>();
         string dateAndTime;
-        int amount;
+        decimal amount;
         string transactionType;
+        static string deposit = "deposit";
+        static string transaction = "transaction";
+
         public bool IsTrue = false;
 
-        public Transactions(string aDateAndTime, int aAmount, string aTransactionType)
+        public Transactions(string aDateAndTime, decimal aAmount, string aTransactionType)
         {
             dateAndTime = aDateAndTime;
             amount = aAmount;
@@ -121,73 +124,149 @@ AMOUNT: 10000krona,
 TO ACCOUNT Type: Checking Account*/
             //Pengar som går in på kontot ska markeras med grönt
             //En counter som går til 3 och sen frågar om man vill tillbaka till main menu???
+
+            Console.Clear();
+
+            Client depositClient = null;
+            int counter = 0;
+            decimal inputAmount;
+
+            Console.Clear();
+            Console.WriteLine("--- Deposit Money ---");
+            Console.WriteLine();
+
             do
             {
-                Console.Clear();
-                Console.WriteLine("--- Deposit Money ---");
-                Console.WriteLine();
-
                 Console.Write("Enter the ID of the customer: ");
 
                 int id = int.Parse(Console.ReadLine());
                 Console.WriteLine();
 
                 // Systemet kontrollerar att ID finns i kundlista
-
                 foreach (Client client in Client.ClientList)
                 {
                     if (id == client.id)
                     {
-                        Console.WriteLine($"Name: {client.name}");
-                        Console.Write("Enter the amount to deposit: ");
-                        int inputAmount = int.Parse(Console.ReadLine());
-                        Console.WriteLine();
-
-                        // Lägg till möjlighet att backa ur?
-                        if (inputAmount % 50 == 0 && inputAmount >= 50)
-                        {
-                            Console.WriteLine($"Sucessfully deposited {inputAmount} to your account!");
-                            client.checkingsAccount += inputAmount;
-                            Console.WriteLine($"{client.name}, you now have {client.checkingsAccount} in your checking account");
-                            Console.WriteLine();
-
-                            // Kod som lägger till transaktion till lista
-                            string dateAndTime = Convert.ToString(DateTime.Now);
-                            Transactions trans = new Transactions(dateAndTime, inputAmount, "Deposit");
-                            ListOfTransactions.Add(trans);
-
-                            RepeatQuery();
-                        }
-                        else
-                        {
-                            Console.WriteLine("You have to deposit a larger amount!");
-                            Console.WriteLine("You can only add amount in even 50 kronor bills");
-                            Console.WriteLine();
-                            Console.WriteLine("Press any key to continue");
-                            Console.ReadKey();
-                            ExecuteDeposit();
-                        }
+                        depositClient = client;
                     }
                 }
-                Console.WriteLine("No such client was found");
-                Console.ReadKey(); 
-            } while (true);
+
+                if (depositClient == null)
+                {
+                    Console.WriteLine("No such client was found");
+                    counter++;
+                }
+                if (counter == 3)
+                {
+                    Console.WriteLine("Going back to main menu");
+                    Console.ReadKey();
+                    Menu.MainMenu();
+                }
+            } while (depositClient == null);
+
+            Console.WriteLine($"Name: {depositClient.name}");
+            Console.WriteLine();
+
+            //Här har jag tagit bort kod och satt in i nästa metod
+            Console.Write("Enter the amount to deposit: ");
+            inputAmount = CheckIfNumber();
+            inputAmount = CheckAmountValidity(deposit, depositClient, inputAmount);
+
+            Console.WriteLine();
+            Console.WriteLine($"Sucessfully deposited {inputAmount} to your account!");
+            depositClient.checkingsAccount += inputAmount;
+
+            string dateAndTime = Convert.ToString(DateTime.Now);
+
+            Console.WriteLine($"{depositClient.name}, you now have {depositClient.checkingsAccount} in your checking account");
+            Console.WriteLine();
+
+            // Kod som lägger till transaktion till lista
+            Transactions trans = new Transactions(dateAndTime, inputAmount, "Deposit");
+            ListOfTransactions.Add(trans);
+
+            RepeatQuery(deposit);
         }
-        public static void RepeatQuery()
+
+        public static decimal CheckIfNumber()
+        {
+            decimal input = 0;
+            for (int i = 0; i < 1; i++)
+            {
+                try
+                {
+                    input = decimal.Parse(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine("Not a number");
+                    //Console.Write("Enter the amount to deposit: ");
+                    i -= 1;
+                }
+            }
+            return input;
+        }
+
+        public static decimal CheckAmountValidity(string aTransactionType, Client client, decimal aInputAmount)
+        {
+            switch (aTransactionType)
+            {
+                case "deposit":
+                    while (aInputAmount < 50 || aInputAmount % 50 != 0)
+                    {
+                        if (aInputAmount < 50)
+                        {
+                            Console.WriteLine("You have to deposit a larger amount!");
+                            Console.Write("Enter the amount to deposit: ");
+                            aInputAmount = CheckIfNumber();
+                        }
+                        else if (aInputAmount % 50 != 0)
+                        {
+                            Console.WriteLine("You can only add amount in even 50 kronor bills");
+                            Console.Write("Enter the amount to deposit: ");
+                            aInputAmount = CheckIfNumber();
+                        }
+                    }
+                    break;
+
+                case "transaction":
+                    while (aInputAmount <= 0 || aInputAmount > client.checkingsAccount)
+                    {
+                        if (aInputAmount <= 0)
+                        {
+                            Console.WriteLine("You have to deposit a larger amount!");
+                            Console.Write("Enter the amount to deposit: ");
+                            CheckIfNumber();
+                        }
+                        else if (aInputAmount > client.checkingsAccount)
+                        {
+                            Console.WriteLine("You can't transfer more money than you have");
+                            Console.WriteLine($"You have {client.checkingsAccount} kronor in your checking account");
+                        }
+                    }
+                    break;
+            }
+            return aInputAmount;
+        }
+
+        public static void RepeatQuery(string aTransactionType)
         {
             string choice;
 
-            Console.WriteLine("Would you like to make a new deposit?");
+            Console.WriteLine($"Would you like to make a new {aTransactionType}?");
             do
             {
                 Console.Write("Enter 'Y' or 'N': ");
                 choice = Console.ReadLine().ToUpper();
 
-                if (choice == "Y")
+                if (choice == "Y" && aTransactionType == "deposit")
                 {
                     ExecuteDeposit();
                 }
-
+                else if (choice == "Y" && aTransactionType == "transaction")
+                {
+                    ExecuteTransactions();
+                }
                 else if (choice == "N")
                 {
                     Menu.MainMenu();
