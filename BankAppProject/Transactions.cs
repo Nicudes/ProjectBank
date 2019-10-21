@@ -102,6 +102,8 @@ TO ACCOUNT Number: 1001
             return IsTrue = true;
         }
 
+        
+
         public static void ExecuteTransactions()
         {
             decimal inputAmount;
@@ -149,6 +151,10 @@ TO ACCOUNT Number: 1001
                     Console.WriteLine("No such client was found");
                 } 
             } while (secondClient == null);
+
+            /*Kod behövs i Execute Transactions för att hantera om man har 0 på kontot men försöker göra en överföring.
+            I nuläget hamnar användare i en loop där de ombeds att ange hur mycket de vill överföra
+            */
 
             Console.Write("Enter the amount of funds you would like to transfer: ");
             inputAmount = CheckIfNumber(choiceTransaction);
