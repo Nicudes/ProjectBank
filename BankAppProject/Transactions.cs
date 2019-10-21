@@ -63,7 +63,10 @@ namespace BankAppProject
                     Console.WriteLine($"Transaction type: {trans.transactionType}");
                     Console.WriteLine($"Date and time: {trans.dateAndTime}");
                     Console.WriteLine($"Amount: {trans.amount} kronor");
-                    Console.WriteLine($"From client id: {trans.firstClient.id}");
+                    Console.Write($"From client id: ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(trans.firstClient.id);
+                    Console.ResetColor();
                     
                     if (trans.transactionType == choiceTransaction)
                     {
@@ -167,12 +170,17 @@ TO ACCOUNT Number: 1001
                 firstClient.checkingsAccount -= inputAmount;
                 firstClient.savingsAccount += inputAmount;
                 toAccountType = "Saving Account";
+                Console.WriteLine($"{firstClient.name} has {firstClient.checkingsAccount} in the checking account, " +
+                    $"{firstClient.name} has {firstClient.savingsAccount} in the savings account");
+
             }
             else
             {
                 firstClient.checkingsAccount -= inputAmount;
                 secondClient.checkingsAccount += inputAmount;
                 toAccountType = "Checking Account";
+                Console.WriteLine($"{firstClient.name} has {firstClient.checkingsAccount}, " +
+                    $"{secondClient.name} has {secondClient.checkingsAccount}");
             }
 
             string dateAndTime = Convert.ToString(DateTime.Now);
@@ -181,7 +189,8 @@ TO ACCOUNT Number: 1001
             ListOfTransactions.Add(trans);
 
             Console.WriteLine();
-            Console.WriteLine($"{firstClient.name} has {firstClient.checkingsAccount}, {secondClient.name} has {secondClient.checkingsAccount}");
+
+            RepeatQuery(choiceTransaction);
             Console.ReadKey();
             //Om ConfirmTransaction IsTrue är True så genomför transaktionen
             //Get set för den nya Balance i respektive konto 
@@ -350,17 +359,17 @@ TO ACCOUNT Type: Checking Account*/
         {
             string choice;
 
-            Console.WriteLine($"Would you like to make a new {aTransactionType}?");
+            Console.WriteLine($"Would you like to make a new {aTransactionType.ToLower()}?");
             do
             {
                 Console.Write("Enter 'Y' or 'N': ");
                 choice = Console.ReadLine().ToUpper();
 
-                if (choice == "Y" && aTransactionType == "deposit")
+                if (choice == "Y" && aTransactionType == "Deposit")
                 {
                     ExecuteDeposit();
                 }
-                else if (choice == "Y" && aTransactionType == "transaction")
+                else if (choice == "Y" && aTransactionType == "Transaction")
                 {
                     ExecuteTransactions();
                 }
