@@ -15,6 +15,7 @@ namespace BankAppProject
         string toAccountType;
         Client firstClient;
         Client secondClient;
+
         static string choiceDeposit = "Deposit";
         static string choiceTransaction = "Transaction";
         static string choiceId = "id";
@@ -208,12 +209,14 @@ TO ACCOUNT Number: 1001
 Enter the id of the customer: 1001
 Enter the amount to deposit: 10000
 Sucessfully Amount Deposited to your account.
+
 Transcation TYPE: Deposit,
 DATE: 2019 - 09 - 22 13:24:18,
 AMOUNT: 10000krona,
 TO ACCOUNT Type: Checking Account*/
             //Pengar som går in på kontot ska markeras med grönt
             //En counter som går til 3 och sen frågar om man vill tillbaka till main menu???
+            //Man kan bara lägga till två decimaler som mest
 
             Console.Clear();
 
@@ -229,7 +232,6 @@ TO ACCOUNT Type: Checking Account*/
             {
                 Console.Write("Enter the ID of the customer: ");
 
-                //int id = int.Parse(Console.ReadLine());
                 decimal id = CheckIfNumber(choiceId);
 
                 Console.WriteLine();
@@ -240,6 +242,7 @@ TO ACCOUNT Type: Checking Account*/
                     if (id == client.id)
                     {
                         firstClient = client;
+                        break;
                     }
                 }
 
@@ -313,9 +316,9 @@ TO ACCOUNT Type: Checking Account*/
 
         public static decimal CheckAmountValidity(string aTransactionType, Client client, decimal aInputAmount)
         {
-            switch (aTransactionType.ToLower())
+            switch (aTransactionType)
             {
-                case "deposit":
+                case "Deposit":
                     while (aInputAmount < 50 || aInputAmount % 50 != 0)
                     {
                         if (aInputAmount < 50)
@@ -333,7 +336,7 @@ TO ACCOUNT Type: Checking Account*/
                     }
                     break;
 
-                case "transaction":
+                case "Transaction":
                     while (aInputAmount <= 0 || aInputAmount > client.checkingsAccount)
                     {
                         if (aInputAmount <= 0)
