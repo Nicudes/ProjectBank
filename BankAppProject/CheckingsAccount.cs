@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankAppProject
 {
-    class CheckingsAccount : BankAccount
+    class CheckingsAccount : BankAccount, ICinemaTicket
     {
         public override void ShowAccounts()
         {
@@ -33,14 +33,30 @@ namespace BankAppProject
                 Console.WriteLine();
                 
             }
+            
             Console.WriteLine("Press any key to continue");
             Console.ReadKey();
-
+            
             /*
 ID: 1001
 Name: Sohail
 CheckingAccount Balance: 2000krona
 MemberSince: 2018-12-12 00:00:00 */
+        }
+
+        public void CinemaTicket()
+        {
+            //Kolla igenom klientlistan och se om saldot nu är mer än på creationdate
+            //Sätta true på variablen som berättar om kunden har fått bonus
+            //skriva ut vid visa checkingaccount bonusen på biobiljett
+
+            foreach (Client client in Client.ClientList)
+            {
+                if(client.checkingsAccount > 0 && client.creationDate.AddDays(30) <= DateTime.Now)
+                {
+                    Console.WriteLine("You have revieved a free cinema ticket!");
+                }
+            }
         }
 
         
