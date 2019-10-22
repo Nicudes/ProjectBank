@@ -10,6 +10,7 @@ namespace BankAppProject
     {
         static void Main(string[] args)
         {
+            Bank.AddExistingClients();
             string choice;
 
             do
