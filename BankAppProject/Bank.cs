@@ -12,7 +12,7 @@ namespace BankAppProject
        
         public static void CreateClient()
         {
-            string creationDate = Convert.ToString(DateTime.Now);
+            DateTime creationDate = DateTime.Now;
 
             Console.WriteLine("Create client");
             //Create an input for client name 
@@ -36,6 +36,16 @@ namespace BankAppProject
             Console.WriteLine("Press any key to return to main menu");
             Console.ReadKey();
             Menu.MainMenu();
+        }
+
+        public static void AddExistingClients()
+        {
+            Client Pelle = new Client("Pelle", ++idNumberMaker, DateTime.Now, 0, 5000);
+            {
+                DateTime value = new DateTime(2017, 1, 11);
+                Pelle.creationDate = value;
+            }
+            Client.ClientList.Add(Pelle);
         }
     }
 }

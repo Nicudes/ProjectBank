@@ -10,12 +10,12 @@ namespace BankAppProject
     {
         public int id;
         public string name;
-        public string creationDate;
+        public DateTime creationDate;
         public decimal checkingsAccount;
         public decimal savingsAccount;
 
         //Skapa en konstruktor för Client som ska innehålla Name och ID 
-        public Client(string aName, int aId, string aCreationDate, decimal aCheckingsAccount, decimal aSavingsAccount)
+        public Client(string aName, int aId, DateTime aCreationDate, decimal aCheckingsAccount, decimal aSavingsAccount)
         {
             name = aName;
             id = aId;
