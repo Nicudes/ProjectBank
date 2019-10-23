@@ -9,41 +9,37 @@ namespace BankAppProject
     class SavingsAccount : BankAccount, IInterest
     {
         bool shownMessage;
+        public string id = "id";
 
         public void Interest(Client client)
         {
             decimal interest = 1.0005m;
 
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Skapa initialAmount eller liknande och sätt värden där för att inte hårdkoda in värden i metoden.//
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+
             if ((DateTime.Now.Date - client.creationDate.Date).Days >= 30 && client.savingsAccount >= 6000 && client.interestBonus == false)
             {
                 client.savingsAccount *= interest;
-                client.interestBonus = true;
-                              
+                client.interestBonus = true;                              
             }
-            
-
         }
 
-        //int savingsBalance = 5000;
         public override void ShowAccounts()
         {
-            //Metoden ShowAccount implementeras olika i de två barnklasserna. De visar olika Listor av clients och konton.
-            //Metoden ska visa aClient.id följt av aClient.name
-            //Metoden ska visa vad det är för slags konto och hur mycket pengar som finns nuvarande i kontot
-            //Ska visa dateAndTime
 
             bool foundClient = false;
            
             do
             {
                 Console.WriteLine("Enter your ID");
-                int inputId = int.Parse(Console.ReadLine());
+                decimal inputId = Transactions.CheckIfNumber(id);
 
                 foreach (Client client in Client.ClientList)
                 {                   
                     if (inputId == client.id)
-                    {
-                        
+                    {                        
                         Interest(client);
                         Console.WriteLine($"ID: {client.id}");
                         Console.WriteLine($"Name: {client.name}");
@@ -66,15 +62,13 @@ namespace BankAppProject
                             }
                             else if (shownMessage == true)
                             {
-                                Console.WriteLine("You have the interest bonus!");
-                            }
-                            
+                                Console.WriteLine("You already have the bonus");
+                            }                            
                         }
                         
                         foundClient = true;
                         break;
                     }
-
                 }
 
                 if (!foundClient)
@@ -88,32 +82,6 @@ namespace BankAppProject
 
             } while (!foundClient);
 
-            
-
-           
-            /*
-ID: 1001
-Name: Sohail
-Saving Balance: 5000krona
-MemberSince: 2018-12-12 00:00:00 */
         }
-
-
-
-        //public override bool CheckForBonus(Client aClient)
-        //{
-        //    //Kraven är samma som i CheckingsAccount, alltså att man har mer pengar i kontot än de första 30 dagarna.
-        //    //Uppfyller man kraven sätts en bool??? till true som i sin tur godkänner de olika bonusarna i de olika kontona.
-            
-        //    if (balance > initialBalance)
-        //    {
-        //        return IsBonus = true;
-        //    }
-        //    else
-        //    {
-        //        return IsBonus = false;
-        //    }
-
-        //}
     }
 }
