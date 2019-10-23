@@ -6,8 +6,24 @@ using System.Threading.Tasks;
 
 namespace BankAppProject
 {
-    class SavingsAccount : BankAccount
+    class SavingsAccount : BankAccount, IInterest
     {
+
+        Client clientPelle = new Client();
+
+        public void Interest()
+        {
+                //decimal initialSavings = 2000m;
+                decimal interestSavings = 1.0005m;
+                //int value = DateTime.Compare(client.creationDate, DateTime.Now);
+
+                if (clientPelle.savingsAccount > 2000)
+                {
+                    clientPelle.savingsAccount *= interestSavings;
+                    IsBonus = true;
+                }     
+        }
+
         //int savingsBalance = 5000;
         public override void ShowAccounts()
         {
@@ -20,6 +36,8 @@ namespace BankAppProject
 
             foreach (Client client in Client.ClientList)
             {
+                Interest();
+
                 Console.WriteLine($"ID: {client.id}");
                 Console.WriteLine($"Name: {client.name}");
                 Console.WriteLine($"Savings Account Balance: {client.savingsAccount}");
@@ -27,6 +45,7 @@ namespace BankAppProject
                 if (IsBonus == true)
                 {
                     Console.WriteLine("Bonus mother fucker!!");
+                    Console.WriteLine(client.savingsAccount);
                 }
                 Console.WriteLine();
             }
@@ -39,6 +58,8 @@ Name: Sohail
 Saving Balance: 5000krona
 MemberSince: 2018-12-12 00:00:00 */
         }
+
+
 
         //public override bool CheckForBonus(Client aClient)
         //{
