@@ -9,7 +9,7 @@ namespace BankAppProject
     class Transactions
     {
         static List<Transactions> ListOfTransactions = new List<Transactions>();
-        string dateAndTime;
+        DateTime dateAndTime;
         decimal amount;
         string transactionType;
         string toAccountType;
@@ -22,7 +22,7 @@ namespace BankAppProject
 
         public bool IsTrue = false;
 
-        public Transactions(string aDateAndTime, decimal aAmount, string aTransactionType, string aToAccountType, Client aFirstClient, Client aSecondClient)
+        public Transactions(DateTime aDateAndTime, decimal aAmount, string aTransactionType, string aToAccountType, Client aFirstClient, Client aSecondClient)
         {
             dateAndTime = aDateAndTime;
             amount = aAmount;
@@ -32,7 +32,7 @@ namespace BankAppProject
             secondClient = aSecondClient;
         }
 
-        public Transactions(string aDateAndTime, decimal aAmount, string aTransactionType, string aToAccountType, Client aFirstClient)
+        public Transactions(DateTime aDateAndTime, decimal aAmount, string aTransactionType, string aToAccountType, Client aFirstClient)
         {
             dateAndTime = aDateAndTime;
             amount = aAmount;
@@ -110,51 +110,71 @@ TO ACCOUNT Number: 1001
 
         public static void ExecuteTransactions()
         {
+            Console.Clear();
+
             decimal inputAmount;
-            ///////////////////////////////////////////////
-            //Kolla med Sohail om det är ok att göra såhär:
-            /////////////////////////////////////////////
-            Client firstClient = null;
-            Client secondClient = null;
+            bool foundClient = false;
+
+            Client firstClient = new Client();
+            Client secondClient = new Client();
 
             do
             {
                 Console.Write("Please enter your account ID: ");
-                //int firstId = int.Parse(Console.ReadLine());
                 decimal firstId = CheckIfNumber(choiceId);
-
+                Console.WriteLine();
+                
                 foreach (Client client in Client.ClientList)
                 {
                     if (firstId == client.id)
                     {
                         firstClient = client;
+                        foundClient = true;
                     }
                 }
 
-                if (firstClient == null)
+                if (!foundClient)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("No such client was found");
+                    Console.ResetColor();
+                    Console.WriteLine();
                 } 
-            } while (firstClient == null);
+            } while (!foundClient);
+
+            if (firstClient.checkingsAccount <= 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{firstClient.name} unfortunately has no money in his/her checking account.");
+                Console.ResetColor();
+                RepeatQuery(choiceTransaction);
+            }
+
+            foundClient = false;
 
             do
             {
                 Console.Write("Please enter the id of the person you would like to transfer funds to: ");
                 decimal secondId = CheckIfNumber(choiceId);
+                Console.WriteLine();
 
                 foreach (Client client in Client.ClientList)
                 {
                     if (secondId == client.id)
                     {
                         secondClient = client;
+                        foundClient = true;
                     }
                 }
 
-                if (secondClient == null)
+                if (!foundClient)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("No such client was found");
+                    Console.ResetColor();
+                    Console.WriteLine();
                 } 
-            } while (secondClient == null);
+            } while (!foundClient);
 
             /*Kod behövs i Execute Transactions för att hantera om man har 0 på kontot men försöker göra en överföring.
             I nuläget hamnar användare i en loop där de ombeds att ange hur mycket de vill överföra
@@ -171,20 +191,18 @@ TO ACCOUNT Number: 1001
                 firstClient.checkingsAccount -= inputAmount;
                 firstClient.savingsAccount += inputAmount;
                 toAccountType = "Saving Account";
-                Console.WriteLine($"{firstClient.name} has {firstClient.checkingsAccount} in the checking account, " +
-                    $"{firstClient.name} has {firstClient.savingsAccount} in the savings account");
-
+                Console.WriteLine($"{firstClient.name} transferred {inputAmount} from his/her checking account " +
+                    $"to his/her {toAccountType.ToLower()}.");
             }
             else
             {
                 firstClient.checkingsAccount -= inputAmount;
                 secondClient.checkingsAccount += inputAmount;
                 toAccountType = "Checking Account";
-                Console.WriteLine($"{firstClient.name} has {firstClient.checkingsAccount}, " +
-                    $"{secondClient.name} has {secondClient.checkingsAccount}");
+                Console.WriteLine($"{firstClient.name} transferred {inputAmount} to {secondClient.name}'s {toAccountType.ToLower()}.");
             }
 
-            string dateAndTime = Convert.ToString(DateTime.Now);
+            DateTime dateAndTime = DateTime.Now;
 
             Transactions trans = new Transactions(dateAndTime, inputAmount, choiceTransaction, toAccountType, firstClient, secondClient);
             ListOfTransactions.Add(trans);
@@ -220,9 +238,10 @@ TO ACCOUNT Type: Checking Account*/
 
             Console.Clear();
 
-            Client firstClient = null;
+            Client firstClient = new Client();
             int counter = 0;
             decimal inputAmount;
+            bool foundClient = false;
 
             Console.Clear();
             Console.WriteLine("--- Deposit Money ---");
@@ -242,13 +261,16 @@ TO ACCOUNT Type: Checking Account*/
                     if (id == client.id)
                     {
                         firstClient = client;
+                        foundClient = true;
                         break;
                     }
                 }
 
-                if (firstClient == null)
+                if (!foundClient)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("No such client was found");
+                    Console.ResetColor();
                     counter++;
                 }
                 if (counter == 3)
@@ -257,23 +279,26 @@ TO ACCOUNT Type: Checking Account*/
                     Console.ReadKey();
                     Menu.MainMenu();
                 }
-            } while (firstClient == null);
+            } while (!foundClient);
 
             Console.WriteLine($"Name: {firstClient.name}");
             Console.WriteLine();
 
-            //Här har jag tagit bort kod och satt in i nästa metod
             Console.Write("Enter the amount to deposit: ");
             inputAmount = CheckIfNumber(choiceDeposit);
             inputAmount = CheckAmountValidity(choiceDeposit, firstClient, inputAmount);
 
             Console.WriteLine();
-            Console.WriteLine($"Sucessfully deposited {inputAmount} to your account!");
+            Console.Write($"Sucessfully deposited ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(inputAmount);
+            Console.ResetColor();
+            Console.WriteLine(" kr to your account!");
             firstClient.checkingsAccount += inputAmount;
 
-            string dateAndTime = Convert.ToString(DateTime.Now);
+            DateTime dateAndTime = DateTime.Now;
 
-            Console.WriteLine($"{firstClient.name}, you now have {firstClient.checkingsAccount} in your checking account");
+            Console.WriteLine($"{firstClient.name}, you now have {firstClient.checkingsAccount} kr in your checking account");
             Console.WriteLine();
 
             // Kod som lägger till transaktion till lista
@@ -299,13 +324,17 @@ TO ACCOUNT Type: Checking Account*/
                 {
                     if (aTransactionType == choiceDeposit || aTransactionType == choiceTransaction)
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Not a number");
+                        Console.ResetColor();
                         Console.Write("Please reenter the amount: ");
                         i -= 1;
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Not a number");
+                        Console.ResetColor(); 
                         Console.Write("Please reenter the ID: ");
                         i -= 1;
                     }
@@ -319,17 +348,24 @@ TO ACCOUNT Type: Checking Account*/
             switch (aTransactionType)
             {
                 case "Deposit":
-                    while (aInputAmount < 50 || aInputAmount % 50 != 0)
+                    while (aInputAmount < 100 || aInputAmount % 100 != 0)
                     {
-                        if (aInputAmount < 50)
+                        if (aInputAmount < 100)
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You have to deposit a larger amount!");
+                            Console.WriteLine("The smallest amount to deposit is 100 kr");
+                            Console.ResetColor();
+                            Console.WriteLine();
                             Console.Write("Enter the amount to deposit: ");
                             aInputAmount = CheckIfNumber(choiceDeposit);
                         }
-                        else if (aInputAmount % 50 != 0)
+                        else if (aInputAmount % 100 != 0)
                         {
-                            Console.WriteLine("You can only add amount in even 50 kronor bills");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("You can only add amount in even 100 kr bills");
+                            Console.ResetColor();
+                            Console.WriteLine();
                             Console.Write("Enter the amount to deposit: ");
                             aInputAmount = CheckIfNumber(choiceDeposit);
                         }
@@ -341,14 +377,21 @@ TO ACCOUNT Type: Checking Account*/
                     {
                         if (aInputAmount <= 0)
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You have to deposit a larger amount!");
+                            Console.WriteLine("You can only transfer a positive amount.");
+                            Console.ResetColor();
+                            Console.WriteLine();
                             Console.Write("Enter the amount to transfer: ");
                             aInputAmount = CheckIfNumber(choiceTransaction);
                         }
                         else if (aInputAmount > client.checkingsAccount)
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You can't transfer more money than you have");
+                            Console.ResetColor();
                             Console.WriteLine($"You have {client.checkingsAccount} kronor in your checking account");
+                            Console.WriteLine();
                             Console.Write("Enter the amount to transfer: ");
                             aInputAmount = CheckIfNumber(choiceTransaction);
                         }
@@ -361,7 +404,7 @@ TO ACCOUNT Type: Checking Account*/
         public static void RepeatQuery(string aTransactionType)
         {
             string choice;
-
+            Console.WriteLine();
             Console.WriteLine($"Would you like to make a new {aTransactionType.ToLower()}?");
             do
             {
@@ -382,7 +425,9 @@ TO ACCOUNT Type: Checking Account*/
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Wrong input!");
+                    Console.ResetColor();
                     Console.WriteLine();
                 }
             } while (choice != "Y" && choice != "N");

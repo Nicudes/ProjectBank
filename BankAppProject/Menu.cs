@@ -10,7 +10,7 @@ namespace BankAppProject
     {
         static int counter = 0;
         static string choice;
-        static string[] menuList = { "Create client", "Show all clients", "Savings accounts", "Checkings accounts", "Show all transactions", "Make a transaction", "masterMenu", "Exit" };
+        static string[] menuList = { "Create client", "Show all clients", "Savings accounts", "Checkings accounts", "Show all transactions", "Make a transaction", "Exit" };
 
         public static void MainMenu()
         {
@@ -65,9 +65,6 @@ namespace BankAppProject
                     Bank.CreateClient();
                     break;
                 case "2":
-                    masterMenu();
-                    break;
-                case "3":
                     Environment.Exit(0);
                     break;
 
@@ -88,22 +85,18 @@ namespace BankAppProject
                     BankAccount.ShowAllAccounts();
                     TransactionMenu();
                     break;
-                //case "3":
-                //    SavingsAccount.ShowSavingAccounts();
-                //    break;
-                //case "4":
-                //    CheckingsAccount.ShowCheckingAccounts();
-                //    break;
+                case "3":
+                    SavingsAccount sa = new SavingsAccount();
+                    sa.ShowAccounts();
+                    break;
+                case "4":
+                    CheckingsAccount ca = new CheckingsAccount();
+                    ca.ShowAccounts();
+                    break;
                 case "5":
                     Transactions.ShowTransactions();
                     break;
                 case "6":
-                    Transactions.ExecuteTransactions();
-                    break;
-                case "7":
-                    masterMenu();
-                    break;
-                case "8":
                     Environment.Exit(0);
                     break;
 
@@ -148,94 +141,6 @@ namespace BankAppProject
                     Console.WriteLine("Incorrect input!");
                     break;
             }
-        }
-        public static void masterMenu()
-        {
-            string choice;
-
-            do
-            {
-                Console.Clear();
-                Console.WriteLine("Master Menu");
-                Console.WriteLine("-----------");
-                Console.WriteLine();
-                Console.WriteLine("1. Bank.Create client");
-                Console.WriteLine("2. BankAccounts.ShowAllAccounts()");
-                Console.WriteLine("3. Menu.MainMenu()");
-                Console.WriteLine("5. CheckingsAccount.ShowAccounts()");
-                Console.WriteLine("6. CheckingsAccount.CheckForBonus()");
-                Console.WriteLine("7. SavingsAccount.ShowAccounts()");
-                Console.WriteLine("8. SavingsAccount.CheckForBonus()");
-                Console.WriteLine("9. Transactions.ConfirmTransactions()");
-                Console.WriteLine("10. Transactions.ExecuteTransactions()");
-                Console.WriteLine("11. Transactions.ExecuteDeposit()");
-                Console.WriteLine("12. Transactions.ShowTransactions()");
-                Console.WriteLine("'exit' to exit program");
-                Console.WriteLine();
-
-                Console.Write("Input: ");
-
-                choice = Console.ReadLine();
-                Console.Clear();
-
-                switch (choice)
-                {
-                    case "1":
-                        Bank.CreateClient();
-                        //MainMenu();
-                        break;
-
-                    case "2":
-                        BankAccount.ShowAllAccounts();
-                        break;
-
-                    case "3":
-                        Menu.MainMenu();
-                        break;
-
-                    case "5":
-                        CheckingsAccount cA = new CheckingsAccount();
-                        cA.ShowAccounts();
-                        break;
-
-                    //case "6":
-                    //    CheckingsAccount ca1 = new CheckingsAccount();
-                    //    ca1.CheckForBonus();
-                    //    break;
-
-                    case "7":
-                        SavingsAccount sA = new SavingsAccount();
-                        sA.ShowAccounts();
-                        break;
-
-                    //case "8":
-                    //SavingsAccount sA1 = new SavingsAccount();
-                    //sA1.CheckForBonus();
-                    //    break;
-
-                    //case "9":
-                    //    Transactions trans = new Transactions();
-                    //    trans.ConfirmTransactions();
-                    //    break;
-
-                    case "10":
-                        Transactions.ExecuteTransactions();
-                        break;
-                    case "11":
-                        Transactions.ExecuteDeposit();
-                        break;
-                    case "12":
-                        Transactions.ShowTransactions();
-                        break;
-                    case "exit":
-                        Environment.Exit(0);
-                        break;
-
-                    default:
-                        Console.WriteLine("Wrong input!");
-                        break;
-                }
-            } while (choice != "exit");
         }
     }
 }

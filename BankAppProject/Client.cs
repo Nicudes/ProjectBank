@@ -16,7 +16,7 @@ namespace BankAppProject
         public bool cinemaBonus;
         public bool interestBonus;
 
-        //Skapa en konstruktor för Client som ska innehålla Name och ID 
+
         public Client(string aName, int aId, DateTime aCreationDate, decimal aCheckingsAccount, decimal aSavingsAccount)
         {
             name = aName;
