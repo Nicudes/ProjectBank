@@ -8,21 +8,15 @@ namespace BankAppProject
 {
     class SavingsAccount : BankAccount, IInterest
     {
-
-        Client clientPelle = new Client();
-
-        public void Interest()
+        public void Interest(Client client)
         {
-                //decimal initialSavings = 2000m;
-                decimal interestSavings = 1.0005m;
-                //int value = DateTime.Compare(client.creationDate, DateTime.Now);
-            
-
-            if (clientPelle.savingsAccount > 2000)
+            decimal interest = 1.0005m;
+   
+                if ((DateTime.Now.Date - client.creationDate.Date).Days >= 30 && client.savingsAccount >= 2000 && IsBonus == false)
                 {
-                    clientPelle.savingsAccount *= interestSavings;
+                    client.savingsAccount *= interest;
                     IsBonus = true;
-                }     
+                }
         }
 
         //int savingsBalance = 5000;
@@ -33,10 +27,9 @@ namespace BankAppProject
             //Metoden ska visa vad det är för slags konto och hur mycket pengar som finns nuvarande i kontot
             //Ska visa dateAndTime
 
-
             foreach (Client client in Client.ClientList)
             {
-                
+                Interest(client);
 
                 Console.WriteLine($"ID: {client.id}");
                 Console.WriteLine($"Name: {client.name}");
@@ -47,12 +40,14 @@ namespace BankAppProject
                     Console.WriteLine("Bonus mother fucker!!");
                     Console.WriteLine(client.savingsAccount);
                 }
+                
                 Console.WriteLine();
+                
             }
             Console.WriteLine("Press any key to continue");
             Console.ReadKey();
 
-            Interest();
+           
             /*
 ID: 1001
 Name: Sohail
