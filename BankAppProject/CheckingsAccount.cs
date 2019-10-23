@@ -72,10 +72,16 @@ MemberSince: 2018-12-12 00:00:00 */
             //Första vi vill göra är att kolla ifall klientens saldo är större än det klienten hade de första 30 dagarna
             //CheckForBonus(client);
 
-            if ((DateTime.Now.Date - client.creationDate.Date).Days > 30 && client.checkingsAccount > 0 && IsBonus == false)
+            if ((DateTime.Now.Date - client.creationDate.Date).Days > 30 && client.checkingsAccount > 0 && client.cinemaBonus == false)
             {
+                Console.WriteLine();
                 Console.WriteLine("You have revieved a free cinema ticket!");
-                IsBonus = true;
+                client.cinemaBonus = true;
+            }
+            else if(client.cinemaBonus == true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("You have revieved a free cinema ticket!");
             }
 
         }
