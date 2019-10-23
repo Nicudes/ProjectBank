@@ -26,10 +26,7 @@ namespace BankAppProject
                 Console.WriteLine($"Name: {client.name}");
                 Console.WriteLine($"Checking Account Balance: {client.checkingsAccount}");
                 Console.WriteLine($"Member since: {client.creationDate}");
-                if (IsBonus == true)
-                {
-                    Console.WriteLine("Bonus mother fucker!!");
-                }
+                CinemaTicket(client);
                 Console.WriteLine();
                 
             }
@@ -44,19 +41,16 @@ CheckingAccount Balance: 2000krona
 MemberSince: 2018-12-12 00:00:00 */
         }
 
-        public void CinemaTicket()
+        public void CinemaTicket(Client client)
         {
-            //Kolla igenom klientlistan och se om saldot nu är mer än på creationdate
-            //Sätta true på variablen som berättar om kunden har fått bonus
-            //skriva ut vid visa checkingaccount bonusen på biobiljett
+            //Eventuellt ha en variabel inital value som är kundens start värde (0)
 
-            foreach (Client client in Client.ClientList)
+
+            if ((DateTime.Now.Date - client.creationDate.Date).Days > 30 && client.checkingsAccount > 0)
             {
-                if(client.checkingsAccount > 0 && client.creationDate.AddDays(30) <= DateTime.Now)
-                {
-                    Console.WriteLine("You have revieved a free cinema ticket!");
-                }
+                Console.WriteLine("You have revieved a free cinema ticket!");
             }
+
         }
 
         
