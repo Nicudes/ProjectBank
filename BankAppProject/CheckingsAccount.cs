@@ -8,7 +8,8 @@ namespace BankAppProject
 {
     class CheckingsAccount : BankAccount, ICinemaTicket
     {
-
+        public string id = "id";
+        
 
         public override void ShowAccounts()
         {
@@ -25,8 +26,8 @@ namespace BankAppProject
                 do
                 {
                     Console.WriteLine("Enter your ID");
-                    int inputId = int.Parse(Console.ReadLine());
-                   
+
+                    decimal inputId = Transactions.CheckIfNumber(id);
 
                     foreach (Client client in Client.ClientList)
                     {
