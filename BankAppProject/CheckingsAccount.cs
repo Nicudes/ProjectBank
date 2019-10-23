@@ -53,6 +53,7 @@ namespace BankAppProject
             }
         }
 
+
         public void CinemaTicket(Client client)
         {
             //Kravspecändring kontot måste ha mer än 100kr för att få biobiljett
