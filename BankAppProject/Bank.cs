@@ -14,26 +14,31 @@ namespace BankAppProject
         {
             DateTime creationDate = DateTime.Now;
 
-            Console.WriteLine("Create client");
-            //Create an input for client name 
-            string name = Console.ReadLine();
-            //Creating an object from client constructor in the Client class with the previous input from the user
             int id = ++idNumberMaker;
             int checkingsAccount = 0;
             int savingsAccount = 5000;
 
-            Client client = new Client(name, id, creationDate, checkingsAccount, savingsAccount);
 
-            Console.WriteLine($"Client created!\nName: {name}\nID: {id}\nAccount created at: {creationDate}\nCheckings Account: {checkingsAccount}\nSavings Account:{savingsAccount}");
+            Console.WriteLine("Creating client");
+            Console.WriteLine("----------------");
+            Console.WriteLine("Enter client name:");
+            string name = Console.ReadLine();
+            Client client = new Client(name, id, creationDate, checkingsAccount, savingsAccount);
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("----------------");
+            Console.WriteLine("Client created");
+            Console.WriteLine("----------------");
+            Console.WriteLine($"Name: {name}\nID: {id}\nAccount created at: {creationDate}\nCheckings Account: {checkingsAccount}\nSavings Account:{savingsAccount}");
+            Console.WriteLine("----------------");
+            Console.ResetColor();
+
             Client.ClientList.Add(client);
 
-            //Create a date of account creation, can be hardcoded
-            //Create account automatic from the method CreateAccount
-            //Writes client name and the ID that was created by the Client class
-
             Console.WriteLine();
-
-            Console.WriteLine("Press any key to return to main menu");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Press any key to return to Main Menu");
+            Console.ResetColor();
             Console.ReadKey();
             Menu.MainMenu();
         }
