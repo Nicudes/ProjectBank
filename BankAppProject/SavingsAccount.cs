@@ -8,15 +8,20 @@ namespace BankAppProject
 {
     class SavingsAccount : BankAccount, IInterest
     {
+        bool shownMessage;
+
         public void Interest(Client client)
         {
             decimal interest = 1.0005m;
-   
-                if ((DateTime.Now.Date - client.creationDate.Date).Days >= 30 && client.savingsAccount >= 2000 && IsBonus == false)
-                {
-                    client.savingsAccount *= interest;
-                    IsBonus = true;
-                }
+
+            if ((DateTime.Now.Date - client.creationDate.Date).Days >= 30 && client.savingsAccount >= 6000 && client.interestBonus == false)
+            {
+                client.savingsAccount *= interest;
+                client.interestBonus = true;
+                              
+            }
+            
+
         }
 
         //int savingsBalance = 5000;
@@ -27,25 +32,63 @@ namespace BankAppProject
             //Metoden ska visa vad det är för slags konto och hur mycket pengar som finns nuvarande i kontot
             //Ska visa dateAndTime
 
-            foreach (Client client in Client.ClientList)
+            bool foundClient = false;
+           
+            do
             {
-                Interest(client);
+                Console.WriteLine("Enter your ID");
+                int inputId = int.Parse(Console.ReadLine());
 
-                Console.WriteLine($"ID: {client.id}");
-                Console.WriteLine($"Name: {client.name}");
-                Console.WriteLine($"Savings Account Balance: {client.savingsAccount}");
-                Console.WriteLine($"Member since: {client.creationDate}");
-                if (IsBonus == true)
-                {
-                    Console.WriteLine("Bonus mother fucker!!");
-                    Console.WriteLine(client.savingsAccount);
+                foreach (Client client in Client.ClientList)
+                {                   
+                    if (inputId == client.id)
+                    {
+                        
+                        Interest(client);
+                        Console.WriteLine($"ID: {client.id}");
+                        Console.WriteLine($"Name: {client.name}");
+                        Console.WriteLine($"Savings Account Balance: {client.savingsAccount}");
+                        Console.WriteLine($"Member since: {client.creationDate}");
+                        Console.WriteLine();
+                        if (client.interestBonus == true)
+                        {
+                            /* Vi vill visa grön bakgrund endast första gången man visar klient.
+                             Efterföljande gånger ska ingen färg visas. Nu visas grön bakgrund vid varje tillfälle */
+
+                            if (!shownMessage)
+                            {
+                                Console.BackgroundColor = ConsoleColor.Green;
+                                Console.ForegroundColor = ConsoleColor.Black;
+                                Console.WriteLine("You have the interest bonus!");
+                                Console.ResetColor();
+                                Console.WriteLine();
+                                shownMessage = true;
+                            }
+                            else if (shownMessage == true)
+                            {
+                                Console.WriteLine("You have the interest bonus!");
+                            }
+                            
+                        }
+                        
+                        foundClient = true;
+                        break;
+                    }
+
                 }
-                
-                Console.WriteLine();
-                
-            }
-            Console.WriteLine("Press any key to continue");
-            Console.ReadKey();
+
+                if (!foundClient)
+                {
+                    Console.WriteLine("Couldn't find the id.");
+
+                }
+
+                Console.WriteLine("Press any key to continue");
+                Console.ReadKey();
+
+            } while (!foundClient);
+
+            
 
            
             /*
