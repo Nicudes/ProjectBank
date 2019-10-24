@@ -10,6 +10,7 @@ namespace BankAppProject
     {
         public int id;
         public string name;
+        public string movieChoice;
         public DateTime creationDate;
         public decimal checkingsAccount;
         public decimal savingsAccount;
@@ -31,6 +32,10 @@ namespace BankAppProject
             id = aId;
             cinemaBonus = aCinemaBonus;
             interestBonus = aInterestBonus;
+        }
+        public Client(string aMovieChoice)
+        {
+            movieChoice = aMovieChoice;
         }
 
         public Client()

@@ -10,8 +10,8 @@ namespace BankAppProject
     {
         static void Main(string[] args)
         {
-            //Bank.AddExistingClients();
-
+            Bank.AddExistingClients();
+            Movies.AddMovies();
             Menu.MainMenu();
         }
     }
