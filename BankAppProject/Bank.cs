@@ -50,7 +50,38 @@ namespace BankAppProject
                 DateTime value = new DateTime(2017, 1, 11);
                 Pelle.creationDate = value;
             }
+            Client Johan = new Client("Johan", ++idNumberMaker, DateTime.Now, 0, 5000);
+            {
+                DateTime value = new DateTime(2017, 1, 11);
+                Johan.creationDate = value;
+            }
+            Client Okhuy = new Client("Okhuy", ++idNumberMaker, DateTime.Now, 0, 5000);
+            {
+                DateTime value = new DateTime(2017, 1, 11);
+                Okhuy.creationDate = value;
+            }
+            Client Smandy = new Client("Smandy", ++idNumberMaker, DateTime.Now, 0, 5000);
+            {
+                DateTime value = new DateTime(2017, 1, 11);
+                Smandy.creationDate = value;
+            }
+            Client Licke = new Client("Licke", ++idNumberMaker, DateTime.Now, 0, 5000);
+            {
+                DateTime value = new DateTime(2017, 1, 11);
+                Licke.creationDate = value;
+            }
+            Client Kroken = new Client("Kroken", ++idNumberMaker, DateTime.Now, 0, 5000);
+            {
+                DateTime value = new DateTime(2017, 1, 11);
+                Kroken.creationDate = value;
+            }
             Client.ClientList.Add(Pelle);
+            Client.ClientList.Add(Johan);
+            Client.ClientList.Add(Okhuy);
+            Client.ClientList.Add(Smandy);
+            Client.ClientList.Add(Licke);
+            Client.ClientList.Add(Kroken);
+
         }
     }
 }

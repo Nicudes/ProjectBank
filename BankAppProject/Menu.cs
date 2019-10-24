@@ -10,7 +10,7 @@ namespace BankAppProject
     {
         static int counter = 0;
         static string choice;
-        static string[] menuList = { "Create client", "Show all clients", "Savings accounts", "Checkings accounts", "Show all transactions", "Make a transaction", "Exit" };
+        static string[] menuList = { "Create client", "Show all clients", "Savings accounts", "Checkings accounts", "Show all transactions", "Exit" };
 
         public static void MainMenu()
         {
@@ -21,7 +21,7 @@ namespace BankAppProject
 
             for (int i = 0; i < menuList.Length; i++)
             {
-                if (NoClients && i == 1 || NoClients && i == 2 || NoClients && i == 3 || NoClients && i == 4 || NoClients && i == 5)
+                if (NoClients && i == 1 || NoClients && i == 2 || NoClients && i == 3 || NoClients && i == 4)
                 {
 
                 }
