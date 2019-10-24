@@ -64,6 +64,7 @@
     <Compile Include="BankAccount.cs" />
     <Compile Include="CheckingsAccount.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="Colours.cs" />
     <Compile Include="ICinemaTicket.cs" />
     <Compile Include="IInterest.cs" />
     <Compile Include="Menu.cs" />
