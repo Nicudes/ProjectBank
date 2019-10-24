@@ -33,11 +33,19 @@ namespace BankAppProject
                         Console.WriteLine($"Member since: {client.creationDate}");
                         Console.WriteLine("----------------");
 
-                        if (ticketAmount > 0)
+                        if (ticketAmount > 0 && client.cinemaBonus == false)
                         {
                             CinemaTicket(client);
                         }
                         Console.WriteLine();
+
+                        if (client.cinemaBonus == true && client.movieChoice != null)
+                        {
+                            //Vill vi ha ljud?
+                            Console.Write($"You have a free cinema ticket for ");
+                            Colours.Cyan(client.movieChoice);
+                            Console.WriteLine();
+                        }
 
                         Console.WriteLine();
                         foundClient = true;
@@ -78,6 +86,8 @@ namespace BankAppProject
                     Console.WriteLine(counter + ". " + movie.title);
                     counter++;
                 }
+                Console.WriteLine();
+                Console.WriteLine(counter + ". No thanks, I don't want a movie ticket");
 
                 string choice;
                 bool choiceMade;
@@ -104,7 +114,12 @@ namespace BankAppProject
                             break;
                         }
                     }
-                    if (!foundMovie)
+                    if (choice == "11")
+                    {
+                        Console.WriteLine("You chose not to go to the movies.");
+                        client.movieChoice = null;
+                    }
+                    else if (!foundMovie)
                     {
                         Console.WriteLine("Invalid input");
                         choiceMade = true;
@@ -112,6 +127,7 @@ namespace BankAppProject
                 } while (choiceMade);
 
                 client.cinemaBonus = true;
+
             }
             else if (client.cinemaBonus == true)
             {
@@ -124,7 +140,6 @@ namespace BankAppProject
 
         public static void UpdateMovies(Movies movie, Client client)
         {
-            Console.WriteLine("Du valde: " + movie.title);
             client.movieChoice = movie.title;
             movie.ticketsAvailable--;
 
