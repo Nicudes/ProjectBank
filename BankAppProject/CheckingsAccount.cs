@@ -53,16 +53,16 @@ namespace BankAppProject
                     foundClient = true;
                     break;
                 }
-
-                if (!foundClient)
-                {
-                    Console.WriteLine("Couldn't find the id.");
-
-                }
-                Colours.Red("Press any key to return to Main Menu");
-                Console.ReadKey();
-                Menu.MainMenu();
+   
             }
+            if (!foundClient)
+            {
+                Console.WriteLine("Couldn't find the id.");
+
+            }
+            Colours.Red("Press any key to return to Main Menu");
+            Console.ReadKey();
+            Menu.MainMenu();
         }
 
      //Denna metoden kollar om klienten har uppfyllt kraven för att få en biobiljett och skriver isf ut det.
