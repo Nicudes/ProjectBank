@@ -30,9 +30,7 @@ namespace BankAppProject
         {
 
             bool foundClient = false;
-           
-            do
-            {
+
                 Console.WriteLine("Enter your ID");
                 decimal inputId = Transactions.CheckIfNumber(id);
 
@@ -77,11 +75,11 @@ namespace BankAppProject
 
                 }
 
-                Console.WriteLine("Press any key to continue");
-                Console.ReadKey();
-
-            } while (!foundClient);
-
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Press any key to return to Main Menu");
+            Console.ResetColor();
+            Console.ReadKey();
+            Menu.MainMenu();
         }
     }
 }
