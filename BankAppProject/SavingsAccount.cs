@@ -8,8 +8,8 @@ namespace BankAppProject
 {
     class SavingsAccount : BankAccount, IInterest
     {
-        bool shownMessage;
-        public string id = "id";
+        bool messageShown;
+        public string choiceId = "id";
 
         public void Interest(Client client)
         {
@@ -26,54 +26,53 @@ namespace BankAppProject
             }
         }
 
-        public override void ShowAccounts()
+        public override void ShowAccount()
         {
-
             bool foundClient = false;
 
-                Console.WriteLine("Enter your ID");
-                decimal inputId = Transactions.CheckIfNumber(id);
+            Console.WriteLine("Enter your ID");
+            decimal inputId = Transactions.CheckIfNumber(choiceId);
 
-                foreach (Client client in Client.ClientList)
-                {                   
-                    if (inputId == client.id)
-                    {                        
-                        Interest(client);
-                        Console.WriteLine($"ID: {client.id}");
-                        Console.WriteLine($"Name: {client.name}");
-                        Console.WriteLine($"Savings Account Balance: {client.savingsAccount}");
-                        Console.WriteLine($"Member since: {client.creationDate}");
-                        Console.WriteLine();
-                        if (client.interestBonus == true)
-                        {
-                            /* Vi vill visa grön bakgrund endast första gången man visar klient.
-                             Efterföljande gånger ska ingen färg visas. Nu visas grön bakgrund vid varje tillfälle */
-
-                            if (!shownMessage)
-                            {
-                                Console.BackgroundColor = ConsoleColor.Green;
-                                Console.ForegroundColor = ConsoleColor.Black;
-                                Console.WriteLine("You have the interest bonus!");
-                                Console.ResetColor();
-                                Console.WriteLine();
-                                shownMessage = true;
-                            }
-                            else if (shownMessage == true)
-                            {
-                                Console.WriteLine("You already have the bonus");
-                            }                            
-                        }
-                        
-                        foundClient = true;
-                        break;
-                    }
-                }
-
-                if (!foundClient)
+            foreach (Client client in Client.clientList)
+            {
+                if (inputId == client.id)
                 {
-                    Console.WriteLine("Couldn't find the id.");
+                    Interest(client);
+                    Console.WriteLine($"ID: {client.id}");
+                    Console.WriteLine($"Name: {client.name}");
+                    Console.WriteLine($"Savings Account Balance: {client.savingsAccount}");
+                    Console.WriteLine($"Member since: {client.creationDate}");
+                    Console.WriteLine();
+                    if (client.interestBonus == true)
+                    {
+                        /* Vi vill visa grön bakgrund endast första gången man visar klient.
+                         Efterföljande gånger ska ingen färg visas. Nu visas grön bakgrund vid varje tillfälle */
 
+                        if (!messageShown)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Green;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                            Console.WriteLine("You have the interest bonus!");
+                            Console.ResetColor();
+                            Console.WriteLine();
+                            messageShown = true;
+                        }
+                        else if (messageShown == true)
+                        {
+                            Console.WriteLine("You already have the bonus");
+                        }
+                    }
+
+                    foundClient = true;
+                    break;
                 }
+            }
+
+            if (!foundClient)
+            {
+                Console.WriteLine("Couldn't find the id.");
+
+            }
 
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Press any key to return to Main Menu");

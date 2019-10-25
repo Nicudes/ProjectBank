@@ -8,7 +8,7 @@ namespace BankAppProject
 {
     class Bank
     {
-      public static int idNumberMaker=1000;
+      private static int idNumberMaker = 1000;
        
         public static void CreateClient()
         {
@@ -33,7 +33,7 @@ namespace BankAppProject
             Console.WriteLine("----------------");
             Console.ResetColor();
 
-            Client.ClientList.Add(client);
+            Client.clientList.Add(client);
 
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
@@ -75,13 +75,13 @@ namespace BankAppProject
                 DateTime value = new DateTime(2017, 1, 11);
                 Kroken.creationDate = value;
             }
-            Client.ClientList.Add(Pelle);
-            Client.ClientList.Add(Johan);
-            Client.ClientList.Add(Okhuy);
-            Client.ClientList.Add(Smandy);
-            Client.ClientList.Add(Licke);
-            Client.ClientList.Add(Kroken);
 
+            Client.clientList.Add(Pelle);
+            Client.clientList.Add(Johan);
+            Client.clientList.Add(Okhuy);
+            Client.clientList.Add(Smandy);
+            Client.clientList.Add(Licke);
+            Client.clientList.Add(Kroken);
         }
     }
 }

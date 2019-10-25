@@ -8,22 +8,23 @@ namespace BankAppProject
 {
     class Client
     {
-        public int id;
         public string name;
-        public string movieChoice;
+        public int id;
         public DateTime creationDate;
-        public decimal checkingsAccount;
+        public decimal checkingAccount;
         public decimal savingsAccount;
+        public string movieChoice;
         public bool cinemaBonus;
         public bool interestBonus;
 
+        public static List<Client> clientList = new List<Client>();
 
         public Client(string aName, int aId, DateTime aCreationDate, decimal aCheckingsAccount, decimal aSavingsAccount)
         {
             name = aName;
             id = aId;
             creationDate = aCreationDate;
-            checkingsAccount = aCheckingsAccount;
+            checkingAccount = aCheckingsAccount;
             savingsAccount = aSavingsAccount;
         }
 
@@ -42,11 +43,5 @@ namespace BankAppProject
         {
 
         }
-
-        public static List<Client> ClientList = new List<Client>();
-        
-
-        
-
     }
 }

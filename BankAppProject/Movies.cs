@@ -8,30 +8,31 @@ namespace BankAppProject
 {
     class Movies
     {
+        public int indexPlace;
         public string title;
         public int ticketsAvailable;
-        public int indexPlace;
 
         public static List<Movies> movieList = new List<Movies>();
 
-        public Movies(string aTitle, int aTicketsAvailable, int aIndexPlace)
+        public Movies(int aIndexPlace, string aTitle, int aTicketsAvailable)
         {
+            indexPlace = aIndexPlace;
             title = aTitle;
             ticketsAvailable = aTicketsAvailable;
-            indexPlace = aIndexPlace;
         }
+
         public static void AddMovies()
         {
-            Movies movie1 = new Movies("Bamse och dunderklockan", 1, 1);
-            Movies movie2 = new Movies("Joker", 1, 2);
-            Movies movie3 = new Movies("Lejonkungen", 1, 3);
-            Movies movie4 = new Movies("Hustlers", 1, 4);
-            Movies movie5 = new Movies("Husdjurens hemliga liv 2", 1, 5);
-            Movies movie6 = new Movies("Hasse och Tage - en kärlekshistoria", 1, 6);
-            Movies movie7 = new Movies("Gemini Man", 3, 7);
-            Movies movie8 = new Movies("Good Boys", 1, 8);
-            Movies movie9 = new Movies("Dora and the lost City", 4, 9);
-            Movies movie10 = new Movies("Ad Astra", 2, 10);
+            Movies movie1 = new Movies(1, "Bamse och dunderklockan", 1);
+            Movies movie2 = new Movies(2, "Joker", 1);
+            Movies movie3 = new Movies(3, "Lejonkungen", 1);
+            Movies movie4 = new Movies(4, "Hustlers", 1);
+            Movies movie5 = new Movies(5, "Husdjurens hemliga liv 2", 1);
+            Movies movie6 = new Movies(6, "Hasse och Tage - en kärlekshistoria", 1);
+            Movies movie7 = new Movies(7, "Gemini Man", 3);
+            Movies movie8 = new Movies(8, "Good Boys", 1);
+            Movies movie9 = new Movies(9, "Dora and the lost City", 4);
+            Movies movie10 = new Movies(10, "Ad Astra", 2);
 
             movieList.Add(movie1);
             movieList.Add(movie2);

@@ -5,7 +5,6 @@ namespace BankAppProject
 {
     interface ICinemaTicket
     {
-
         public void CinemaTicket(Client client);
     }
 }

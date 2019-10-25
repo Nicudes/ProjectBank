@@ -16,7 +16,7 @@ namespace BankAppProject
         {
             Console.Clear();
 
-            bool NoClients = !Client.ClientList.Any();
+            bool NoClients = !Client.clientList.Any();
             counter = 1;
 
             for (int i = 0; i < menuList.Length; i++)
@@ -87,11 +87,11 @@ namespace BankAppProject
                     break;
                 case "3":
                     SavingsAccount sa = new SavingsAccount();
-                    sa.ShowAccounts();
+                    sa.ShowAccount();
                     break;
                 case "4":
                     CheckingsAccount ca = new CheckingsAccount();
-                    ca.ShowAccounts();
+                    ca.ShowAccount();
                     break;
                 case "5":
                     Transactions.ShowTransactions();

@@ -8,49 +8,43 @@ namespace BankAppProject
 {
     class CheckingsAccount : BankAccount, ICinemaTicket
     {
-        public string id = "id";
-        static int ticketAmount = 10;
+        private string choiceId = "id";
+        private static int ticketAmount = 10;
 
-        public override void ShowAccounts()
+        public override void ShowAccount()
         {
+            bool foundClient = false;
 
+            Console.WriteLine("Enter your ID:");
+            decimal inputId = Transactions.CheckIfNumber(choiceId);
+
+            foreach (Client client in Client.clientList)
             {
-                bool foundClient = false;
-
-                Console.WriteLine("Enter your ID:");
-
-                decimal inputId = Transactions.CheckIfNumber(id);
-
-                foreach (Client client in Client.ClientList)
+                if (inputId == client.id)
                 {
-                    if (inputId == client.id)
+                    Console.WriteLine("----------------");
+                    Console.WriteLine($"ID: {client.id}");
+                    Console.WriteLine($"Name: {client.name}");
+                    Console.WriteLine($"Checking Account Balance: {client.checkingAccount}");
+                    Console.WriteLine($"Member since: {client.creationDate}");
+                    Console.WriteLine("----------------");
+
+                    if (ticketAmount > 0 && client.cinemaBonus == false)
                     {
-
-                        Console.WriteLine("----------------");
-                        Console.WriteLine($"ID: {client.id}");
-                        Console.WriteLine($"Name: {client.name}");
-                        Console.WriteLine($"Checking Account Balance: {client.checkingsAccount}");
-                        Console.WriteLine($"Member since: {client.creationDate}");
-                        Console.WriteLine("----------------");
-
-                        if (ticketAmount > 0 && client.cinemaBonus == false)
-                        {
-                            CinemaTicket(client);
-                        }
-                        Console.WriteLine();
-
-                        if (client.cinemaBonus == true && client.movieChoice != null)
-                        {
-                            //Vill vi ha ljud?
-                            Console.Write($"You have a free cinema ticket for ");
-                            Colours.Cyan(client.movieChoice);
-                            Console.WriteLine();
-                        }
-
-                        Console.WriteLine();
-                        foundClient = true;
-                        break;
+                        CinemaTicket(client);
                     }
+                    Console.WriteLine();
+
+                    if (client.cinemaBonus == true && client.movieChoice != null)
+                    {
+                        //Vill vi ha ljud?
+                        Console.Write("You have a free cinema ticket for "); Colours.Cyan(client.movieChoice);
+                        Console.WriteLine();
+                    }
+
+                    Console.WriteLine();
+                    foundClient = true;
+                    break;
                 }
 
                 if (!foundClient)
@@ -66,11 +60,10 @@ namespace BankAppProject
             }
         }
 
-
         public void CinemaTicket(Client client)
         {
             //Kravspecändring kontot måste ha mer än 100kr för att få biobiljett
-            if ((DateTime.Now.Date - client.creationDate.Date).Days > 30 && client.checkingsAccount > 100 && client.cinemaBonus == false)
+            if ((DateTime.Now.Date - client.creationDate.Date).Days > 30 && client.checkingAccount > 100 && client.cinemaBonus == false)
             {
                 Console.WriteLine();
                 Console.BackgroundColor = ConsoleColor.Green;
@@ -127,7 +120,6 @@ namespace BankAppProject
                 } while (choiceMade);
 
                 client.cinemaBonus = true;
-
             }
             else if (client.cinemaBonus == true)
             {
