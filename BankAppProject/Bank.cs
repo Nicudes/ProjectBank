@@ -8,21 +8,25 @@ namespace BankAppProject
 {
     class Bank
     {
+      //variabeln är till för att konton som skapas ska från nr 1001.
       private static int idNumberMaker = 1000;
        
+      //CreateClient är till för att skapa ett klient objekt.
         public static void CreateClient()
         {
-            DateTime creationDate = DateTime.Now;
-
             int id = ++idNumberMaker;
             int checkingsAccount = 0;
             int savingsAccount = 5000;
-
 
             Console.WriteLine("Creating client");
             Console.WriteLine("----------------");
             Console.WriteLine("Enter client name:");
             string name = Console.ReadLine();
+
+            //Vi skapar objektet creationDate av typen DateTime för att logga när kund är skapad.
+            DateTime creationDate = DateTime.Now;
+
+            //Vi skapar ett objekt utifrån en konstruktor i client som vi använder för att se kundens alla uppgifter. 
             Client client = new Client(name, id, creationDate, checkingsAccount, savingsAccount);
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -33,6 +37,7 @@ namespace BankAppProject
             Console.WriteLine("----------------");
             Console.ResetColor();
 
+            //Den skapade klienten läggs till i vår klientlista.
             Client.clientList.Add(client);
 
             Console.WriteLine();
@@ -43,6 +48,7 @@ namespace BankAppProject
             Menu.MainMenu();
         }
 
+        //I denna metod skapar vi hårdkodade klienter som läggs till i början av programmet.
         public static void AddExistingClients()
         {
             Client Pelle = new Client("Pelle", ++idNumberMaker, DateTime.Now, 0, 5000);

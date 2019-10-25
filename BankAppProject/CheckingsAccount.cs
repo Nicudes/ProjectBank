@@ -6,13 +6,19 @@ using System.Threading.Tasks;
 
 namespace BankAppProject
 {
+    //Checking account ärver ifrån Bank account och tar in interfacet IcinemaTicket.
     class CheckingsAccount : BankAccount, ICinemaTicket
     {
+     /// <summary>
+     /// Kolla upp om vi kan göra det bättre, används för att skriva ut wrong input 4 id or wrong input 4 amount
+     /// </summary>
         private string choiceId = "id";
         private static int ticketAmount = 10;
 
+     // En overridad metod som vi använder för att se ett specifikt kontos checking account + väsentliga uppgfiter.
         public override void ShowAccount()
         {
+     // Använder en bool för att säga om vi har hittat ett konto eller inte vid input av id nr.
             bool foundClient = false;
 
             Console.WriteLine("Enter your ID:");
@@ -29,12 +35,13 @@ namespace BankAppProject
                     Console.WriteLine($"Member since: {client.creationDate}");
                     Console.WriteLine("----------------");
 
+     // om det finns mer än 0 biobiljetter och klient ej fått bonus ska programmet gå igenom interfacet
                     if (ticketAmount > 0 && client.cinemaBonus == false)
                     {
                         CinemaTicket(client);
                     }
                     Console.WriteLine();
-
+     //om klient har fått bonus och valt film för sin biobiljett ska vi skriva ut filmens namn.
                     if (client.cinemaBonus == true && client.movieChoice != null)
                     {
                         //Vill vi ha ljud?
@@ -52,17 +59,16 @@ namespace BankAppProject
                     Console.WriteLine("Couldn't find the id.");
 
                 }
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Press any key to return to Main Menu");
-                Console.ResetColor();
+                Colours.Red("Press any key to return to Main Menu");
                 Console.ReadKey();
                 Menu.MainMenu();
             }
         }
 
+     //Denna metoden kollar om klienten har uppfyllt kraven för att få en biobiljett och skriver isf ut det.
         public void CinemaTicket(Client client)
         {
-            //Kravspecändring kontot måste ha mer än 100kr för att få biobiljett
+     // Kraven för att klient ska uppnå biobiljetts bonus.
             if ((DateTime.Now.Date - client.creationDate.Date).Days > 30 && client.checkingAccount > 100 && client.cinemaBonus == false)
             {
                 Console.WriteLine();
@@ -72,18 +78,21 @@ namespace BankAppProject
                 Console.ResetColor();
                 Console.WriteLine();
 
+     // skapar en counter för att visa en siffra framför filmerna i filmmenyn.
                 int counter = 1;
-
+     // loopar igenom filmlistan och skriver ut objektens attribut för filmernas titel.
                 foreach (Movies movie in Movies.movieList)
                 {
-                    Console.WriteLine(counter + ". " + movie.title);
+                    Console.WriteLine(counter + ") " + movie.title);
                     counter++;
                 }
                 Console.WriteLine();
-                Console.WriteLine(counter + ". No thanks, I don't want a movie ticket");
-
+                Console.WriteLine("0) No thanks, I don't want a movie ticket");
+     // använder variablen för att jämföra user input med filmobjektets indexPlace.
                 string choice;
-                bool choiceMade;
+     // använder variablen för att användaren alltid ska behöva göra ett val tills ett möjligt val är gjort.
+                bool invalidInput;
+     // använder variabeln för att säga om vi har hittat en film eller inte.
                 bool foundMovie = false;
 
                 do
@@ -94,20 +103,24 @@ namespace BankAppProject
 
                     choice = Console.ReadLine();
 
-                    choiceMade = false;
+                    invalidInput = false;
 
+     // loopar igenom movielistan och kollar om användarens val stämmer överrens med filmobjektets indexPlace.
                     foreach (Movies movie in Movies.movieList)
                     {
+     //  konverterar till string för att vi senare i IF, måste jämföra två likadana datatyper.
+     //  Använder oss utav string för att det hanterar även bokstäver vid inmatning
                         string indexPlace = Convert.ToString(movie.indexPlace);
 
                         if (choice == indexPlace)
                         {
-                            UpdateMovies(movie, client);
+     // Tar in movie och klient som argument för att vi vill ha klientens val av film.
+                            Movies.UpdateMovies(movie, client);
                             foundMovie = true;
                             break;
                         }
                     }
-                    if (choice == "11")
+                    if (choice == "0")
                     {
                         Console.WriteLine("You chose not to go to the movies.");
                         client.movieChoice = null;
@@ -115,36 +128,20 @@ namespace BankAppProject
                     else if (!foundMovie)
                     {
                         Console.WriteLine("Invalid input");
-                        choiceMade = true;
+                        invalidInput = true;
                     }
-                } while (choiceMade);
+                } while (invalidInput);
 
                 client.cinemaBonus = true;
             }
+     // detta är else if till första if. Hade detta varit en enskild if hade programmet kört båda stegen
+     // När vi har valt en biljett sedan innan.
             else if (client.cinemaBonus == true)
             {
                 Console.WriteLine();
                 Console.Write($"You have claimed a cinema ticket for ");
                 Colours.Cyan(client.movieChoice);
                 Console.WriteLine();
-            }
-        }
-
-        public static void UpdateMovies(Movies movie, Client client)
-        {
-            client.movieChoice = movie.title;
-            movie.ticketsAvailable--;
-
-            if (movie.ticketsAvailable == 0)
-            {
-                foreach (Movies movieCompare in Movies.movieList)
-                {
-                    if (movie.indexPlace < movieCompare.indexPlace)
-                    {
-                        movieCompare.indexPlace--;
-                    }
-                }
-                Movies.movieList.Remove(movie);
             }
         }
     }

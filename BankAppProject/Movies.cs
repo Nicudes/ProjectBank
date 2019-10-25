@@ -21,6 +21,24 @@ namespace BankAppProject
             ticketsAvailable = aTicketsAvailable;
         }
 
+        public static void UpdateMovies(Movies movie, Client client)
+        {
+            client.movieChoice = movie.title;
+            movie.ticketsAvailable--;
+
+            if (movie.ticketsAvailable == 0)
+            {
+                foreach (Movies movieCompare in movieList)
+                {
+                    if (movie.indexPlace < movieCompare.indexPlace)
+                    {
+                        movieCompare.indexPlace--;
+                    }
+                }
+                movieList.Remove(movie);
+            }
+        }
+
         public static void AddMovies()
         {
             Movies movie1 = new Movies(1, "Bamse och dunderklockan", 1);

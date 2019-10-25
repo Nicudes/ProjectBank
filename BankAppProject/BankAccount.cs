@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace BankAppProject
 {
+    //Abstrakt klass för att vi vill inte skapa objekt härifrån.
    abstract class BankAccount
     {
-        protected int balance = 0;
 
+        //en virtual metod som overridas i barnklasserna med egen logik.
         public virtual void ShowAccount()
         {
             
         }
 
+        //Loopar igenom klientlistan och visar all information om varje klient.
         public static void ShowAllAccounts()
         {            
             foreach (Client client in Client.clientList)
