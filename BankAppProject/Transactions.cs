@@ -53,7 +53,7 @@ namespace BankAppProject
             if (IsEmpty)
             {
                 Console.WriteLine("There are no transactions at the moment");
-                Console.Write("Press any key to continue ");
+                Colours.Red("Press any key to continue ");
                 Console.ReadKey();
                 Menu.MainMenu();
             }
@@ -63,15 +63,12 @@ namespace BankAppProject
                 {
                     Console.WriteLine($"Transaction type: {trans.transactionType}");
                     Console.WriteLine($"Date and time: {trans.dateAndTime}");
-                    Console.WriteLine($"Amount: {trans.amount} kronor");
-                    Console.Write($"From client id: ");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine(trans.firstClient.id);
-                    Console.ResetColor();
+                    Console.Write($"Amount: "); Colours.Green(Convert.ToString(trans.amount)); Console.WriteLine("kr");
                     
                     if (trans.transactionType == choiceTransaction)
                     {
-                        Console.WriteLine($"To client id: {trans.secondClient.id}");
+                        Console.WriteLine($"From client id: {trans.firstClient.id}");
+                        Console.WriteLine($"To client id: {trans.secondClient.id}");     
                     }
                     else
                     {
@@ -95,14 +92,13 @@ TO ACCOUNT Number: 1001
         }
 
         public static void ErrorMessage()
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("No such client was found");
-            Console.ResetColor();
+        {            
+            Colours.Red("No such client was found");
             Console.WriteLine(); 
             Console.WriteLine("Do you want to return to main menu? Press 0.");
             Console.WriteLine("Otherwise press any key to continue.");
             string goBackToMainMenu = Console.ReadLine();
+
             if (goBackToMainMenu == "0")
             {
                 Menu.MainMenu();
