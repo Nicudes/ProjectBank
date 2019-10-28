@@ -35,6 +35,8 @@ namespace BankAppProject
             Console.WriteLine("Input: ");
             choice = Console.ReadLine();
             Console.Clear();
+           
+    
 
             /* switchcase för
  * skapa kund - skapa kund metoden
@@ -69,7 +71,7 @@ namespace BankAppProject
                     break;
 
                 default:
-                    Console.WriteLine("Incorrect input!");
+                    MainMenu();
                     break;
             }
         }
@@ -101,7 +103,7 @@ namespace BankAppProject
                     break;
 
                 default:
-                    Console.WriteLine("Incorrect input!");
+                    MainMenu();
                     break;
             }
         }
@@ -113,7 +115,7 @@ namespace BankAppProject
              * transfer - skriv in ditt kund id, skriv in den du vill skicka tills id, summa.
              * återgå till transactionMenu
              * return to mainmenu*/
-
+            Console.WriteLine();
             Console.WriteLine("Transaction Menu");
             Console.WriteLine("----------------");
             Console.WriteLine();
@@ -124,23 +126,35 @@ namespace BankAppProject
 
             Console.WriteLine("Input: ");
             string choice = Console.ReadLine();
-            Console.Clear();
+            Console.WriteLine();
 
-            switch (choice)
+            do
             {
-                case "1":
-                    Transactions.ExecuteDeposit();
-                    break;
-                case "2":
-                    Transactions.ExecuteTransactions();
-                    break;
-                case "3":
-                    MainMenu();
-                    break;
-                default:
-                    Console.WriteLine("Incorrect input!");
-                    break;
-            }
+
+                switch (choice)
+                {
+                    case "1":
+                        Transactions.ExecuteDeposit();
+                        break;
+                    case "2":
+                        Transactions.ExecuteTransactions();
+                        break;
+                    case "3":
+                        MainMenu();
+                        break;
+                    default:
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        Console.WriteLine(new string(' ', Console.BufferWidth - (Console.CursorTop - 1)));
+                        Console.SetCursorPosition(0, Console.CursorTop - 1);
+                        choice = Console.ReadLine();
+                        Console.WriteLine("Wrong input, please try again!");
+
+
+
+
+                        break;
+                } 
+            } while (true);
         }
     }
 }

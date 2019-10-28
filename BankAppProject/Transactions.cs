@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Media;
 
 namespace BankAppProject
 {
@@ -15,6 +16,7 @@ namespace BankAppProject
         private static string toAccountType;
         Client firstClient;
         Client secondClient;
+        static SoundPlayer player = new SoundPlayer();
 
         private static string choiceDeposit = "Deposit";
         private static string choiceTransaction = "Transaction";
@@ -53,7 +55,7 @@ namespace BankAppProject
             if (IsEmpty)
             {
                 Console.WriteLine("There are no transactions at the moment");
-                Console.Write("Press any key to continue ");
+                Colours.Red("Press any key to continue ");
                 Console.ReadKey();
                 Menu.MainMenu();
             }
@@ -63,15 +65,12 @@ namespace BankAppProject
                 {
                     Console.WriteLine($"Transaction type: {trans.transactionType}");
                     Console.WriteLine($"Date and time: {trans.dateAndTime}");
-                    Console.WriteLine($"Amount: {trans.amount} kronor");
-                    Console.Write($"From client id: ");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine(trans.firstClient.id);
-                    Console.ResetColor();
+                    Console.Write($"Amount: "); Colours.Green(Convert.ToString(trans.amount)); Console.WriteLine("kr");
                     
                     if (trans.transactionType == choiceTransaction)
                     {
-                        Console.WriteLine($"To client id: {trans.secondClient.id}");
+                        Console.WriteLine($"From client id: {trans.firstClient.id}");
+                        Console.WriteLine($"To client id: {trans.secondClient.id}");     
                     }
                     else
                     {
@@ -94,8 +93,23 @@ TO ACCOUNT Number: 1001
 */
         }
 
+        public static void ErrorMessage()
+        {            
+            Colours.Red("No such client was found");
+            Console.WriteLine(); 
+            Console.WriteLine("Do you want to return to main menu? Press 0.");
+            Console.WriteLine("Otherwise press any key to continue.");
+            string goBackToMainMenu = Console.ReadLine();
+
+            if (goBackToMainMenu == "0")
+            {
+                Menu.MainMenu();
+            }
+            
+        }
         public static void ExecuteTransactions()
         {
+
             Console.Clear();
 
             decimal inputAmount;
@@ -108,6 +122,8 @@ TO ACCOUNT Number: 1001
             {
                 Console.Write("Please enter your account ID: ");
                 decimal firstId = CheckIfNumber(choiceId);
+                
+
                 Console.WriteLine();
                 
                 foreach (Client client in Client.clientList)
@@ -121,12 +137,11 @@ TO ACCOUNT Number: 1001
 
                 if (!foundClient)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("No such client was found");
-                    Console.ResetColor();
-                    Console.WriteLine();
+                 ErrorMessage();
                 } 
+
             } while (!foundClient);
+            Console.Clear();
 
             if (firstClient.checkingAccount <= 0)
             {
@@ -155,12 +170,12 @@ TO ACCOUNT Number: 1001
 
                 if (!foundClient)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("No such client was found");
-                    Console.ResetColor();
-                    Console.WriteLine();
+                    ErrorMessage();
                 } 
+
             } while (!foundClient);
+
+            Console.Clear();
 
             /*Kod behövs i Execute Transactions för att hantera om man har 0 på kontot men försöker göra en överföring.
             I nuläget hamnar användare i en loop där de ombeds att ange hur mycket de vill överföra
@@ -190,7 +205,10 @@ TO ACCOUNT Number: 1001
 
             Transactions trans = new Transactions(dateAndTime, inputAmount, choiceTransaction, toAccountType, firstClient, secondClient);
             transactionList.Add(trans);
-
+            //
+            player.SoundLocation = "ca-ching.wav";
+            player.PlaySync();
+            //
             Console.WriteLine();
 
             RepeatQuery(choiceTransaction);
@@ -280,6 +298,12 @@ TO ACCOUNT Type: Checking Account*/
             firstClient.checkingAccount += inputAmount;
 
             DateTime dateAndTime = DateTime.Now;
+
+            //
+          
+            player.SoundLocation = "ca-ching.wav";
+            player.PlaySync();
+            //
 
             Console.WriteLine($"{firstClient.name}, you now have {firstClient.checkingAccount} kr in your checking account");
             Console.WriteLine();
