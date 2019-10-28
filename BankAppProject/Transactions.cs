@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Media;
 
 namespace BankAppProject
 {
@@ -293,6 +294,12 @@ TO ACCOUNT Type: Checking Account*/
             firstClient.checkingAccount += inputAmount;
 
             DateTime dateAndTime = DateTime.Now;
+
+            //
+            SoundPlayer player = new SoundPlayer();
+            player.SoundLocation = @"SoundEffects\ca-ching.wav";
+            player.PlaySync();
+            //
 
             Console.WriteLine($"{firstClient.name}, you now have {firstClient.checkingAccount} kr in your checking account");
             Console.WriteLine();
