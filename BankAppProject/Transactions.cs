@@ -16,6 +16,7 @@ namespace BankAppProject
         private static string toAccountType;
         Client firstClient;
         Client secondClient;
+        static SoundPlayer player = new SoundPlayer();
 
         private static string choiceDeposit = "Deposit";
         private static string choiceTransaction = "Transaction";
@@ -204,7 +205,10 @@ TO ACCOUNT Number: 1001
 
             Transactions trans = new Transactions(dateAndTime, inputAmount, choiceTransaction, toAccountType, firstClient, secondClient);
             transactionList.Add(trans);
-
+            //
+            player.SoundLocation = "ca-ching.wav";
+            player.PlaySync();
+            //
             Console.WriteLine();
 
             RepeatQuery(choiceTransaction);
@@ -296,8 +300,8 @@ TO ACCOUNT Type: Checking Account*/
             DateTime dateAndTime = DateTime.Now;
 
             //
-            SoundPlayer player = new SoundPlayer();
-            player.SoundLocation = @"SoundEffects\ca-ching.wav";
+          
+            player.SoundLocation = "ca-ching.wav";
             player.PlaySync();
             //
 
