@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace BankAppProject
 {
     //Checking account ärver ifrån Bank account och tar in interfacet IcinemaTicket.
-    class CheckingsAccount : BankAccount, ICinemaTicket
+    class CheckingAccount : BankAccount, ICinemaTicket
     {
      /// <summary>
      /// Kolla upp om vi kan göra det bättre, används för att skriva ut wrong input 4 id or wrong input 4 amount
@@ -139,8 +139,7 @@ namespace BankAppProject
             else if (client.cinemaBonus == true)
             {
                 Console.WriteLine();
-                Console.Write($"You have claimed a cinema ticket for ");
-                Colours.Cyan(client.movieChoice);
+                Console.Write($"You have claimed a cinema ticket for "); Colours.Cyan(client.movieChoice);
                 Console.WriteLine();
             }
         }

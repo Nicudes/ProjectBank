@@ -62,7 +62,7 @@
   <ItemGroup>
     <Compile Include="Bank.cs" />
     <Compile Include="BankAccount.cs" />
-    <Compile Include="CheckingsAccount.cs" />
+    <Compile Include="CheckingAccount.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Colours.cs" />
     <Compile Include="ICinemaTicket.cs" />

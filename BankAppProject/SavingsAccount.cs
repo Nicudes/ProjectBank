@@ -8,18 +8,14 @@ namespace BankAppProject
 {
     class SavingsAccount : BankAccount, IInterest
     {
-        bool messageShown;
         public string choiceId = "id";
+        int initialAmount = 5000;
 
         public void Interest(Client client)
         {
             decimal interest = 1.0005m;
 
-            //////////////////////////////////////////////////////////////////////////////////////////////////////
-            // Skapa initialAmount eller liknande och sätt värden där för att inte hårdkoda in värden i metoden.//
-            //////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            if ((DateTime.Now.Date - client.creationDate.Date).Days >= 30 && client.savingsAccount >= 6000 && client.interestBonus == false)
+            if ((DateTime.Now.Date - client.creationDate.Date).Days >= 30 && client.savingsAccount > initialAmount && client.interestBonus == false)
             {
                 client.savingsAccount *= interest;
                 client.interestBonus = true;                              
@@ -29,54 +25,59 @@ namespace BankAppProject
         public override void ShowAccount()
         {
             bool foundClient = false;
+            bool IsNumber;
+            int id = 0;
 
-            Console.WriteLine("Enter your ID");
-            decimal inputId = Transactions.CheckIfNumber(choiceId);
+            Console.Write("Enter your id: ");
 
-            foreach (Client client in Client.clientList)
+            do
             {
-                if (inputId == client.id)
+                try
                 {
-                    Interest(client);
-                    Console.WriteLine($"ID: {client.id}");
-                    Console.WriteLine($"Name: {client.name}");
-                    Console.WriteLine($"Savings Account Balance: {client.savingsAccount}");
-                    Console.WriteLine($"Member since: {client.creationDate}");
-                    Console.WriteLine();
-                    if (client.interestBonus == true)
-                    {
-                        /* Vi vill visa grön bakgrund endast första gången man visar klient.
-                         Efterföljande gånger ska ingen färg visas. Nu visas grön bakgrund vid varje tillfälle */
+                    IsNumber = true;
+                    id = int.Parse(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine("Must be a number.");
+                    IsNumber = false;
+                }
 
-                        if (!messageShown)
+                //decimal inputId = Transactions.CheckIfNumber(choiceId);
+                if (!IsNumber)
+                {
+                    foreach (Client client in Client.clientList)
+                    {
+                        if (id == client.id)
                         {
-                            Console.BackgroundColor = ConsoleColor.Green;
-                            Console.ForegroundColor = ConsoleColor.Black;
-                            Console.WriteLine("You have the interest bonus!");
-                            Console.ResetColor();
+                            Interest(client);
+                            Console.WriteLine($"ID: {client.id}");
+                            Console.WriteLine($"Name: {client.name}");
+                            Console.WriteLine($"Savings Account Balance: {client.savingsAccount.ToString("F2")}");
+                            Console.WriteLine($"Member since: {client.creationDate}");
                             Console.WriteLine();
-                            messageShown = true;
-                        }
-                        else if (messageShown == true)
-                        {
-                            Console.WriteLine("You already have the bonus");
+                            if (client.interestBonus == true)
+                            {
+                                Console.BackgroundColor = ConsoleColor.Green;
+                                Console.ForegroundColor = ConsoleColor.Black;
+                                Console.WriteLine("You have been awarded an interest bonus!");
+                                Console.ResetColor();
+                                Console.WriteLine();
+                            }
+
+                            foundClient = true;
+                            break;
                         }
                     }
-
-                    foundClient = true;
-                    break;
                 }
-            }
+            } while (!IsNumber);
 
             if (!foundClient)
             {
-                Console.WriteLine("Couldn't find the id.");
-
+                Colours.Red("No such client was found.");
             }
 
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Press any key to return to Main Menu");
-            Console.ResetColor();
+            Colours.Red("Press any key to return to Main Menu");
             Console.ReadKey();
             Menu.MainMenu();
         }

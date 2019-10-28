@@ -122,7 +122,6 @@ TO ACCOUNT Number: 1001
             {
                 Console.Write("Please enter your account ID: ");
                 decimal firstId = CheckIfNumber(choiceId);
-                
 
                 Console.WriteLine();
                 
@@ -269,9 +268,7 @@ TO ACCOUNT Type: Checking Account*/
 
                 if (!foundClient)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("No such client was found");
-                    Console.ResetColor();
+                    Colours.Red("No such client was found");
                     counter++;
                 }
                 if (counter == 3)
@@ -291,9 +288,7 @@ TO ACCOUNT Type: Checking Account*/
 
             Console.WriteLine();
             Console.Write($"Sucessfully deposited ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write(inputAmount);
-            Console.ResetColor();
+            Colours.Green($"{inputAmount}");
             Console.WriteLine(" kr to your account!");
             firstClient.checkingAccount += inputAmount;
 
@@ -331,17 +326,13 @@ TO ACCOUNT Type: Checking Account*/
                 {
                     if (aTransactionType == choiceDeposit || aTransactionType == choiceTransaction)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Not a number");
-                        Console.ResetColor();
+                        Colours.Red("Not a number\n");
                         Console.Write("Please reenter the amount: ");
                         i -= 1;
                     }
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Not a number");
-                        Console.ResetColor(); 
+                        Colours.Red("Not a number\n");
                         Console.Write("Please reenter the ID: ");
                         i -= 1;
                     }
@@ -359,19 +350,15 @@ TO ACCOUNT Type: Checking Account*/
                     {
                         if (aInputAmount < 100)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("You have to deposit a larger amount!");
-                            Console.WriteLine("The smallest amount to deposit is 100 kr");
-                            Console.ResetColor();
+                            Colours.Red("You have to deposit a larger amount!\n");
+                            Colours.Red("The smallest amount to deposit is 100 kr\n");
                             Console.WriteLine();
                             Console.Write("Enter the amount to deposit: ");
                             aInputAmount = CheckIfNumber(choiceDeposit);
                         }
                         else if (aInputAmount % 100 != 0)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("You can only add amount in even 100 kr bills");
-                            Console.ResetColor();
+                            Colours.Red("You can only add amount in even 100 kr bills\n");
                             Console.WriteLine();
                             Console.Write("Enter the amount to deposit: ");
                             aInputAmount = CheckIfNumber(choiceDeposit);
@@ -384,19 +371,15 @@ TO ACCOUNT Type: Checking Account*/
                     {
                         if (aInputAmount <= 0)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("You have to deposit a larger amount!");
-                            Console.WriteLine("You can only transfer a positive amount.");
-                            Console.ResetColor();
+                            Colours.Red("You have to deposit a larger amount!\n");
+                            Colours.Red("You can only transfer a positive amount.\n");
                             Console.WriteLine();
                             Console.Write("Enter the amount to transfer: ");
                             aInputAmount = CheckIfNumber(choiceTransaction);
                         }
                         else if (aInputAmount > client.checkingAccount)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("You can't transfer more money than you have");
-                            Console.ResetColor();
+                            Colours.Red("You can't transfer more money than you have\n");
                             Console.WriteLine($"You have {client.checkingAccount} kronor in your checking account");
                             Console.WriteLine();
                             Console.Write("Enter the amount to transfer: ");
@@ -432,9 +415,7 @@ TO ACCOUNT Type: Checking Account*/
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Wrong input!");
-                    Console.ResetColor();
+                    Colours.Red("Wrong input!\n");
                     Console.WriteLine();
                 }
             } while (choice != "Y" && choice != "N");

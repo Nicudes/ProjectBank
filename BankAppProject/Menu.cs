@@ -92,7 +92,7 @@ namespace BankAppProject
                     sa.ShowAccount();
                     break;
                 case "4":
-                    CheckingsAccount ca = new CheckingsAccount();
+                    CheckingAccount ca = new CheckingAccount();
                     ca.ShowAccount();
                     break;
                 case "5":
