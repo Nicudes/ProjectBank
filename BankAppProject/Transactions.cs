@@ -94,8 +94,24 @@ TO ACCOUNT Number: 1001
 */
         }
 
+        public static void ErrorMessage()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("No such client was found");
+            Console.ResetColor();
+            Console.WriteLine(); 
+            Console.WriteLine("Do you want to return to main menu? Press 0.");
+            Console.WriteLine("Otherwise press any key to continue.");
+            string goBackToMainMenu = Console.ReadLine();
+            if (goBackToMainMenu == "0")
+            {
+                Menu.MainMenu();
+            }
+            
+        }
         public static void ExecuteTransactions()
         {
+
             Console.Clear();
 
             decimal inputAmount;
@@ -108,6 +124,8 @@ TO ACCOUNT Number: 1001
             {
                 Console.Write("Please enter your account ID: ");
                 decimal firstId = CheckIfNumber(choiceId);
+                
+
                 Console.WriteLine();
                 
                 foreach (Client client in Client.clientList)
@@ -121,12 +139,11 @@ TO ACCOUNT Number: 1001
 
                 if (!foundClient)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("No such client was found");
-                    Console.ResetColor();
-                    Console.WriteLine();
+                 ErrorMessage();
                 } 
+
             } while (!foundClient);
+            Console.Clear();
 
             if (firstClient.checkingAccount <= 0)
             {
@@ -155,12 +172,12 @@ TO ACCOUNT Number: 1001
 
                 if (!foundClient)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("No such client was found");
-                    Console.ResetColor();
-                    Console.WriteLine();
+                    ErrorMessage();
                 } 
+
             } while (!foundClient);
+
+            Console.Clear();
 
             /*Kod behövs i Execute Transactions för att hantera om man har 0 på kontot men försöker göra en överföring.
             I nuläget hamnar användare i en loop där de ombeds att ange hur mycket de vill överföra
