@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace BankAppProject
 {
@@ -17,23 +18,74 @@ namespace BankAppProject
             int id = ++idNumberMaker;
             int checkingsAccount = 0;
             int savingsAccount = 5000;
+            string fullName = null;
+            string firstOrLast = "first";
+            bool ValidateName;
+            bool ContainsNumber;
+            bool IsUpper;
 
             Console.WriteLine("Creating client");
             Console.WriteLine("----------------");
-            Console.WriteLine("Enter client name:");
-            string name = Console.ReadLine();
+
+            do
+            {
+                ValidateName = false;
+                IsUpper = true;
+
+                Console.WriteLine();
+                Console.Write($"Enter {firstOrLast} name: ");
+                string input = Console.ReadLine();
+
+                ContainsNumber = !input.All(char.IsLetter);
+
+                if (ContainsNumber)
+                {
+                    Colours.Red("Name can not contain a number.\n");
+                }
+                else
+                {
+                    try
+                    {
+                        IsUpper = char.IsUpper(input.First());
+                        if (!IsUpper)
+                        {
+                            Colours.Red("Name has to start with upper case.\n");
+                        }
+                        else
+                        {
+                            ValidateName = true;
+                        }
+                    }
+                    catch
+                    {
+                        Colours.Red("Name contains no letters\n");
+                    }
+                }
+
+                if (ValidateName && firstOrLast == "first")
+                {
+                    fullName = input;
+                    firstOrLast = "last";
+                    ValidateName = false;
+                }
+                else if (ValidateName && firstOrLast == "last")
+                {
+                    fullName += " " + input;
+                    break;
+                }
+            } while (!ValidateName);
 
             //Vi skapar objektet creationDate av typen DateTime för att logga när kund är skapad.
             DateTime creationDate = DateTime.Now;
 
             //Vi skapar ett objekt utifrån en konstruktor i client som vi använder för att se kundens alla uppgifter. 
-            Client client = new Client(name, id, creationDate, checkingsAccount, savingsAccount);
+            Client client = new Client(fullName, id, creationDate, checkingsAccount, savingsAccount);
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("----------------");
             Console.WriteLine("Client created");
             Console.WriteLine("----------------");
-            Console.WriteLine($"Name: {name}\nID: {id}\nAccount created at: {creationDate}\nCheckings Account: {checkingsAccount}\nSavings Account:{savingsAccount}");
+            Console.WriteLine($"Name: {fullName}\nID: {id}\nAccount created at: {creationDate}\nCheckings Account: {checkingsAccount}\nSavings Account:{savingsAccount}");
             Console.WriteLine("----------------");
             Console.ResetColor();
 
@@ -41,9 +93,7 @@ namespace BankAppProject
             Client.clientList.Add(client);
 
             Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Press any key to return to Main Menu");
-            Console.ResetColor();
+            Colours.Red("Press any key to return to Main Menu");
             Console.ReadKey();
             Menu.MainMenu();
         }
