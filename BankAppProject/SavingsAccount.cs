@@ -58,7 +58,11 @@ namespace BankAppProject
                     IsNumber = false;
                 }
 
+<<<<<<< HEAD
     // om inmatning av id är korrekt skriver programmet ut information gällande matchande id för klient vid sparkonto.
+=======
+                //decimal inputId = Transactions.CheckIfNumber(choiceId);
+>>>>>>> master
                 if (IsNumber)
                 {
                     foreach (Client client in Client.clientList)
