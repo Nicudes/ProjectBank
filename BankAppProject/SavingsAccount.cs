@@ -44,7 +44,7 @@ namespace BankAppProject
                 }
 
                 //decimal inputId = Transactions.CheckIfNumber(choiceId);
-                if (!IsNumber)
+                if (IsNumber)
                 {
                     foreach (Client client in Client.clientList)
                     {
