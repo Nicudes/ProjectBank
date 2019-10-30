@@ -9,7 +9,7 @@ namespace BankAppProject
 {
     class Transactions
     {
-        //För konstruktorerna
+        //Variabler för att användas i konstruktorerna.
         private DateTime dateAndTime;
         private decimal amount;
         private string transactionType;
@@ -206,7 +206,7 @@ TO ACCOUNT Number: 1001
             transactionList.Add(trans);
             //
             player.SoundLocation = "ca-ching.wav";
-            player.PlaySync();
+            player.Play();
             //
             Console.WriteLine();
 
@@ -240,7 +240,6 @@ TO ACCOUNT Type: Checking Account*/
             Console.Clear();
 
             Client firstClient = new Client();
-            int counter = 0;
             decimal inputAmount;
             bool foundClient = false;
 
@@ -268,14 +267,7 @@ TO ACCOUNT Type: Checking Account*/
 
                 if (!foundClient)
                 {
-                    Colours.Red("No such client was found");
-                    counter++;
-                }
-                if (counter == 3)
-                {
-                    Console.WriteLine("Going back to main menu");
-                    Console.ReadKey();
-                    Menu.MainMenu();
+                    ErrorMessage();
                 }
             } while (!foundClient);
 
@@ -285,7 +277,12 @@ TO ACCOUNT Type: Checking Account*/
             Console.Write("Enter the amount to deposit: ");
             inputAmount = CheckIfNumber(choiceDeposit);
             inputAmount = ValidateAmount(choiceDeposit, firstClient, inputAmount);
+            //
 
+            player.SoundLocation = "ca-ching.wav";
+            player.Play();
+
+            //
             Console.WriteLine();
             Console.Write($"Sucessfully deposited ");
             Colours.Green($"{inputAmount}");
@@ -294,11 +291,7 @@ TO ACCOUNT Type: Checking Account*/
 
             DateTime dateAndTime = DateTime.Now;
 
-            //
-          
-            player.SoundLocation = "ca-ching.wav";
-            player.PlaySync();
-            //
+      
 
             Console.WriteLine($"{firstClient.name}, you now have {firstClient.checkingAccount} kr in your checking account");
             Console.WriteLine();

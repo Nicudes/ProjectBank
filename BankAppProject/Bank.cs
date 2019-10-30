@@ -4,13 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Media;
 
 namespace BankAppProject
 {
+
     class Bank
     {
-      //variabeln är till för att konton som skapas ska från nr 1001.
-      private static int idNumberMaker = 1000;
+        static SoundPlayer Player = new SoundPlayer();
+
+        //variabeln är till för att konton som skapas ska från nr 1001.
+        private static int idNumberMaker = 1000;
        
       //CreateClient är till för att skapa ett klient objekt.
         public static void CreateClient()
@@ -81,6 +85,8 @@ namespace BankAppProject
             //Vi skapar ett objekt utifrån en konstruktor i client som vi använder för att se kundens alla uppgifter. 
             Client client = new Client(fullName, id, creationDate, checkingsAccount, savingsAccount);
             Console.WriteLine();
+            Player.SoundLocation = "confirm.wav";
+            Player.Play();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("----------------");
             Console.WriteLine("Client created");
