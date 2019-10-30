@@ -36,15 +36,6 @@ namespace BankAppProject
             choice = Console.ReadLine();
             Console.Clear();
            
-    
-
-            /* switchcase för
- * skapa kund - skapa kund metoden
- * visa kunder - foreach metoden - transaction menu
- * sparkonton - listasubmeny sparkonto
- * lönekonton
- * visa alla transaktioner - foreach lista av transakt.
- * avsluta*/
 
             while (true)
             {
