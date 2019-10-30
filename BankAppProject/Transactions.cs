@@ -9,7 +9,7 @@ namespace BankAppProject
 {
     class Transactions
     {
-        //För konstruktorerna
+        //Variabler för att användas i konstruktorerna.
         private DateTime dateAndTime;
         private decimal amount;
         private string transactionType;
