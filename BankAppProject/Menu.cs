@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace BankAppProject
 {
@@ -49,6 +50,81 @@ namespace BankAppProject
                 }
             }
         }
+        public static void CheckPassword()
+        {
+            Console.Clear();
+            Console.SetCursorPosition((Console.WindowWidth - 25) / 2, Console.CursorTop);
+
+            Console.WriteLine("Welcome to the BANK APP \n");
+            Console.SetCursorPosition((Console.WindowWidth - 27) / 2, Console.CursorTop);
+            Console.WriteLine("Please enter the password:\n");
+
+
+            for (int i = 0; i < 3; i++)
+            {
+                string password = MaskingPassword();
+                if (password == "admin")
+                {
+                    MainMenu();
+                }
+                else
+                {
+                    Console.SetCursorPosition((Console.WindowWidth - 40) / 2, Console.CursorTop);
+
+                    Console.WriteLine("Incorrect password, Please try again:\n");
+
+                }
+            }
+            Console.SetCursorPosition((Console.WindowWidth - 50) / 2, Console.CursorTop);
+            Console.WriteLine("------------------------------------------------");
+            Console.WriteLine();
+            Console.SetCursorPosition((Console.WindowWidth - 30) / 2, Console.CursorTop);
+            Console.WriteLine("Too many incorrect input!");
+            for (int i = 10; i > 0; i--)
+            {
+                Console.SetCursorPosition((Console.WindowWidth - 25) / 2, Console.CursorTop);
+                Console.Write($"Please wait {i} seconds");
+                Thread.Sleep(1000);
+            }
+
+            CheckPassword();
+
+
+        }
+        public static string MaskingPassword()
+        {
+            string password = "";
+            Console.SetCursorPosition((Console.WindowWidth - password.Length) / 3 + 10, Console.CursorTop);
+            ConsoleKeyInfo info = Console.ReadKey(true);
+            while (info.Key != ConsoleKey.Enter)
+            {
+                if (info.Key != ConsoleKey.Backspace)
+                {
+                    Console.Write("*");
+                    password += info.KeyChar;
+                }
+                else if (info.Key == ConsoleKey.Backspace)
+                {
+                    if (!string.IsNullOrEmpty(password))
+                    {
+                        // remove one character from the list of password characters
+                        password = password.Substring(0, password.Length - 1);
+                        // get the location of the cursor
+                        int pos = Console.CursorLeft;
+                        // move the cursor to the left by one character
+                        Console.SetCursorPosition(pos - 1, Console.CursorTop);
+                        // replace it with space
+                        Console.Write(" ");
+                        // move the cursor to the left by one character again
+                        Console.SetCursorPosition(pos - 1, Console.CursorTop);
+                    }
+                }
+                info = Console.ReadKey(true);
+            }
+            Console.WriteLine();
+            return password;
+        }
+
 
         public static void SwitchMenu1()
         {

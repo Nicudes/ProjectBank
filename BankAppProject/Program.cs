@@ -12,6 +12,7 @@ namespace BankAppProject
         {
             Bank.AddExistingClients();
             Movies.AddMovies();
+            Menu.CheckPassword();
             Menu.MainMenu();
         }
     }
