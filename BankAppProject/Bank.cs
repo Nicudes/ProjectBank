@@ -15,13 +15,11 @@ namespace BankAppProject
 
         //variabeln är till för att konton som skapas ska från nr 1001.
         private static int idNumberMaker = 1000;
-       
-      //CreateClient är till för att skapa ett klient objekt.
+
+        //CreateClient är till för att skapa ett klient objekt.
         public static void CreateClient()
         {
             int id = ++idNumberMaker;
-            int checkingsAccount = 0;
-            int savingsAccount = 5000;
             string fullName = null;
             string firstOrLast = "first";
             bool ValidateName;
@@ -82,8 +80,11 @@ namespace BankAppProject
             //Vi skapar objektet creationDate av typen DateTime för att logga när kund är skapad.
             DateTime creationDate = DateTime.Now;
 
+            CheckingAccount checkingAccount = new CheckingAccount();
+            SavingsAccount savingsAccount = new SavingsAccount();
+
             //Vi skapar ett objekt utifrån en konstruktor i client som vi använder för att se kundens alla uppgifter. 
-            Client client = new Client(fullName, id, creationDate, checkingsAccount, savingsAccount);
+            Client client = new Client(fullName, id, creationDate, checkingAccount, savingsAccount);
             Console.WriteLine();
             Player.SoundLocation = "confirm.wav";
             Player.Play();
@@ -91,7 +92,7 @@ namespace BankAppProject
             Console.WriteLine("----------------");
             Console.WriteLine("Client created");
             Console.WriteLine("----------------");
-            Console.WriteLine($"Name: {fullName}\nID: {id}\nAccount created at: {creationDate}\nCheckings Account: {checkingsAccount}\nSavings Account:{savingsAccount}");
+            Console.WriteLine($"Name: {fullName}\nID: {id}\nAccount created at: {creationDate}\nChecking Account: {checkingAccount.amount}\nSavings Account: {savingsAccount.amount}");
             Console.WriteLine("----------------");
             Console.ResetColor();
 
@@ -107,43 +108,20 @@ namespace BankAppProject
         //I denna metod skapar vi hårdkodade klienter som läggs till i början av programmet.
         public static void AddExistingClients()
         {
-            Client Pelle = new Client("Pelle", ++idNumberMaker, DateTime.Now, 0, 5000);
             {
-                DateTime value = new DateTime(2017, 1, 11);
-                Pelle.creationDate = value;
-            }
-            Client Johan = new Client("Johan", ++idNumberMaker, DateTime.Now, 0, 5000);
-            {
-                DateTime value = new DateTime(2017, 1, 11);
-                Johan.creationDate = value;
-            }
-            Client Okhuy = new Client("Okhuy", ++idNumberMaker, DateTime.Now, 0, 5000);
-            {
-                DateTime value = new DateTime(2017, 1, 11);
-                Okhuy.creationDate = value;
-            }
-            Client Smandy = new Client("Smandy", ++idNumberMaker, DateTime.Now, 0, 5000);
-            {
-                DateTime value = new DateTime(2017, 1, 11);
-                Smandy.creationDate = value;
-            }
-            Client Licke = new Client("Licke", ++idNumberMaker, DateTime.Now, 0, 5000);
-            {
-                DateTime value = new DateTime(2017, 1, 11);
-                Licke.creationDate = value;
-            }
-            Client Kroken = new Client("Kroken", ++idNumberMaker, DateTime.Now, 0, 5000);
-            {
-                DateTime value = new DateTime(2017, 1, 11);
-                Kroken.creationDate = value;
-            }
+                string[] clientNames = { "Pelle", "Johan", "Okhuy", "Smandy", "Licke", "Kroken" };
 
-            Client.clientList.Add(Pelle);
-            Client.clientList.Add(Johan);
-            Client.clientList.Add(Okhuy);
-            Client.clientList.Add(Smandy);
-            Client.clientList.Add(Licke);
-            Client.clientList.Add(Kroken);
+                foreach (string name in clientNames)
+                {
+                    CheckingAccount checkingAccount = new CheckingAccount(0);
+                    SavingsAccount savingsAccount = new SavingsAccount(5000);
+                    DateTime dateTime = new DateTime(2017, 1, 11);
+
+                    Client client = new Client(name, ++idNumberMaker, dateTime, checkingAccount, savingsAccount);
+
+                    Client.clientList.Add(client);
+                }
+            }
         }
     }
 }

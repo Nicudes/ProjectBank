@@ -121,7 +121,6 @@ namespace BankAppProject
 
             do
             {
-
                 switch (choice)
                 {
                     case "1":
@@ -139,10 +138,6 @@ namespace BankAppProject
                         Console.SetCursorPosition(0, Console.CursorTop - 1);
                         choice = Console.ReadLine();
                         Console.WriteLine("Wrong input, please try again!");
-
-
-
-
                         break;
                 } 
             } while (true);

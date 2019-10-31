@@ -11,17 +11,17 @@ namespace BankAppProject
         public string name;
         public int id;
         public DateTime creationDate;
-        public decimal checkingAccount;
-        public decimal savingsAccount;
+        public CheckingAccount checkingAccount;
+        public SavingsAccount savingsAccount;
         public string movieChoice;
         public bool cinemaBonus;
         public bool interestBonus;
 
-// Vi skapar en lista där alla klientobjekt adderas.
+        // Vi skapar en lista där alla klientobjekt adderas.
         public static List<Client> clientList = new List<Client>();
 // Vi har olika konstruktorer för olika syften.
 // Denna konstruktorn används för att skapa klientobjekten.
-        public Client(string aName, int aId, DateTime aCreationDate, decimal aCheckingsAccount, decimal aSavingsAccount)
+        public Client(string aName, int aId, DateTime aCreationDate, CheckingAccount aCheckingsAccount, SavingsAccount aSavingsAccount)
         {
             name = aName;
             id = aId;
@@ -37,11 +37,6 @@ namespace BankAppProject
             interestBonus = aInterestBonus;
             movieChoice = aMovieChoice;
         }
-// Denna konstruktor kan möjlgitvis slås samman med föregåeende.
-        //public Client(string aMovieChoice)
-        //{
-        //    movieChoice = aMovieChoice;
-        //}
 
         public Client()
         {

@@ -9,9 +9,18 @@ namespace BankAppProject
     //Checking account ärver ifrån Bank account och tar in interfacet IcinemaTicket.
     class CheckingAccount : BankAccount, ICinemaTicket
     {
-     /// <summary>
-     /// Kolla upp om vi kan göra det bättre, används för att skriva ut wrong input 4 id or wrong input 4 amount
-     /// </summary>
+        public CheckingAccount(decimal aAmount = 0)
+        {
+            amount = aAmount;
+        }
+
+        //public CheckingAccount()
+        //{
+
+        //}
+        /// <summary>
+        /// Kolla upp om vi kan göra det bättre, används för att skriva ut wrong input 4 id or wrong input 4 amount
+        /// </summary>
         private string choiceId = "id";
         private static int ticketAmount = 10;
 
@@ -31,7 +40,7 @@ namespace BankAppProject
                     Console.WriteLine("----------------");
                     Console.WriteLine($"ID: {client.id}");
                     Console.WriteLine($"Name: {client.name}");
-                    Console.WriteLine($"Checking Account Balance: {client.checkingAccount}");
+                    Console.WriteLine($"Checking Account Balance: {client.checkingAccount.amount}");
                     Console.WriteLine($"Member since: {client.creationDate}");
                     Console.WriteLine("----------------");
 
@@ -69,7 +78,7 @@ namespace BankAppProject
         public void CinemaTicket(Client client)
         {
      // Kraven för att klient ska uppnå biobiljetts bonus.
-            if ((DateTime.Now.Date - client.creationDate.Date).Days > 30 && client.checkingAccount > 100 && client.cinemaBonus == false)
+            if ((DateTime.Now.Date - client.creationDate.Date).Days > 30 && client.checkingAccount.amount > 100 && client.cinemaBonus == false)
             {
                 Console.WriteLine();
                 Console.BackgroundColor = ConsoleColor.Green;

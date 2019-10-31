@@ -9,7 +9,7 @@ namespace BankAppProject
     //Abstrakt klass för att vi vill inte skapa objekt härifrån.
    abstract class BankAccount
     {
-
+        public decimal amount;
         //en virtual metod som overridas i barnklasserna med egen logik.
         public virtual void ShowAccount()
         {
@@ -23,8 +23,8 @@ namespace BankAppProject
             {
                 Console.WriteLine($"ID: {client.id}");
                 Console.WriteLine($"Name: {client.name}");
-                Console.WriteLine($"Checking Account Balance: {client.checkingAccount}");
-                Console.WriteLine($"Savings Account Balance: {client.savingsAccount}");
+                Console.WriteLine($"Checking Account Balance: {client.checkingAccount.amount} kr");
+                Console.WriteLine($"Savings Account Balance: {client.savingsAccount.amount} kr");
                 Console.WriteLine($"Member since: {client.creationDate}");
 
                 Console.WriteLine();                
@@ -35,9 +35,6 @@ namespace BankAppProject
             Console.ReadKey();
             Console.WriteLine(new string(' ', Console.BufferWidth - (Console.CursorTop - 2)));
             Console.SetCursorPosition(0, Console.CursorTop - 2);
-
-
-
         }
     }
 }

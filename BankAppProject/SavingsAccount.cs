@@ -9,8 +9,17 @@ namespace BankAppProject
     // Skapar en klass som ärver från klassen BankAccount och tar in interfacet Iinterest.
     class SavingsAccount : BankAccount, IInterest
     {
-     
-    // Skapar en variabel för startsaldot på sparkontot som alltid är 5000kr.
+        public SavingsAccount(decimal aAmount = 5000)
+        {
+            amount = aAmount;
+        }
+
+        //public SavingsAccount()
+        //{
+
+        //}
+
+        // Skapar en variabel för startsaldot på sparkontot som alltid är 5000kr.
         int initialAmount = 5000;
     
     // implementerar interfacet Iinterest som är till för att applicera ränta bonus på sparkontot.
@@ -20,11 +29,11 @@ namespace BankAppProject
             decimal interest = 1.0005m;
 
     // om logiken nedan uppfylls har klienten fått tillgång till bonus.
-            if ((DateTime.Now.Date - client.creationDate.Date).Days >= 30 && client.savingsAccount > initialAmount && client.interestBonus == false)
+            if ((DateTime.Now.Date - client.creationDate.Date).Days >= 30 && client.savingsAccount.amount > initialAmount && client.interestBonus == false)
             {
 
     // Eftersom klientens sparkonto ska öka med 0.05%  får vi ta det befintliga saldot och öka det med räntan.
-                client.savingsAccount *= interest;
+                client.savingsAccount.amount *= interest;
 
     // när klienten har fått bonus sätts interest bool till true.
                 client.interestBonus = true;                              
@@ -69,7 +78,7 @@ namespace BankAppProject
                             Interest(client);
                             Console.WriteLine($"ID: {client.id}");
                             Console.WriteLine($"Name: {client.name}");
-                            Console.WriteLine($"Savings Account Balance: {client.savingsAccount.ToString("F2")}");
+                            Console.WriteLine($"Savings Account Balance: {client.savingsAccount.amount.ToString("F2")}");
                             Console.WriteLine($"Member since: {client.creationDate}");
                             Console.WriteLine();
                             if (client.interestBonus == true)

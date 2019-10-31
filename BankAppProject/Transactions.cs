@@ -76,7 +76,7 @@ namespace BankAppProject
                 {
                     Console.WriteLine($"Transaction type: {trans.transactionType}");
                     Console.WriteLine($"Date and time: {trans.dateAndTime}");
-                    Console.Write($"Amount: "); Colours.Green(Convert.ToString(trans.amount)); Console.WriteLine("kr");
+                    Console.Write($"Amount: "); Colours.Green(Convert.ToString(trans.amount)); Console.WriteLine(" kr");
                     
                     if (trans.transactionType == choiceTransaction)
                     {
@@ -97,18 +97,26 @@ namespace BankAppProject
         // Skapar en metod för ett felmedd. När man skriver in ett felaktigt id utförs denna metoden.
         // Vi ger möjligheten att kunna gå tillbaka till main menu genom att skriva in 0.
         public static void ErrorMessage()
-        {            
+        {
             Colours.Red("No such client was found");
-            Console.WriteLine(); 
-            Console.WriteLine("Do you want to return to main menu? Press 0.");
-            Console.WriteLine("Otherwise press any key to continue.");
-            string goBackToMainMenu = Console.ReadLine();
+            Console.WriteLine();
+            Console.WriteLine("Do you want to return to main menu? Press 'esc'.");
+            Console.WriteLine("Otherwise press 'enter' to continue.");
 
-            if (goBackToMainMenu == "0")
+            ConsoleKeyInfo info;
+
+            do
             {
-                Menu.MainMenu();
-            }
-            
+                Console.WriteLine(new string(' ', Console.BufferWidth - (Console.CursorTop - 1)));
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
+
+                info = Console.ReadKey();
+                if (info.Key == ConsoleKey.Escape)
+                {
+                    Menu.MainMenu();
+                }
+
+            } while (info.Key != ConsoleKey.Escape && info.Key != ConsoleKey.Enter);
         }
         // Skapar en metod för att genomföra en överföring. 
         public static void ExecuteTransactions()
@@ -152,7 +160,7 @@ namespace BankAppProject
             Console.Clear();
         // Om klientens checkingAcc är 0 eller mindre skriver vi ut den informationen och ger alternativet
         // att göra en ny transaktion via RepeatQuery metoden och choiseTransaction som argument.
-            if (firstClient.checkingAccount <= 0)
+            if (firstClient.checkingAccount.amount <= 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"{firstClient.name} unfortunately has no money in his/her checking account.");
@@ -200,8 +208,8 @@ namespace BankAppProject
         // checkingAcc till sitt egna SavingsAcc.
             if (firstClient == secondClient)
             {
-                firstClient.checkingAccount -= inputAmount;
-                firstClient.savingsAccount += inputAmount;
+                firstClient.checkingAccount.amount -= inputAmount;
+                firstClient.savingsAccount.amount += inputAmount;
                 toAccountType = "Saving Account";
                 Console.WriteLine($"{firstClient.name} transferred {inputAmount} from his/her checking account " +
                     $"to his/her {toAccountType.ToLower()}.");
@@ -210,8 +218,8 @@ namespace BankAppProject
         // till second clients checkingAcc.
             else
             {
-                firstClient.checkingAccount -= inputAmount;
-                secondClient.checkingAccount += inputAmount;
+                firstClient.checkingAccount.amount -= inputAmount;
+                secondClient.checkingAccount.amount += inputAmount;
                 toAccountType = "Checking Account";
                 Console.WriteLine($"{firstClient.name} transferred {inputAmount} to {secondClient.name}'s {toAccountType.ToLower()}.");
             }
@@ -293,7 +301,7 @@ namespace BankAppProject
             Console.WriteLine(" kr to your account!");
 
         // När transaktionen är godkänd säger vi att klientens checkingAcc är uppdaterat med summan av överföringen.
-            firstClient.checkingAccount += inputAmount;
+            firstClient.checkingAccount.amount += inputAmount;
 
             DateTime dateAndTime = DateTime.Now;
 
@@ -386,7 +394,7 @@ namespace BankAppProject
                 case "Transaction":
 
         // Går inte ur denna loop förrens användare har matat in mer än 0kr eller ett värde som är mindre eller = klientens Checkacc.
-                    while (aInputAmount <= 0 || aInputAmount > client.checkingAccount)
+                    while (aInputAmount <= 0 || aInputAmount > client.checkingAccount.amount)
                     {
                         if (aInputAmount <= 0)
                         {
@@ -398,7 +406,7 @@ namespace BankAppProject
         // kallar på checkIfNumber igen för att mata in ett nytt värde
                             aInputAmount = CheckIfNumber(choiceTransaction);
                         }
-                        else if (aInputAmount > client.checkingAccount)
+                        else if (aInputAmount > client.checkingAccount.amount)
                         {
                             Colours.Red("You can't transfer more money than you have\n");
                             Console.WriteLine($"You have {client.checkingAccount} kronor in your checking account");
