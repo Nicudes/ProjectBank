@@ -23,7 +23,7 @@ namespace BankAppProject
 
         public static void UpdateMovies(Movies movie, Client client)
         {
-            client.movieChoice = movie.title;
+            client.movieChoice = movie;
             movie.ticketsAvailable--;
 
             if (movie.ticketsAvailable == 0)
@@ -52,16 +52,9 @@ namespace BankAppProject
             Movies movie9 = new Movies(9, "Dora and the lost City", 4);
             Movies movie10 = new Movies(10, "Ad Astra", 2);
 
-            movieList.Add(movie1);
-            movieList.Add(movie2);
-            movieList.Add(movie3);
-            movieList.Add(movie4);
-            movieList.Add(movie5);
-            movieList.Add(movie6);
-            movieList.Add(movie7);
-            movieList.Add(movie8);
-            movieList.Add(movie9);
-            movieList.Add(movie10);
+            Movies[] movies = { movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10 };
+
+            movieList.AddRange(movies);
         }
     }
 }

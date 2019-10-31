@@ -54,7 +54,7 @@ namespace BankAppProject
                     if (client.cinemaBonus == true && client.movieChoice != null)
                     {
                         //Vill vi ha ljud?
-                        Console.Write("You have a free cinema ticket for "); Colours.Cyan(client.movieChoice);
+                        Console.Write("You have a free cinema ticket for "); Colours.Cyan(client.movieChoice.title);
                         Console.WriteLine();
                     }
 
@@ -89,15 +89,27 @@ namespace BankAppProject
 
      // skapar en counter för att visa en siffra framför filmerna i filmmenyn.
                 int counter = 1;
-     // loopar igenom filmlistan och skriver ut objektens attribut för filmernas titel.
+                // loopar igenom filmlistan och skriver ut objektens attribut för filmernas titel.
                 foreach (Movies movie in Movies.movieList)
                 {
-                    Console.WriteLine(counter + ") " + movie.title);
+                    Console.Write(counter + ") "); Colours.Cyan(movie.title);
+                    Console.WriteLine();
+                    Console.Write("     tickets left: ");
+
+                    if (movie.ticketsAvailable < 2)
+                    {
+                        Colours.Red($"{movie.ticketsAvailable}\n");
+                    }
+                    else
+                    {
+                        Colours.Green($"{movie.ticketsAvailable}\n");
+                    }
+                    Console.WriteLine("-------");
+                    Console.WriteLine();
                     counter++;
                 }
-                Console.WriteLine();
-                Console.WriteLine("0) No thanks, I don't want a movie ticket");
-     // använder variablen för att jämföra user input med filmobjektets indexPlace.
+                Console.Write("0) "); Colours.Red("No thanks, I don't want a movie ticket\n");
+                // använder variablen för att jämföra user input med filmobjektets indexPlace.
                 string choice;
      // använder variablen för att användaren alltid ska behöva göra ett val tills ett möjligt val är gjort.
                 bool invalidInput;
@@ -148,7 +160,7 @@ namespace BankAppProject
             else if (client.cinemaBonus == true)
             {
                 Console.WriteLine();
-                Console.Write($"You have claimed a cinema ticket for "); Colours.Cyan(client.movieChoice);
+                Console.Write($"You have claimed a cinema ticket for "); Colours.Cyan(client.movieChoice.title);
                 Console.WriteLine();
             }
         }

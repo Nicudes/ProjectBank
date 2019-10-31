@@ -13,7 +13,7 @@ namespace BankAppProject
         public DateTime creationDate;
         public CheckingAccount checkingAccount;
         public SavingsAccount savingsAccount;
-        public string movieChoice;
+        public Movies movieChoice;
         public bool cinemaBonus;
         public bool interestBonus;
 
@@ -30,7 +30,7 @@ namespace BankAppProject
             savingsAccount = aSavingsAccount;
         }
 // Denna konstruktor använder vi för klienternas bonus.
-        public Client(int aId, bool aCinemaBonus, bool aInterestBonus, string aMovieChoice)
+        public Client(int aId, bool aCinemaBonus, bool aInterestBonus, Movies aMovieChoice)
         {
             id = aId;
             cinemaBonus = aCinemaBonus;
