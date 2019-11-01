@@ -27,6 +27,8 @@ namespace BankAppProject
      // En overridad metod som vi använder för att se ett specifikt kontos checking account + väsentliga uppgfiter.
         public override void ShowAccount()
         {
+            Console.Title = "Checking Account";
+
      // Använder en bool för att säga om vi har hittat ett konto eller inte vid input av id nr.
             bool foundClient = false;
 

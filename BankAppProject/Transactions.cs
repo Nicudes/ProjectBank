@@ -60,6 +60,8 @@ namespace BankAppProject
         // Vi skapar en metod för att kunna se genomförda transaktioner
         public static void ShowTransactions()
         {
+            Console.Title = "List of Transactions";
+
         // Skapar en bool för att se om listan innehåller något i huvud taget.
             bool IsEmpty = !transactionList.Any();
 
@@ -125,6 +127,7 @@ namespace BankAppProject
         // Skapar en metod för att genomföra en överföring. 
         public static void ExecuteTransactions()
         {
+            Console.Title = "Transaction";
 
             Console.Clear();
         // Skapar en variabel där inmatning av belopp sparas.
@@ -259,6 +262,7 @@ namespace BankAppProject
         // skapar en metod som är till för att göra insättningar.
         public static void ExecuteDeposit()
         {
+            Console.Title = "Deposit";
 
             Console.Clear();
         // skapar endast en first client för att vi inte kommer skapa en second client när vi gör en insättning.

@@ -43,6 +43,8 @@ namespace BankAppProject
     // skapar en metod för att kunna se ditt sparkonto.
         public override void ShowAccount()
         {
+            Console.Title = "Savings Account";
+
             bool foundClient = false;
             bool IsNumber;
             int id = 0;
