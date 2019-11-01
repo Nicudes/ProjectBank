@@ -189,7 +189,8 @@ namespace BankAppProject
 
             Console.WriteLine("1) Deposit");
             Console.WriteLine("2) Transfer");
-            Console.WriteLine("3) Return to main menu");
+            Console.WriteLine("3) Remove clients");
+            Console.WriteLine("4) Return to main menu");
 
             Console.WriteLine("Input: ");
             string choice = Console.ReadLine();
@@ -206,6 +207,9 @@ namespace BankAppProject
                         Transactions.ExecuteTransactions();
                         break;
                     case "3":
+                        Bank.RemoveExistingClients();
+                        break;
+                    case "4":
                         MainMenu();
                         break;
                     default:

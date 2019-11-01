@@ -32,7 +32,6 @@ namespace BankAppProject
             Colours.Red("Press any key to continue");
             Console.WriteLine();
             Console.WriteLine();
-            Console.ReadKey();
             Console.WriteLine(new string(' ', Console.BufferWidth - (Console.CursorTop - 2)));
             Console.SetCursorPosition(0, Console.CursorTop - 2);
         }

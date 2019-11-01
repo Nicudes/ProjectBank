@@ -108,20 +108,81 @@ namespace BankAppProject
         //I denna metod skapar vi hårdkodade klienter som läggs till i början av programmet.
         public static void AddExistingClients()
         {
+            string[] clientNames = { "Pelle", "Johan", "Okhuy", "Smandy", "Licke", "Kroken" };
+
+            foreach (string name in clientNames)
             {
-                string[] clientNames = { "Pelle", "Johan", "Okhuy", "Smandy", "Licke", "Kroken" };
+                CheckingAccount checkingAccount = new CheckingAccount(0);
+                SavingsAccount savingsAccount = new SavingsAccount(5000);
+                DateTime dateTime = new DateTime(2017, 1, 11);
 
-                foreach (string name in clientNames)
-                {
-                    CheckingAccount checkingAccount = new CheckingAccount(0);
-                    SavingsAccount savingsAccount = new SavingsAccount(5000);
-                    DateTime dateTime = new DateTime(2017, 1, 11);
+                Client client = new Client(name, ++idNumberMaker, dateTime, checkingAccount, savingsAccount);
 
-                    Client client = new Client(name, ++idNumberMaker, dateTime, checkingAccount, savingsAccount);
-
-                    Client.clientList.Add(client);
-                }
+                Client.clientList.Add(client);
             }
+        }
+
+        public static void RemoveExistingClients()
+        {
+            //Visa klienterna
+            //Fråga vilken man vill ta bort
+            //bekräfta att man vill ta bort {namn}
+            //Klient raderad
+
+            Client clientToRemove = new Client();
+            bool foundClient = false;
+         
+            do
+            {
+                Console.Clear();
+
+                BankAccount.ShowAllAccounts();
+                Console.WriteLine();
+
+                Console.Write("Which client do you want to remove?: ");
+                decimal id = Transactions.CheckIfNumber("id");
+
+                foreach (Client client in Client.clientList)
+                {
+                    if (id == client.id)
+                    {
+                        clientToRemove = client;
+                        foundClient = true;
+                    }
+                }
+
+                if (!foundClient)
+                {
+                    Transactions.ErrorMessage();
+                } 
+            } while (!foundClient);
+
+            string choice;
+            do
+            {
+                Console.Write($"Are you sure you want to remove {clientToRemove.name}? Y/N: ");
+                choice = Console.ReadLine().ToUpper();
+
+                if (choice == "Y")
+                {
+                    Client.clientList.Remove(clientToRemove);
+                }
+                else if (choice == "N")
+                {
+                    Console.WriteLine("Going back to main menu");
+                    Console.ReadKey();
+                    Menu.MainMenu();
+                }
+                else
+                {
+                    Console.WriteLine("Wrong input!");
+                } 
+            } while (choice != "Y" && choice != "N");
+
+            Colours.Red($"[DELETED] {clientToRemove.name}");
+
+            Console.ReadKey();
+            Menu.MainMenu();
         }
     }
 }
