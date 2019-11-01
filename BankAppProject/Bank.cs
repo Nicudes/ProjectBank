@@ -21,10 +21,9 @@ namespace BankAppProject
         {
             int id = ++idNumberMaker;
             string fullName = null;
+            string lastName = null;
             string firstOrLast = "first";
             bool ValidateName;
-            bool ContainsNumber;
-            bool IsUpper;
 
             Console.WriteLine("Creating client");
             Console.WriteLine("----------------");
@@ -32,49 +31,30 @@ namespace BankAppProject
             do
             {
                 ValidateName = false;
-                IsUpper = true;
 
-                Console.WriteLine();
-                Console.Write($"Enter {firstOrLast} name: ");
-                string input = Console.ReadLine();
+                string input = CheckNameValidity(firstOrLast);
+                char[] letters = input.ToCharArray();
 
-                ContainsNumber = !input.All(char.IsLetter);
-
-                if (ContainsNumber)
+                for (int i = 0; i < letters.Length; i++)
                 {
-                    Colours.Red("Name can not contain a number.\n");
-                }
-                else
-                {
-                    try
+                    if (letters[i] == letters[0])
                     {
-                        IsUpper = char.IsUpper(input.First());
-                        if (!IsUpper)
-                        {
-                            Colours.Red("Name has to start with upper case.\n");
-                        }
-                        else
-                        {
-                            ValidateName = true;
-                        }
-                    }
-                    catch
-                    {
-                        Colours.Red("Name contains no letters\n");
+                        MakeLetterUpper(letters, i);
                     }
                 }
 
-                if (ValidateName && firstOrLast == "first")
+                if (firstOrLast == "first")
                 {
-                    fullName = input;
+                    fullName = new string(letters);
                     firstOrLast = "last";
-                    ValidateName = false;
                 }
-                else if (ValidateName && firstOrLast == "last")
+                else if (firstOrLast == "last")
                 {
-                    fullName += " " + input;
-                    break;
+                    lastName = new string(letters);
+                    fullName += " " + lastName;
+                    ValidateName = true;
                 }
+
             } while (!ValidateName);
 
             //Vi skapar objektet creationDate av typen DateTime för att logga när kund är skapad.
@@ -103,6 +83,45 @@ namespace BankAppProject
             Colours.Red("Press any key to return to Main Menu");
             Console.ReadKey();
             Menu.MainMenu();
+        }
+
+        public static void MakeLetterUpper(char[] letters, int i)
+        {
+            char letter = letters[i];
+            string letterString = letter.ToString().ToUpper();
+            letter = char.Parse(letterString);
+            letters[i] = letter;
+        }
+
+        public static string CheckNameValidity(string firstOrLast)
+        {
+            bool InvalidInput;
+            string input = "";
+
+            do
+            {
+                InvalidInput = true;
+
+                Console.WriteLine();
+                Console.Write($"Enter {firstOrLast} name: ");
+                input = Console.ReadLine();
+
+                if (input.All(char.IsLetter) && !string.IsNullOrWhiteSpace(input))
+                {
+                    InvalidInput = false;
+                }
+
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    Colours.Red("Name can not be white space\n");
+                }
+                else if (!input.All(char.IsLetter))
+                {
+                    Colours.Red("Name can only consist of letters A-Ö.\n");
+                }
+            } while (InvalidInput);
+
+            return input;
         }
 
         //I denna metod skapar vi hårdkodade klienter som läggs till i början av programmet.
