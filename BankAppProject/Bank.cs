@@ -38,7 +38,7 @@ namespace BankAppProject
                 {
                     if (letters[i] == letters[0])
                     {
-                        //Vi vill göra första bokstaven i namnet till stor bokstav
+        //Vi vill göra första bokstaven i namnet till stor bokstav
                         char letterChar = letters[i];
                         letterChar = char.ToUpper(letterChar);
                         letters[i] = letterChar;
