@@ -17,7 +17,11 @@ namespace BankAppProject
         Client firstClient;
         Client secondClient;
 
-    // Skapar ett objekt av api soundplayer som är en del av System.Media.
+        private static decimal interest = 0.0005m;
+        // Skapar ett objekt av savingsAccount
+
+
+        // Skapar ett objekt av api soundplayer som är en del av System.Media.
         static SoundPlayer player = new SoundPlayer();
 
     // Använder dessa variabler för att hantera felaktig inmatning och retunera rätt information.
@@ -128,6 +132,7 @@ namespace BankAppProject
         // skapar en bool som säger om vi har hittat en klient eller inte.
             bool foundClient = false;
         // skapar ett objekt av klient som vi kallar för första klienten.
+
             Client firstClient = new Client();
         // skapar ett objekt av klient som vi kallar för andra klienten.
             Client secondClient = new Client();
@@ -208,11 +213,23 @@ namespace BankAppProject
         // checkingAcc till sitt egna SavingsAcc.
             if (firstClient == secondClient)
             {
+                SavingsAccount savingsAcc = new SavingsAccount();
+
+                decimal interestBonus = firstClient.savingsAccount.amount * interest;
+
                 firstClient.checkingAccount.amount -= inputAmount;
                 firstClient.savingsAccount.amount += inputAmount;
                 toAccountType = "Saving Account";
                 Console.WriteLine($"{firstClient.name} transferred {inputAmount} from his/her checking account " +
                     $"to his/her {toAccountType.ToLower()}.");
+                if (firstClient.interestBonus == false)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"{firstClient.name} earned a interest bonus!");
+                    Console.WriteLine($"The bonus was {interestBonus.ToString("F2")} kr");
+
+                    savingsAcc.Interest(firstClient);
+                }
             }
         // Är första inmatningen av klientens id inte samma som den andra, skickas pengarna från first clients checkingAcc
         // till second clients checkingAcc.
