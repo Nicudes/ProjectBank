@@ -77,6 +77,7 @@ namespace BankAppProject
                     {
                         if (id == client.id)
                         {
+                            Console.Title += $" - {client.name}";
                             Interest(client);
                             Console.WriteLine($"ID: {client.id}");
                             Console.WriteLine($"Name: {client.name}");

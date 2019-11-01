@@ -39,6 +39,7 @@ namespace BankAppProject
             {
                 if (inputId == client.id)
                 {
+                    Console.Title += $" - {client.name}";
                     Console.WriteLine("----------------");
                     Console.WriteLine($"ID: {client.id}");
                     Console.WriteLine($"Name: {client.name}");
@@ -64,13 +65,13 @@ namespace BankAppProject
                     foundClient = true;
                     break;
                 }
-   
             }
             if (!foundClient)
             {
                 Console.WriteLine("Couldn't find the id.");
 
             }
+
             Colours.Red("Press any key to return to Main Menu");
             Console.ReadKey();
             Menu.MainMenu();

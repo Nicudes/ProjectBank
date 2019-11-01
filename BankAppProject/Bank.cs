@@ -147,8 +147,11 @@ namespace BankAppProject
             do
             {
                 Console.Clear();
+                foreach (Client client in Client.clientList)
+                {
+                    Console.WriteLine($"{client.id}) {client.name}");
+                }
 
-                BankAccount.ShowAllAccounts();
                 Console.WriteLine();
 
                 Console.Write("Which client do you want to remove?: ");
@@ -165,6 +168,7 @@ namespace BankAppProject
 
                 if (!foundClient)
                 {
+                    Colours.Red("No such client was found\n");
                     Transactions.ErrorMessage();
                 } 
             } while (!foundClient);
@@ -172,7 +176,8 @@ namespace BankAppProject
             string choice;
             do
             {
-                Console.Write($"Are you sure you want to remove {clientToRemove.name}? Y/N: ");
+                Colours.Red($"Are you sure you want to remove {clientToRemove.name}? "); Console.Write("Y/N: ");
+
                 choice = Console.ReadLine().ToUpper();
 
                 if (choice == "Y")
@@ -182,6 +187,7 @@ namespace BankAppProject
                 else if (choice == "N")
                 {
                     Console.WriteLine("Going back to main menu");
+                    Console.WriteLine();
                     Console.ReadKey();
                     Menu.MainMenu();
                 }

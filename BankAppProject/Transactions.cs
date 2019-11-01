@@ -104,7 +104,7 @@ namespace BankAppProject
         // Vi ger möjligheten att kunna gå tillbaka till main menu genom att skriva in 0.
         public static void ErrorMessage()
         {
-            Colours.Red("No such client was found");
+            //Colours.Red("No such client was found\n");
             Console.WriteLine();
             Console.WriteLine("Do you want to return to main menu? Press 'esc'.");
             Console.WriteLine("Otherwise press 'enter' to continue.");
@@ -123,6 +123,7 @@ namespace BankAppProject
                 }
 
             } while (info.Key != ConsoleKey.Escape && info.Key != ConsoleKey.Enter);
+            Console.WriteLine();
         }
         // Skapar en metod för att genomföra en överföring. 
         public static void ExecuteTransactions()
@@ -161,7 +162,8 @@ namespace BankAppProject
         // Hittar vi ingen klient med det inmatade id:t visar vi felmedd.
                 if (!foundClient)
                 {
-                 ErrorMessage();
+                    Colours.Red("No such client was found\n");
+                    ErrorMessage();
                 } 
 
             } while (!foundClient);
@@ -198,6 +200,7 @@ namespace BankAppProject
         // Hittar vi ingen klient med det inmatade id:t visar vi felmedd.
                 if (!foundClient)
                 {
+                    Colours.Red("No such client was found\n");
                     ErrorMessage();
                 } 
 
@@ -228,7 +231,7 @@ namespace BankAppProject
                 if (firstClient.interestBonus == false)
                 {
                     Console.WriteLine();
-                    Console.WriteLine($"{firstClient.name} earned a interest bonus!");
+                    Console.WriteLine($"{firstClient.name} earned an interest bonus!");
                     Console.WriteLine($"The bonus was {interestBonus.ToString("F2")} kr");
 
                     savingsAcc.Interest(firstClient);
@@ -296,6 +299,7 @@ namespace BankAppProject
         // Hittar vi ingen klient med det inmatade id:t visar vi felmedd.
                 if (!foundClient)
                 {
+                    Colours.Red("No such client was found\n");
                     ErrorMessage();
                 }
             } while (!foundClient);
@@ -363,6 +367,7 @@ namespace BankAppProject
                     if (aTransactionType == choiceDeposit || aTransactionType == choiceTransaction)
                     {
                         Colours.Red("Not a number\n");
+                        ErrorMessage();
                         Console.Write("Please reenter the amount: ");
                         i -= 1;
                     }
@@ -371,6 +376,7 @@ namespace BankAppProject
                     else
                     {
                         Colours.Red("Not a number\n");
+                        ErrorMessage();
                         Console.Write("Please reenter the ID: ");
                         i -= 1;
                     }
