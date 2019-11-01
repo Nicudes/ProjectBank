@@ -19,6 +19,7 @@ namespace BankAppProject
         //CreateClient är till för att skapa ett klient objekt.
         public static void CreateClient()
         {
+            Console.Title = "Create Client";
             int id = ++idNumberMaker;
             string fullName = null;
             string firstOrLast = "first";
@@ -139,11 +140,7 @@ namespace BankAppProject
 
         public static void RemoveExistingClients()
         {
-            //Visa klienterna
-            //Fråga vilken man vill ta bort
-            //bekräfta att man vill ta bort {namn}
-            //Klient raderad
-
+            Console.Title = "Remove Client";
             Client clientToRemove = new Client();
             bool foundClient = false;
          

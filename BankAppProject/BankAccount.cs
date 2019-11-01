@@ -18,7 +18,8 @@ namespace BankAppProject
 
         //Loopar igenom klientlistan och visar all information om varje klient.
         public static void ShowAllAccounts()
-        {            
+        {
+            Console.Title = "All Clients";
             foreach (Client client in Client.clientList)
             {
                 Console.WriteLine($"ID: {client.id}");
@@ -30,10 +31,11 @@ namespace BankAppProject
                 Console.WriteLine();                
             }
             Colours.Red("Press any key to continue");
+            Console.ReadKey();
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine(new string(' ', Console.BufferWidth - (Console.CursorTop - 2)));
-            Console.SetCursorPosition(0, Console.CursorTop - 2);
+            Console.SetCursorPosition(1, Console.CursorTop - 2);
         }
     }
 }

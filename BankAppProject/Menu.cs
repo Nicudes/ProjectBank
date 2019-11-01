@@ -15,6 +15,7 @@ namespace BankAppProject
 
         public static void MainMenu()
         {
+            Console.Title = "Main Menu";
             Console.Clear();
 
             bool NoClients = !Client.clientList.Any();
@@ -66,6 +67,7 @@ namespace BankAppProject
                 if (password == "admin")
                 {
                     MainMenu();
+                    break;
                 }
                 else
                 {
@@ -86,10 +88,7 @@ namespace BankAppProject
                 Console.Write($"Please wait {i} seconds");
                 Thread.Sleep(1000);
             }
-
             CheckPassword();
-
-
         }
         public static string MaskingPassword()
         {
@@ -177,11 +176,7 @@ namespace BankAppProject
 
         public static void TransactionMenu()
         {
-            /*
-             * deposit - alltid till sitt eget lönekonto. Välja personens id + summan.
-             * transfer - skriv in ditt kund id, skriv in den du vill skicka tills id, summa.
-             * återgå till transactionMenu
-             * return to mainmenu*/
+            Console.Title = "Transaction Menu";
             Console.WriteLine();
             Console.WriteLine("Transaction Menu");
             Console.WriteLine("----------------");

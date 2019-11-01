@@ -10,6 +10,7 @@ namespace BankAppProject
     {
         static void Main(string[] args)
         {
+            Console.Title = "Bank Application -- Created by: Huy, Alexander, Mikael & Andreas";
             Bank.AddExistingClients();
             Movies.AddMovies();
             Menu.CheckPassword();
