@@ -21,7 +21,6 @@ namespace BankAppProject
         {
             int id = ++idNumberMaker;
             string fullName = null;
-            string lastName = null;
             string firstOrLast = "first";
             bool ValidateName;
 
@@ -50,8 +49,7 @@ namespace BankAppProject
                 }
                 else if (firstOrLast == "last")
                 {
-                    lastName = new string(letters);
-                    fullName += " " + lastName;
+                    fullName += " " + new string(letters);
                     ValidateName = true;
                 }
 
