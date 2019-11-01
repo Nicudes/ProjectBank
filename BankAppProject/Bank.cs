@@ -38,7 +38,10 @@ namespace BankAppProject
                 {
                     if (letters[i] == letters[0])
                     {
-                        MakeLetterUpper(letters, i);
+                        //Vi vill göra första bokstaven i namnet till stor bokstav
+                        char letterChar = letters[i];
+                        letterChar = char.ToUpper(letterChar);
+                        letters[i] = letterChar;
                     }
                 }
 
@@ -49,6 +52,7 @@ namespace BankAppProject
                 }
                 else if (firstOrLast == "last")
                 {
+        //Vi slår ihop namnen till ett och samma.
                     fullName += " " + new string(letters);
                     ValidateName = true;
                 }
@@ -83,14 +87,6 @@ namespace BankAppProject
             Menu.MainMenu();
         }
 
-        public static void MakeLetterUpper(char[] letters, int i)
-        {
-            char letter = letters[i];
-            string letterString = letter.ToString().ToUpper();
-            letter = char.Parse(letterString);
-            letters[i] = letter;
-        }
-
         public static string CheckNameValidity(string firstOrLast)
         {
             bool InvalidInput;
@@ -104,21 +100,23 @@ namespace BankAppProject
                 Console.Write($"Enter {firstOrLast} name: ");
                 input = Console.ReadLine();
 
+        //Om alla chars i en input är en bokstav och hela strängen inte består av bara mellanslag
                 if (input.All(char.IsLetter) && !string.IsNullOrWhiteSpace(input))
                 {
                     InvalidInput = false;
                 }
-
+        //Om input bara är mellanslag eller ingenting skrivs ett felmeddelande ut
                 if (string.IsNullOrWhiteSpace(input))
                 {
                     Colours.Red("Name can not be white space\n");
                 }
+        //Om inte alla chars i input är bokstäver skrivs ett felmeddelande ut
                 else if (!input.All(char.IsLetter))
                 {
                     Colours.Red("Name can only consist of letters A-Ö.\n");
                 }
             } while (InvalidInput);
-
+        // Returnerar en string
             return input;
         }
 
