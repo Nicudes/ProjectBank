@@ -22,7 +22,7 @@ namespace BankAppProject
             Console.Title = "All Clients";
             foreach (Client client in Client.clientList)
             {
-                Console.WriteLine($"ID: {client.id}");
+                Console.WriteLine($"ID: {client.id}\n");
                 Console.WriteLine($"Name: {client.name}");
                 Console.WriteLine($"Checking Account Balance: {client.checkingAccount.amount} kr");
                 Console.WriteLine($"Savings Account Balance: {client.savingsAccount.amount} kr");

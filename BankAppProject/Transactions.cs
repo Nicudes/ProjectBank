@@ -76,26 +76,26 @@ namespace BankAppProject
         // Om det finns något i listan så skriver den ut innehållet.
             else
             {
-        // Skriver ut varje transkation och om det är en insättning skriver den ut else.
-        // Är det en transaktion skriver den ut If.
+                // Skriver ut varje transkation och om det är en insättning skriver den ut else.
+                // Är det en transaktion skriver den ut If.
                 foreach (Transactions trans in transactionList)
                 {
-                    Console.WriteLine($"Transaction type: {trans.transactionType}");
-                    Console.WriteLine($"Date and time: {trans.dateAndTime}");
-                    Console.Write($"Amount: "); Colours.Green(Convert.ToString(trans.amount)); Console.WriteLine(" kr");
+                    Console.WriteLine($"Transaction type:   {trans.transactionType}");
+                    Console.WriteLine($"Date and time:      {trans.dateAndTime}");
+                    Console.Write($"Amount: "); Colours.Green($"            {trans.amount}"); Console.WriteLine(" kr");
                     
                     if (trans.transactionType == choiceTransaction)
                     {
-                        Console.WriteLine($"From client id: {trans.firstClient.id}");
-                        Console.WriteLine($"To client id: {trans.secondClient.id}");     
+                        Console.WriteLine($"From client id:     {trans.firstClient.id}");
+                        Console.WriteLine($"To client id:       {trans.secondClient.id}");     
                     }
                     else
                     {
-                        Console.WriteLine($"To client id: {trans.firstClient.id}");
+                        Console.WriteLine($"To client id:       {trans.firstClient.id}");
                     }
                     Console.WriteLine();
                 }
-                Console.Write("Press any key to continue ");
+                Colours.Red("Press any key to continue");
                 Console.ReadKey();
                 Menu.MainMenu();
             }
@@ -131,26 +131,28 @@ namespace BankAppProject
             Console.Title = "Transaction";
 
             Console.Clear();
-        // Skapar en variabel där inmatning av belopp sparas.
+            // Skapar en variabel där inmatning av belopp sparas.
             decimal inputAmount;
-        // skapar en bool som säger om vi har hittat en klient eller inte.
+            // skapar en bool som säger om vi har hittat en klient eller inte.
             bool foundClient = false;
-        // skapar ett objekt av klient som vi kallar för första klienten.
+            // skapar ett objekt av klient som vi kallar för första klienten.
 
             Client firstClient = new Client();
-        // skapar ett objekt av klient som vi kallar för andra klienten.
+            // skapar ett objekt av klient som vi kallar för andra klienten.
             Client secondClient = new Client();
-        // gör en do While för att vi vill att användare ska mata in klient id tills programmet hittar en matchande klient.
+            // gör en do While för att vi vill att användare ska mata in klient id tills programmet hittar en matchande klient.
             do
             {
+                Console.Clear();
+
                 Console.Write("Please enter your account ID: ");
-        // Här kollar vi om inmatningen är ett nummer genom metoden CheckIfNumber. 
-        // Är det inte det, så skriver programmet ut att det inte är ett nummer samt att man ska mata in ett id igen.
+                // Här kollar vi om inmatningen är ett nummer genom metoden CheckIfNumber. 
+                // Är det inte det, så skriver programmet ut att det inte är ett nummer samt att man ska mata in ett id igen.
                 decimal firstId = CheckIfNumber(choiceId);
 
                 Console.WriteLine();
-        // letar igenom klient listan. Vi för över infomrationen från klienten vi är på till first client.
-        // Om det inmatade id:t hittas i listan av klienter, sätter vi även bool foundclient till true.
+                // letar igenom klient listan. Vi för över infomrationen från klienten vi är på till first client.
+                // Om det inmatade id:t hittas i listan av klienter, sätter vi även bool foundclient till true.
                 foreach (Client client in Client.clientList)
                 {
                     if (firstId == client.id)
@@ -159,17 +161,17 @@ namespace BankAppProject
                         foundClient = true;
                     }
                 }
-        // Hittar vi ingen klient med det inmatade id:t visar vi felmedd.
+                // Hittar vi ingen klient med det inmatade id:t visar vi felmedd.
                 if (!foundClient)
                 {
                     Colours.Red("No such client was found\n");
                     ErrorMessage();
-                } 
+                }
 
             } while (!foundClient);
-            Console.Clear();
-        // Om klientens checkingAcc är 0 eller mindre skriver vi ut den informationen och ger alternativet
-        // att göra en ny transaktion via RepeatQuery metoden och choiseTransaction som argument.
+
+            // Om klientens checkingAcc är 0 eller mindre skriver vi ut den informationen och ger alternativet
+            // att göra en ny transaktion via RepeatQuery metoden och choiseTransaction som argument.
             if (firstClient.checkingAccount.amount <= 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -177,18 +179,23 @@ namespace BankAppProject
                 Console.ResetColor();
                 RepeatQuery(choiceTransaction);
             }
-        // Sätter bool till false för att vi vill använda samma bool till nästa klient.
+            // Sätter bool till false för att vi vill använda samma bool till nästa klient.
             foundClient = false;
-        // gör en do While för att vi vill att användare ska mata in klient id tills programmet hittar en matchande klient.
+            // gör en do While för att vi vill att användare ska mata in klient id tills programmet hittar en matchande klient.
+
+
             do
             {
+                Console.Clear();
+                Console.WriteLine($"Transferring funds from: {firstClient.id}\n\n");
+
                 Console.Write("Please enter the id of the person you would like to transfer funds to: ");
-        // Här kollar vi om inmatningen är ett nummer genom metoden CheckIfNumber. 
-        // Är det inte det, så skriver programmet ut att det inte är ett nummer samt att man ska mata in ett id igen.
+                // Här kollar vi om inmatningen är ett nummer genom metoden CheckIfNumber. 
+                // Är det inte det, så skriver programmet ut att det inte är ett nummer samt att man ska mata in ett id igen.
                 decimal secondId = CheckIfNumber(choiceId);
                 Console.WriteLine();
-        // letar igenom klient listan. Vi för över infomrationen från klienten vi är på till second client.
-        // Om det inmatade id:t hittas i listan av klienter, sätter vi även bool foundclient till true.
+                // letar igenom klient listan. Vi för över infomrationen från klienten vi är på till second client.
+                // Om det inmatade id:t hittas i listan av klienter, sätter vi även bool foundclient till true.
                 foreach (Client client in Client.clientList)
                 {
                     if (secondId == client.id)
@@ -197,17 +204,20 @@ namespace BankAppProject
                         foundClient = true;
                     }
                 }
-        // Hittar vi ingen klient med det inmatade id:t visar vi felmedd.
+                // Hittar vi ingen klient med det inmatade id:t visar vi felmedd.
                 if (!foundClient)
                 {
                     Colours.Red("No such client was found\n");
                     ErrorMessage();
-                } 
+                }
 
             } while (!foundClient);
 
             Console.Clear();
- 
+
+            Console.Write($"Transferring funds from "); Colours.Red($"{firstClient.id} "); Console.Write("to ");  
+                            Colours.Red($"{secondClient.id}\n\n\n");
+
             Console.Write("Enter the amount of funds you would like to transfer: ");
         // kollar att det inmatade värdet är ett nummer och även om det är ett belopp genom argumentet ChoiceTrans.
         // Det returnerade värdet från CheckIfNumber stoppas sedan in i variabeln inputAmount.
@@ -221,18 +231,21 @@ namespace BankAppProject
             {
                 SavingsAccount savingsAcc = new SavingsAccount();
 
-                decimal interestBonus = firstClient.savingsAccount.amount * interest;
-
                 firstClient.checkingAccount.amount -= inputAmount;
                 firstClient.savingsAccount.amount += inputAmount;
+
                 toAccountType = "Saving Account";
                 Console.WriteLine($"{firstClient.name} transferred {inputAmount} from his/her checking account " +
                     $"to his/her {toAccountType.ToLower()}.");
+                
                 if (firstClient.interestBonus == false)
                 {
+                    decimal interestBonus = firstClient.savingsAccount.amount * interest;
                     Console.WriteLine();
-                    Console.WriteLine($"{firstClient.name} earned an interest bonus!");
-                    Console.WriteLine($"The bonus was {interestBonus.ToString("F2")} kr");
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.WriteLine($"{firstClient.name} earned an interest bonus of {interestBonus.ToString("F2")} kr");
+                    Console.ResetColor();
 
                     savingsAcc.Interest(firstClient);
                 }
@@ -332,7 +345,7 @@ namespace BankAppProject
 
       
 
-            Console.WriteLine($"{firstClient.name}, you now have {firstClient.checkingAccount} kr in your checking account");
+            Console.WriteLine($"{firstClient.name}, you now have {firstClient.checkingAccount.amount} kr in your checking account");
             Console.WriteLine();
 
             string toAccountType = "Checking Account";
@@ -425,7 +438,6 @@ namespace BankAppProject
                     {
                         if (aInputAmount <= 0)
                         {
-                            Colours.Red("You have to deposit a larger amount!\n");
                             Colours.Red("You can only transfer a positive amount.\n");
                             Console.WriteLine();
                             Console.Write("Enter the amount to transfer: ");
@@ -436,7 +448,7 @@ namespace BankAppProject
                         else if (aInputAmount > client.checkingAccount.amount)
                         {
                             Colours.Red("You can't transfer more money than you have\n");
-                            Console.WriteLine($"You have {client.checkingAccount} kronor in your checking account");
+                            Console.WriteLine($"You have {client.checkingAccount.amount} kronor in your checking account");
                             Console.WriteLine();
                             Console.Write("Enter the amount to transfer: ");
 

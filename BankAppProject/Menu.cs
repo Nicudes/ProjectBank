@@ -11,7 +11,7 @@ namespace BankAppProject
     {
         static int counter = 0;
         static string choice;
-        static string[] menuList = { "Create client", "Show all clients", "Savings accounts", "Checkings accounts", "Show all transactions", "Exit" };
+        static string[] menuList = { "Create client", "Show all clients", "Savings accounts", "Checking accounts", "Show all transactions", "Exit" };
 
         public static void MainMenu()
         {
@@ -20,6 +20,9 @@ namespace BankAppProject
 
             bool NoClients = !Client.clientList.Any();
             counter = 1;
+
+            Console.WriteLine("Main Menu");
+            Console.WriteLine("---------\n");
 
             for (int i = 0; i < menuList.Length; i++)
             {
@@ -34,7 +37,7 @@ namespace BankAppProject
             }
             Console.WriteLine();
 
-            Console.WriteLine("Input: ");
+            Console.Write("Input: ");
             choice = Console.ReadLine();
             Console.Clear();
            
@@ -82,7 +85,7 @@ namespace BankAppProject
             Console.WriteLine();
             Console.SetCursorPosition((Console.WindowWidth - 30) / 2, Console.CursorTop);
             Console.WriteLine("Too many incorrect input!");
-            for (int i = 10; i > 0; i--)
+            for (int i = 9; i > 0; i--)
             {
                 Console.SetCursorPosition((Console.WindowWidth - 25) / 2, Console.CursorTop);
                 Console.Write($"Please wait {i} seconds");
@@ -186,8 +189,8 @@ namespace BankAppProject
             Console.WriteLine("2) Transfer");
             Console.WriteLine("3) Remove clients");
             Console.WriteLine("4) Return to main menu");
-
-            Console.WriteLine("Input: ");
+            Console.WriteLine();
+            Console.Write("Input: ");
             string choice = Console.ReadLine();
             Console.WriteLine();
 

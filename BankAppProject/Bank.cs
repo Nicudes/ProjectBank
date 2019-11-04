@@ -75,7 +75,7 @@ namespace BankAppProject
             Console.WriteLine("----------------");
             Console.WriteLine("Client created");
             Console.WriteLine("----------------");
-            Console.WriteLine($"Name: {fullName}\nID: {id}\nAccount created at: {creationDate}\nChecking Account: {checkingAccount.amount}\nSavings Account: {savingsAccount.amount}");
+            Console.WriteLine($"Name: {fullName}\nID: {id}\nAccount created at: {creationDate}\nChecking Account: {checkingAccount.amount} kr\nSavings Account: {savingsAccount.amount} kr");
             Console.WriteLine("----------------");
             Console.ResetColor();
 
@@ -154,7 +154,7 @@ namespace BankAppProject
 
                 Console.WriteLine();
 
-                Console.Write("Which client do you want to remove?: ");
+                Console.Write("Enter the id of the client you wish to remove?: ");
                 decimal id = Transactions.CheckIfNumber("id");
 
                 foreach (Client client in Client.clientList)
@@ -197,6 +197,7 @@ namespace BankAppProject
                 } 
             } while (choice != "Y" && choice != "N");
 
+            Console.WriteLine();
             Colours.Red($"[DELETED] {clientToRemove.name}");
 
             Console.ReadKey();

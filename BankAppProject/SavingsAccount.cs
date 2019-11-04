@@ -31,8 +31,7 @@ namespace BankAppProject
     // om logiken nedan uppfylls har klienten fått tillgång till bonus.
             if ((DateTime.Now.Date - client.creationDate.Date).Days >= 30 && client.savingsAccount.amount > initialAmount && client.interestBonus == false)
             {
-
-    // Eftersom klientens sparkonto ska öka med 0.05%  får vi ta det befintliga saldot och öka det med räntan.
+                // Eftersom klientens sparkonto ska öka med 0.05%  får vi ta det befintliga saldot och öka det med räntan.
                 client.savingsAccount.amount *= interest;
 
     // när klienten har fått bonus sätts interest bool till true.
@@ -84,14 +83,6 @@ namespace BankAppProject
                             Console.WriteLine($"Savings Account Balance: {client.savingsAccount.amount.ToString("F2")}");
                             Console.WriteLine($"Member since: {client.creationDate}");
                             Console.WriteLine();
-                            if (client.interestBonus == true)
-                            {
-                                Console.BackgroundColor = ConsoleColor.Green;
-                                Console.ForegroundColor = ConsoleColor.Black;
-                                Console.WriteLine("You have been awarded an interest bonus!");
-                                Console.ResetColor();
-                                Console.WriteLine();
-                            }
 
                             foundClient = true;
                             break;
