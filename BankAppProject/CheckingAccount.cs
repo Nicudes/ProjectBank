@@ -107,10 +107,9 @@ namespace BankAppProject
                     {
                         Colours.Green($"{movie.ticketsAvailable}\n");
                     }
-                    Console.WriteLine("-------");
-                    Console.WriteLine();
                     counter++;
                 }
+                Console.WriteLine("----------");
                 Console.Write("0) "); Colours.Red("No thanks, I don't want a movie ticket\n");
                 // använder variablen för att jämföra user input med filmobjektets indexPlace.
                 string choice;
@@ -123,7 +122,6 @@ namespace BankAppProject
                 {
                     Console.WriteLine();
                     Console.Write("Choose which movie: ");
-                    Console.WriteLine();
 
                     choice = Console.ReadLine();
 
