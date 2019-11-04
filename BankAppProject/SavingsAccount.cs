@@ -9,18 +9,18 @@ namespace BankAppProject
     // Skapar en klass som ärver från klassen BankAccount och tar in interfacet Iinterest.
     class SavingsAccount : BankAccount, IInterest
     {
-        public SavingsAccount(decimal aAmount = 5000)
+        public SavingsAccount(decimal aAmount = initialAmount)
         {
             amount = aAmount;
         }
 
-        //public SavingsAccount()
-        //{
+        public SavingsAccount()
+        {
 
-        //}
+        }
 
-        // Skapar en variabel för startsaldot på sparkontot som alltid är 5000kr.
-        int initialAmount = 5000;
+        // Skapar en constant variabel för startsaldot på sparkontot som alltid är 5000kr.
+        const decimal initialAmount = 5000;
     
     // implementerar interfacet Iinterest som är till för att applicera ränta bonus på sparkontot.
         public void Interest(Client client)

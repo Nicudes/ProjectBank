@@ -18,9 +18,7 @@ namespace BankAppProject
         Client secondClient;
 
         private static decimal interest = 0.0005m;
-        // Skapar ett objekt av savingsAccount
-
-
+  
         // Skapar ett objekt av api soundplayer som är en del av System.Media.
         static SoundPlayer player = new SoundPlayer();
 
@@ -229,6 +227,7 @@ namespace BankAppProject
         // checkingAcc till sitt egna SavingsAcc.
             if (firstClient == secondClient)
             {
+        // Skapar ett objekt av savingsAccount för att nedan komma åt interest metoden.
                 SavingsAccount savingsAcc = new SavingsAccount();
 
                 firstClient.checkingAccount.amount -= inputAmount;
