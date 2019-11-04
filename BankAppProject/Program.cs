@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Snakeclass;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace BankAppProject
     {
         static void Main(string[] args)
         {
+            Console.SetWindowSize(100, 40);
             Console.Title = "Bank Application -- Created by: Huy, Alexander, Mikael & Andreas";
             Bank.AddExistingClients();
             Movies.AddMovies();

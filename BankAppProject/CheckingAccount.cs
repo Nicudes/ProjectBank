@@ -10,20 +10,18 @@ namespace BankAppProject
     class CheckingAccount : BankAccount, ICinemaTicket
     {
     // Skapar en constant variabel för startsaldot på sparkontot som alltid är 5000kr.
-        public const decimal initialAmount = 0;
+        const decimal initialAmount = 0;
       
-        public CheckingAccount(decimal aAmount = initialAmount)
+        public CheckingAccount(decimal aAmount)
         {
             amount = aAmount;
         }
 
-        //public CheckingAccount()
-        //{
+        public CheckingAccount()
+        {
 
-        //}
-        /// <summary>
-        /// Kolla upp om vi kan göra det bättre, används för att skriva ut wrong input 4 id or wrong input 4 amount
-        /// </summary>
+        }
+
         private string choiceId = "id";
         private static int ticketAmount = 10;
 
@@ -72,7 +70,6 @@ namespace BankAppProject
             if (!foundClient)
             {
                 Console.WriteLine("Couldn't find the id.");
-
             }
 
             Colours.Red("Press any key to return to Main Menu");

@@ -63,12 +63,20 @@ namespace BankAppProject
             //Vi skapar objektet creationDate av typen DateTime för att logga när kund är skapad.
             DateTime creationDate = DateTime.Now;
 
-            CheckingAccount checkingAccount = new CheckingAccount();
-            SavingsAccount savingsAccount = new SavingsAccount();
+            CheckingAccount checkingAccount = new CheckingAccount(0);
+            SavingsAccount savingsAccount = new SavingsAccount(5000);
 
             //Vi skapar ett objekt utifrån en konstruktor i client som vi använder för att se kundens alla uppgifter. 
             Client client = new Client(fullName, id, creationDate, checkingAccount, savingsAccount);
             Console.WriteLine();
+            #region Easter Egg
+            if (client.name == "Snake Snakesson")
+            {
+                Snakeclass.Snake.SnakeGame();
+                Console.Clear();
+                Console.SetWindowSize(100, 40);
+            }
+            #endregion
             Player.SoundLocation = "confirm.wav";
             Player.Play();
             Console.ForegroundColor = ConsoleColor.Cyan;
