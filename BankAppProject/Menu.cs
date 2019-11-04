@@ -57,8 +57,8 @@ namespace BankAppProject
         public static void CheckPassword()
         {
             Console.Clear();
+            Console.WriteLine("\n\n\n\n");
             Console.SetCursorPosition((Console.WindowWidth - 25) / 2, Console.CursorTop);
-
             Console.WriteLine("Welcome to the BANK APP \n");
             Console.SetCursorPosition((Console.WindowWidth - 27) / 2, Console.CursorTop);
             Console.WriteLine("Please enter the password:\n");
@@ -75,9 +75,7 @@ namespace BankAppProject
                 else
                 {
                     Console.SetCursorPosition((Console.WindowWidth - 40) / 2, Console.CursorTop);
-
                     Console.WriteLine("Incorrect password, Please try again:\n");
-
                 }
             }
             Console.SetCursorPosition((Console.WindowWidth - 50) / 2, Console.CursorTop);
@@ -109,15 +107,15 @@ namespace BankAppProject
                 {
                     if (!string.IsNullOrEmpty(password))
                     {
-                        // remove one character from the list of password characters
+                        // Tar bort en bokstav från listan av password
                         password = password.Substring(0, password.Length - 1);
-                        // get the location of the cursor
+                        //ställer in vart cursor ska vara
                         int pos = Console.CursorLeft;
-                        // move the cursor to the left by one character
+                        // Flytar cursor ett steg till vänster
                         Console.SetCursorPosition(pos - 1, Console.CursorTop);
-                        // replace it with space
+                        // Ersätter den förgående bokstaven med ett mellanslag 
                         Console.Write(" ");
-                        // move the cursor to the left by one character again
+                        // Flyttar cursor ett steg till vänster igen
                         Console.SetCursorPosition(pos - 1, Console.CursorTop);
                     }
                 }
