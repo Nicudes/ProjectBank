@@ -11,6 +11,7 @@ namespace BankAppProject
     {
         static void Main(string[] args)
         {
+            //Hello class! 
             Console.SetWindowSize(100, 40);
             Console.Title = "Bank Application -- Created by: Huy, Alexander, Mikael & Andreas";
             Bank.AddExistingClients();
