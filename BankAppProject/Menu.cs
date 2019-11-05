@@ -16,6 +16,8 @@ namespace BankAppProject
 
         public static void MainMenu()
         {
+            Console.WriteLine("Hej, det är Mikael som gjort en ändring här.");
+
             Console.Title = "Main Menu";
             Console.Clear();
 
