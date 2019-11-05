@@ -10,6 +10,9 @@ Hur man använder BankApp:
   konto än startbeloppet, belönas klienten med antingen en biobiljett 
   eller ett räntepåslag beroende på vilket konto det berör. 
   Bonusen kan bara ges ut en gång/klient.
+  De hårdkodade klienterna vi har i programmet har funnits mer än 30
+  dagar och bonus kan alltså endast delas ut till dem vid körning av
+  programmet.
 	- Biobiljetten är kopplad till varje enskild klient och 
 	  klienten kan bara välja mellan de filmer som det finns 
 	  platser kvar av.
