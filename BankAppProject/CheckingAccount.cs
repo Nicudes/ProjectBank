@@ -9,7 +9,7 @@ namespace BankAppProject
     //Checking account ärver ifrån Bank account och tar in interfacet IcinemaTicket.
     class CheckingAccount : BankAccount, ICinemaTicket
     {
-    // Skapar en constant variabel för startsaldot på sparkontot som alltid är 5000kr.
+    // Skapar en constant variabel för startsaldot på Lönekontot som alltid är 0.
         const decimal initialAmount = 0;
       
         public CheckingAccount(decimal aAmount)
