@@ -11,6 +11,7 @@ namespace BankAppProject
     {
         static int counter = 0;
         static string choice;
+        // Vi skapar en array med alla menyval
         static string[] menuList = { "Create client", "Show all clients", "Savings accounts", "Checking accounts", "Show all transactions", "Exit" };
 
         public static void MainMenu()
@@ -18,14 +19,17 @@ namespace BankAppProject
             Console.Title = "Main Menu";
             Console.Clear();
 
+        // Vi skapar en boolean som kollar av om det finns några klienter i vår klientlista
             bool NoClients = !Client.clientList.Any();
             counter = 1;
 
             Console.WriteLine("Main Menu");
             Console.WriteLine("---------\n");
 
+        // Vi vill inte visa alla menyval ifall det inte finns några klienter i vår klientlista
             for (int i = 0; i < menuList.Length; i++)
             {
+        // Om det inte finns några klienter så ska inte arrayplatserna 1,2,3 eller 4 skrivas ut.
                 if (NoClients && i == 1 || NoClients && i == 2 || NoClients && i == 3 || NoClients && i == 4)
                 {
 
