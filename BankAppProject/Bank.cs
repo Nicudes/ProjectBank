@@ -11,6 +11,7 @@ namespace BankAppProject
 
     class Bank
     {
+        public static bool addedClients;
         static SoundPlayer Player = new SoundPlayer();
 
         //variabeln är till för att konton som skapas ska från nr 1001.
@@ -144,6 +145,10 @@ namespace BankAppProject
 
                 Client.clientList.Add(client);
             }
+            addedClients = true;
+            Console.WriteLine("You have added existing clients!\n");
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();           
         }
 
         public static void RemoveExistingClients()

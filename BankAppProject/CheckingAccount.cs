@@ -86,7 +86,7 @@ namespace BankAppProject
                 Console.WriteLine();
                 Console.BackgroundColor = ConsoleColor.Green;
                 Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine("You have received a free cinema ticket!");
+                Console.WriteLine("You have received a free cinema ticket, ONLY ONE!");
                 Console.ResetColor();
                 Console.WriteLine();
 

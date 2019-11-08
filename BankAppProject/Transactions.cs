@@ -216,15 +216,21 @@ namespace BankAppProject
             Console.Write($"Transferring funds from "); Colours.Red($"{firstClient.id} "); Console.Write("to ");  
                             Colours.Red($"{secondClient.id}\n\n\n");
 
+            Console.WriteLine($"{firstClient.name} has {firstClient.checkingAccount.amount} kr in his/her Checking Account\n");
+
             Console.Write("Enter the amount of funds you would like to transfer: ");
         // kollar att det inmatade värdet är ett nummer och även om det är ett belopp genom argumentet ChoiceTrans.
-        // Det returnerade värdet från CheckIfNumber stoppas sedan in i variabeln inputAmount.
+        // Det returnerade värdet från CheckIfNumber stoppas sedan in i variabeln inputAmount.{firstClient.name} has 
             inputAmount = CheckIfNumber(choiceTransaction);
         // Kollar så att summan man försöker föra över är godkänd enligt logiken i ValidateAmount.
         // Det returnerade värdet från ValidateAmount stoppas sedan in i variabeln inputAmount.
             inputAmount = ValidateAmount(choiceTransaction, firstClient, inputAmount);
-        // Om första klientens id inmatning matchar andra klientens id inmatning skickas pengarna från sitt egna
-        // checkingAcc till sitt egna SavingsAcc.
+
+        // Vill att överföringssumman inte ska vara mer än 2 decimaler och avrundar därmed input.
+            inputAmount = (Math.Round(inputAmount, 2));
+
+            // Om första klientens id inmatning matchar andra klientens id inmatning skickas pengarna från sitt egna
+            // checkingAcc till sitt egna SavingsAcc.
             if (firstClient == secondClient)
             {
         // Skapar ett objekt av savingsAccount för att nedan komma åt interest metoden.
@@ -369,7 +375,13 @@ namespace BankAppProject
         // Vid inmatning av id ovan referrerar programmet till nedanstående ReadLine.
                 try
                 {
-                    input = decimal.Parse(Console.ReadLine());
+                    string test = Console.ReadLine();
+
+                    if (test.Contains("."))
+                    {
+                        test = test.Replace('.', ',');
+                    }
+                    input = decimal.Parse(test);
                 }
 
         // istället för att programmet kraschar går programmet över till catch.
