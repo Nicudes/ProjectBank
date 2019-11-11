@@ -48,13 +48,13 @@ namespace BankAppProject
             bool IsNumber;
             int id = 0;
 
-            Console.Write("Enter your id: ");
+            
     // Testar ett nytt sätt att lösa funktionen av metoden CheckIfNumber. Fungerar att implementera den metoden här.
     // Programmet gör detta sålänge isNumber är false som används för att se om inmatning av id är en siffra.
             do
             {
-
-    // Testar om inmatning av id är en siffra och konverterar ev rätt inmatning till int.
+                Console.Write("Enter your id: ");
+                // Testar om inmatning av id är en siffra och konverterar ev rätt inmatning till int.
                 try
                 {
                     IsNumber = true;
@@ -64,7 +64,7 @@ namespace BankAppProject
     // är inmatningen inte en siffra körs nedanstående kod.
                 catch
                 {
-                    Console.WriteLine("Must be a number.");
+                    Colours.Red("Must be a number.\n");
                     IsNumber = false;
                 }
 
@@ -93,7 +93,7 @@ namespace BankAppProject
     // hittar vi ingen klient i listan så skrivs nedanstående ut.
             if (!foundClient)
             {
-                Colours.Red("No such client was found.");
+                Colours.Red("No such client was found.\n\n");
             }
     // ger möjligheten till användare att återgå till huvudmenyn.
             Colours.Red("Press any key to return to Main Menu");

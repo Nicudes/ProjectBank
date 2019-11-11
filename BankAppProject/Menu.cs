@@ -12,12 +12,10 @@ namespace BankAppProject
         static int counter = 0;
         static string choice;
         // Vi skapar en array med alla menyval
-        static string[] menuList = { "Create client", "Show all clients", "Savings accounts", "Checking accounts", "Show all transactions", "Exit" };
+        static string[] menuList = { "Create client", "Show all clients", "Savings accounts", "Checking accounts", "Show all transactions","Add existing clients", "Exit" };
 
         public static void MainMenu()
         {
-            Console.WriteLine("Hej, det är Mikael som gjort en ändring här.");
-
             Console.Title = "Main Menu";
             Console.Clear();
 
@@ -32,7 +30,7 @@ namespace BankAppProject
             for (int i = 0; i < menuList.Length; i++)
             {
         // Om det inte finns några klienter så ska inte arrayplatserna 1,2,3 eller 4 skrivas ut.
-                if (NoClients && i == 1 || NoClients && i == 2 || NoClients && i == 3 || NoClients && i == 4)
+                if (NoClients && i == 1 || NoClients && i == 2 || NoClients && i == 3 || NoClients && i == 4 || NoClients && i == 5)
                 {
 
                 }
@@ -172,6 +170,19 @@ namespace BankAppProject
                     Transactions.ShowTransactions();
                     break;
                 case "6":
+                    if(Bank.addedClients == false)
+                    {
+                        Bank.AddExistingClients();
+                        MainMenu();
+                    }
+                    else if (Bank.addedClients == true)
+                    {
+                        Console.WriteLine("You have already added existing clients!");
+                        Console.ReadKey();
+                        MainMenu();
+                    }
+                    break;
+                case "7":
                     Environment.Exit(0);
                     break;
 
